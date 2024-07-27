@@ -5,12 +5,8 @@ import VehicleClass, { LightBattleVehicle, VehicleClasses } from './models/vehic
 import Weapon from './models/weapon';
 import { WeaponTypes } from './models/weapon-class';
 import { UnitCard } from './components/UnitCard';
+import { VehicleClassSelect } from './components/VehicleClassSelect';
 import './App.css'
-
-interface VehicleClassSelectProps {
-  vehicleClass: VehicleClass,
-  handleVehicleClassChange: React.ChangeEventHandler<HTMLSelectElement>
-}
 
 interface UnitFormState {
   clean: boolean,
@@ -28,23 +24,6 @@ const initialState: UnitFormState = {
   clean: true,
   vehicleClass: LightBattleVehicle,
   unit: new Unit(LightBattleVehicle)
-}
-
-function VehicleClassSelect({vehicleClass, handleVehicleClassChange}: VehicleClassSelectProps) {
-  let classList = VehicleClasses.map((v) =>
-    <option value={v.name} key={v.name}>{v.name}</option>
-  )
-  return (
-    <div>
-      <label>
-        <select name="vehicle-class" id="vehicle-class" value={vehicleClass.name} onChange={handleVehicleClassChange}>
-          {classList}
-        </select>
-      </label>
-      <div>Base Cost: {vehicleClass.baseCost}</div>
-      <div>Max Cost: {vehicleClass.maxCost}</div>
-    </div>
-  )
 }
 
 function App() {
