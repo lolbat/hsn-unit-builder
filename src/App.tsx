@@ -24,7 +24,7 @@ interface UnitFormState {
 
 type UnitFormAction = 
   | {type: "classChanged", vehicleClass: string}
-  | {type: "weaponChanged", mount: string, weapon: string}
+  | {type: "weaponChanged", mountKey: string, weaponType: string}
 
 const initialState: UnitFormState = {
   clean: true,
@@ -57,7 +57,7 @@ function WeaponList({mounts, handleWeaponChange}: WeaponListProps) {
     return (
       <li className="weapon" key={mount.key}>
         <div className="weapon-selector">
-          <select name={`${mount.key}-selector`} onChange={handleWeaponChange}>
+          <select name={mount.key} onChange={handleWeaponChange}>
             <option value="">Choose a weapon...</option>
             {compatibleWeapons}
           </select>
@@ -144,8 +144,8 @@ function App() {
   const handleWeaponChange = useCallback<React.ChangeEventHandler<HTMLSelectElement>>((e) => {
     dispatch({
       type: 'weaponChanged',
-      mount: e.target.name,
-      weapon: e.target.value
+      mountKey: e.target.name,
+      weaponType: e.target.value
     });
   }, [dispatch]);
 
@@ -164,16 +164,15 @@ function App() {
       }
       case 'weaponChanged': {
         let unit = unitForm.unit;
-        let {mount, weapon} = action;
-        let mountName = mount.substring(0, mount.indexOf('-'))
-        let mountToEquip = unit.mounts.find((m) => m.type.mountType === mountName)
+        let {mountKey, weaponType} = action;
+        let mountToEquip = unit.mounts.find((m) => m.key === mountKey)
         if (!mountToEquip) {
-          throw Error('Unknow mount type: ' + action.mount);
+          throw Error('Unknow mount type: ' + mountKey);
         }
 
-        let weaponToEquip = WeaponTypes.find((w) => weapon === w.name)
+        let weaponToEquip = WeaponTypes.find((w) => weaponType === w.name)
         if (!weaponToEquip) {
-          throw Error('Unknow weapon type: ' + action.weapon);
+          throw Error('Unknow weapon type: ' + weaponType);
         }
 
         mountToEquip.setWeapon(new Weapon(weaponToEquip, mountToEquip.type.mountType));
