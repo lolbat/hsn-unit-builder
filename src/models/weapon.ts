@@ -25,6 +25,10 @@ class Weapon {
     get cost() {
         return this.weaponType.cost;
     }
+
+    get type() {
+        return this.weaponType;
+    }
 }
 
 export default Weapon;
