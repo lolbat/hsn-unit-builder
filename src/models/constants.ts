@@ -35,7 +35,7 @@ export enum WeaponName {
   SuperheavyLaser = "Superheavy Laser",
   // Bombs
   ClusterBombs = "Cluster Bombs",
-  IncendiaryBombs = "Incendiary  Bombs",
+  IncendiaryBombs = "Incendiary Bombs",
   HeavyBombs = "Heavy Bombs",
   PlasmaBombs = "Plasma Bombs",
   // Close Combat Weaponry
