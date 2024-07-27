@@ -1,12 +1,18 @@
 import Unit from "../models/unit";
 import { WeaponList } from "./WeaponList";
+import { Mount } from "../models/mount";
 
 interface UnitCardProps {
   unit: Unit;
-  handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>;
+  handleUnitChange: (unit: Unit) => void;
 }
 
-export default function UnitCard({ unit, handleWeaponChange }: UnitCardProps) {
+export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
+  const handleMountsChange = function (mounts: Mount[]) {
+    unit.mounts = mounts;
+    handleUnitChange(unit);
+  };
+
   return (
     <div className="unit">
       <div className="name">{unit.name}</div>
@@ -32,7 +38,7 @@ export default function UnitCard({ unit, handleWeaponChange }: UnitCardProps) {
       <div className="special value">{unit.special}</div>
       <WeaponList
         mounts={unit.mounts}
-        handleWeaponChange={handleWeaponChange}
+        handleMountsChange={handleMountsChange}
       />
       <div className="modifications">
         <div className="title">Modifications</div>

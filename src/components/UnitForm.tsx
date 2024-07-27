@@ -1,12 +1,9 @@
-import { useCallback, useReducer } from "react";
-import { toWeaponName, WeaponName } from "../models/constants";
+import { useReducer } from "react";
 import Unit from "../models/unit";
 import VehicleClass, {
   VehicleClasses,
   LightBattleVehicle,
 } from "../models/vehicle-class";
-import Weapon from "../models/weapon";
-import { WeaponTypes } from "../models/weapon-type";
 import VehicleClassSelect from "./VehicleClassSelect";
 import UnitCard from "./UnitCard";
 
@@ -16,11 +13,9 @@ interface UnitFormState {
   unit: Unit;
 }
 
-type WeaponSelection = WeaponName | "None";
-
 type UnitFormAction =
   | { type: "classChanged"; vehicleClass: string }
-  | { type: "weaponChanged"; mountKey: string; weaponType: WeaponSelection };
+  | { type: "unitChanged"; unit: Unit };
 
 const initialState: UnitFormState = {
   clean: true,
@@ -31,37 +26,19 @@ const initialState: UnitFormState = {
 export default function UnitForm() {
   const [unitForm, dispatch] = useReducer(unitReducer, initialState);
 
-  const handleVehicleClassChange = useCallback<
-    React.ChangeEventHandler<HTMLSelectElement>
-  >(
-    (e) => {
-      dispatch({
-        type: "classChanged",
-        vehicleClass: e.target.value,
-      });
-    },
-    [dispatch],
-  );
+  function handleVehicleClassChange(vehicleClass: VehicleClass) {
+    dispatch({
+      type: "classChanged",
+      vehicleClass: vehicleClass.name,
+    });
+  }
 
-  const handleWeaponChange = useCallback<
-    React.ChangeEventHandler<HTMLSelectElement>
-  >(
-    (e) => {
-      let weaponType: WeaponSelection;
-      if (e.target.value === "None") {
-        weaponType = "None";
-      } else {
-        weaponType = toWeaponName(e.target.value);
-      }
-
-      dispatch({
-        type: "weaponChanged",
-        mountKey: e.target.name,
-        weaponType: weaponType,
-      });
-    },
-    [dispatch],
-  );
+  function handleUnitChange(unit: Unit) {
+    dispatch({
+      type: "unitChanged",
+      unit,
+    });
+  }
 
   function unitReducer(
     unitForm: UnitFormState,
@@ -81,36 +58,11 @@ export default function UnitForm() {
           unit: new Unit(vehicleClass),
         };
       }
-      case "weaponChanged": {
-        let unit = unitForm.unit;
-        let { mountKey, weaponType } = action;
-        let mountToEquip = unit.mounts.find((m) => m.key === mountKey);
-        if (!mountToEquip) {
-          throw Error("Unknow mount type: " + mountKey);
-        }
-
-        if (weaponType === "None") {
-          mountToEquip.removeWeapon();
-          return {
-            ...unitForm,
-            clean: false,
-            unit: unit,
-          };
-        }
-
-        let weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
-        if (!weaponToEquip) {
-          throw Error("Unknow weapon type: " + weaponType);
-        }
-
-        mountToEquip.setWeapon(
-          new Weapon(weaponToEquip, mountToEquip.type.mountType),
-        );
-
+      case "unitChanged": {
         return {
           ...unitForm,
           clean: false,
-          unit: unit,
+          unit: action.unit,
         };
       }
     }
@@ -124,7 +76,7 @@ export default function UnitForm() {
         vehicleClass={vehicleClass}
         handleVehicleClassChange={handleVehicleClassChange}
       />
-      <UnitCard unit={unit} handleWeaponChange={handleWeaponChange} />
+      <UnitCard unit={unit} handleUnitChange={handleUnitChange} />
     </>
   );
 }

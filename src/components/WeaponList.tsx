@@ -1,41 +1,39 @@
-import { Mount } from "../models/mount";
-import { FilledMount, FilledMountListItem } from "./FilledMountListItem";
+import { EmptyMount, Mount } from "../models/mount";
+import { FilledMountListItem } from "./FilledMountListItem";
+import { FilledMount } from "../models/mount";
+import { EmptyMountListItem } from "./EmptyMountListItem";
 
 interface WeaponListProps {
   mounts: Mount[];
-  handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>;
+  handleMountsChange: (mounts: Mount[]) => void;
 }
 
-export function WeaponList({ mounts, handleWeaponChange }: WeaponListProps) {
+export function WeaponList({ mounts, handleMountsChange }: WeaponListProps) {
+  function handleMountChange(mount: Mount) {
+    handleMountsChange([
+      ...mounts.filter((m) => m.index < mount.index),
+      mount,
+      ...mounts.filter((m) => m.index > mount.index),
+    ]);
+  }
+
   let weaponList = mounts.map((mount) => {
-    if (mount.weapon !== null) {
-      let filledMount = mount as FilledMount;
+    if (mount.empty === false) {
       return (
         <FilledMountListItem
-          filledMount={filledMount}
-          handleWeaponChange={handleWeaponChange}
+          mount={mount as FilledMount}
+          handleMountChange={handleMountChange}
           key={mount.key}
         />
       );
     }
 
-    let compatibleWeapons = mount
-      .compatibleWeaponTypes()
-      .map((w) => (
-        <option value={w.name} key={w.name}>{`${w.name} (${w.cost})`}</option>
-      ));
-
     return (
-      <li className="weapon" key={mount.key}>
-        <div className="weapon-selector">
-          <select name={mount.key} onChange={handleWeaponChange}>
-            <option value="">Choose a weapon...</option>
-            {compatibleWeapons}
-          </select>
-        </div>
-        <div className="mount value">{mount.type.mountType}</div>
-        <div className="special value"> </div>
-      </li>
+      <EmptyMountListItem
+        mount={mount as EmptyMount}
+        handleMountChange={handleMountChange}
+        key={mount.key}
+      />
     );
   });
 

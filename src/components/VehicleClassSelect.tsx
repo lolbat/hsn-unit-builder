@@ -2,7 +2,7 @@ import VehicleClass, { VehicleClasses } from "../models/vehicle-class";
 
 interface VehicleClassSelectProps {
   vehicleClass: VehicleClass;
-  handleVehicleClassChange: React.ChangeEventHandler<HTMLSelectElement>;
+  handleVehicleClassChange(vehicleClass: VehicleClass): void;
 }
 
 export default function VehicleClassSelect({
@@ -14,6 +14,16 @@ export default function VehicleClassSelect({
       {v.name}
     </option>
   ));
+
+  function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    let vehicleClass = VehicleClasses.find((vc) => vc.name === e.target.value);
+    if (!vehicleClass) {
+      throw Error("Unknow vehicle class: " + e.target.value);
+    }
+
+    handleVehicleClassChange(vehicleClass);
+  }
+
   return (
     <div>
       <label>
@@ -21,7 +31,7 @@ export default function VehicleClassSelect({
           name="vehicle-class"
           id="vehicle-class"
           value={vehicleClass.name}
-          onChange={handleVehicleClassChange}
+          onChange={handleChange}
         >
           {classList}
         </select>

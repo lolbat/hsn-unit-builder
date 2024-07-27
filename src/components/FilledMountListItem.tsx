@@ -1,44 +1,60 @@
 import { useState } from "react";
-import { Mount } from "../models/mount";
-import { MountType } from "../models/mount-type";
+import { Mount, FilledMount } from "../models/mount";
 import Weapon from "../models/weapon";
+import { toWeaponName, WeaponName } from "../models/constants";
+import { WeaponTypes } from "../models/weapon-type";
 
 interface FilledMountListItemProps {
-  filledMount: FilledMount;
-  handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>;
+  mount: FilledMount;
+  handleMountChange: (mount: Mount) => void;
 }
 
-export interface FilledMount {
-  readonly type: MountType;
-  readonly index: number;
-  readonly weapon: Weapon;
-  readonly key: string;
-}
+type WeaponSelection = WeaponName | "None";
 
 export function FilledMountListItem({
-  filledMount,
-  handleWeaponChange,
+  mount,
+  handleMountChange,
 }: FilledMountListItemProps) {
   const [open, setOpen] = useState<boolean>(false);
 
+  function handleWeaponChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    let weaponType: WeaponSelection;
+    if (e.target.value === "None") {
+      weaponType = "None";
+    } else {
+      weaponType = toWeaponName(e.target.value);
+    }
+
+    if (weaponType === "None") {
+      handleMountChange(mount.removeWeapon());
+    } else {
+      let weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
+      if (!weaponToEquip) {
+        throw Error("Unknow weapon type: " + weaponType);
+      }
+
+      mount.setWeapon(new Weapon(weaponToEquip, mount.type.mountType));
+
+      handleMountChange(
+        mount.setWeapon(new Weapon(weaponToEquip, mount.type.mountType)),
+      );
+    }
+  }
+
   if (open) {
-    let compatibleWeapons = (filledMount as Mount)
+    let compatibleWeapons = (mount as Mount)
       .compatibleWeaponTypes()
       .map((w) => (
         <option value={w.name} key={w.name}>{`${w.name} (${w.cost})`}</option>
       ));
 
     return (
-      <li
-        className="weapon"
-        key={filledMount.key}
-        onBlur={(e) => setOpen(false)}
-      >
+      <li className="weapon" key={mount.key} onBlur={(e) => setOpen(false)}>
         <div className="weapon-selector">
           <select
             autoFocus
-            name={filledMount.key}
-            defaultValue={filledMount.weapon.name}
+            name={mount.key}
+            defaultValue={mount.weapon.name}
             onChange={(e) => {
               handleWeaponChange(e);
               e.target.blur();
@@ -50,7 +66,7 @@ export function FilledMountListItem({
             {compatibleWeapons}
           </select>
         </div>
-        <div className="mount value">{filledMount.type.mountType}</div>
+        <div className="mount value">{mount.type.mountType}</div>
         <div className="special value"> </div>
       </li>
     );
@@ -59,11 +75,11 @@ export function FilledMountListItem({
   return (
     <li className="weapon">
       <div className="weapon value" onClick={(e) => setOpen(true)}>
-        {filledMount.weapon.name}
+        {mount.weapon.name}
       </div>
-      <div className="rating value">{filledMount.weapon.rating}</div>
-      <div className="mount value">{filledMount.type.mountType}</div>
-      <div className="special value">{filledMount.weapon.special}</div>
+      <div className="rating value">{mount.weapon.rating}</div>
+      <div className="mount value">{mount.type.mountType}</div>
+      <div className="special value">{mount.weapon.special}</div>
     </li>
   );
 }
