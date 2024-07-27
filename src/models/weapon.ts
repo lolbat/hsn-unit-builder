@@ -1,16 +1,29 @@
-class Weapon {
-    private readonly name: string;
-    private readonly rating: number;
-    private readonly mount: string;
-    private readonly special: string[];
-    private readonly cost: number;
+import { MountLocation } from "./constants";
+import { WeaponClass } from "./weapon-class";
 
-    constructor(name: string, rating: number, mount: string, special: string[], cost: number) {
-        this.name = name;
-        this.rating = rating;
-        this.mount = mount;
-        this.special = structuredClone(special);
-        this.cost = cost;
+class Weapon {
+    private readonly weaponClass: WeaponClass;
+    readonly mount: MountLocation;
+
+    constructor(weaponClass: WeaponClass, mountType: MountLocation) {
+        this.weaponClass = weaponClass;
+        this.mount = mountType;
+    }
+
+    get name() {
+        return this.weaponClass.name;
+    }
+
+    get rating() {
+        return this.weaponClass.rating;
+    }
+
+    get special() {
+        return this.weaponClass.special;
+    }
+
+    get cost() {
+        return this.weaponClass.cost;
     }
 }
 
