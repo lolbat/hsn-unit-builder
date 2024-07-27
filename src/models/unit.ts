@@ -1,7 +1,6 @@
 import Armour from './armour';
 import { Mount } from './mount';
 import VehicleClass from './vehicle-class';
-import Weapon from './weapon';
 
 class Unit {
     readonly vehicleClass: VehicleClass;
@@ -14,7 +13,7 @@ class Unit {
     armour: Armour;
     hullPoints: number;
     special: string[];
-    weapons: Map<Mount, Weapon | null>;
+    mounts: Mount[];
     modifications: string[];
 
     constructor(vehicleClass: VehicleClass) {
@@ -28,7 +27,7 @@ class Unit {
         this.armour = vehicleClass.armour;
         this.hullPoints = vehicleClass.hullPoints;
         this.special = structuredClone(vehicleClass.special);
-        this.weapons = new Map(vehicleClass.mounts.map((mountType, index) => [new Mount(mountType, index), null]));
+        this.mounts = vehicleClass.mounts.map((mountType, index) => new Mount(mountType, index));
         this.modifications = [];
     }
 
@@ -37,9 +36,9 @@ class Unit {
     }
 
     private totalWeaponCost() {
-        return [...this.weapons.values()]
+        return this.mounts
             .filter((w) => w !== null)
-            .reduce((acc, cur) => acc + cur.cost, 0);
+            .reduce((acc, cur) => acc + (cur.weapon?.cost || 0), 0);
     }
 }
 

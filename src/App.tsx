@@ -33,20 +33,19 @@ const initialState: UnitFormState = {
 }
 
 interface WeaponListProps {
-  weaponsByMount: Map<Mount, Weapon | null>,
+  mounts: Mount[],
   handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-function WeaponList({weaponsByMount, handleWeaponChange}: WeaponListProps) {
-  let weaponList = [...weaponsByMount.entries()].map((entry, index) => {
-    let [mount, weapon] = entry;
-    if (weapon) {
+function WeaponList({mounts, handleWeaponChange}: WeaponListProps) {
+  let weaponList = mounts.map((mount) => {
+    if (mount.weapon !== null) {
       return (
-        <li className="weapon" key={`${mount.type.mountType}-${index}`}>
-          <div className="weapon value">{weapon.name}</div>
-          <div className="rating value">{weapon.rating}</div>
+        <li className="weapon" key={mount.key}>
+          <div className="weapon value">{mount.weapon.name}</div>
+          <div className="rating value">{mount.weapon.rating}</div>
           <div className="mount value">{mount.type.mountType}</div>
-          <div className="special value">{weapon.special}</div>
+          <div className="special value">{mount.weapon.special}</div>
         </li>
       );
     }
@@ -56,9 +55,9 @@ function WeaponList({weaponsByMount, handleWeaponChange}: WeaponListProps) {
     );
 
     return (
-      <li className="weapon" key={`${mount.type.mountType}-${index}`}>
+      <li className="weapon" key={mount.key}>
         <div className="weapon-selector">
-          <select name={`${mount.type.mountType}-${index}-selector`} onChange={handleWeaponChange}>
+          <select name={`${mount.key}-selector`} onChange={handleWeaponChange}>
             <option value="">Choose a weapon...</option>
             {compatibleWeapons}
           </select>
@@ -104,7 +103,7 @@ function UnitCard({unit, handleWeaponChange}: UnitCardProps) {
       <div className="hullpoints value">{unit.hullPoints}</div>
       <div className="special title">Special</div>
       <div className="special value">{unit.special}</div>
-      <WeaponList weaponsByMount={unit.weapons} handleWeaponChange={handleWeaponChange}  />
+      <WeaponList mounts={unit.mounts} handleWeaponChange={handleWeaponChange}  />
       <div className="modifications">
         <div className="title">Modifications</div>
         <div className="modifications-list">
@@ -167,7 +166,7 @@ function App() {
         let unit = unitForm.unit;
         let {mount, weapon} = action;
         let mountName = mount.substring(0, mount.indexOf('-'))
-        let mountToEquip = [...unit.weapons.keys()].find((m) => m.type.mountType === mountName)
+        let mountToEquip = unit.mounts.find((m) => m.type.mountType === mountName)
         if (!mountToEquip) {
           throw Error('Unknow mount type: ' + action.mount);
         }
@@ -177,7 +176,7 @@ function App() {
           throw Error('Unknow weapon type: ' + action.weapon);
         }
 
-        unit.weapons.set(mountToEquip, new Weapon(weaponToEquip, mountToEquip.type.mountType));
+        mountToEquip.setWeapon(new Weapon(weaponToEquip, mountToEquip.type.mountType));
 
         return {
           ...unitForm,
