@@ -1,10 +1,12 @@
-import UnitForm from './components/UnitForm';
-import './App.css'
+import UnitForm from "./components/UnitForm";
+import "./App.css";
 
 function App() {
-  return <>
-    <UnitForm />
-  </>
+  return (
+    <>
+      <UnitForm />
+    </>
+  );
 }
 
-export default App
+export default App;

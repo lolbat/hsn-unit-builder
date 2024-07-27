@@ -1,7 +1,7 @@
 {
-    "extends": "@tsconfig/vite-react/tsconfig.json",
-    "compilerOptions": {
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-    }
+  "extends": "@tsconfig/vite-react/tsconfig.json",
+  "compilerOptions": {
+    "noUnusedLocals": false,
+    "noUnusedParameters": false
+  }
 }
