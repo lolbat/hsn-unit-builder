@@ -1,7 +1,7 @@
-import { WeaponCategory, WeaponWeightClass } from "./constants";
+import { WeaponName, WeaponCategory, WeaponWeightClass } from "./constants";
 
 export interface WeaponType {
-    readonly name: string;
+    readonly name: WeaponName;
     readonly weight: WeaponWeightClass;
     readonly category: WeaponCategory;
     readonly rating: number;
@@ -13,7 +13,7 @@ export interface WeaponType {
  * LIGHT WEAPONRY
  */
 export const Autogun: WeaponType = {
-    name: 'Autogun',
+    name: WeaponName.Autogun,
     weight: WeaponWeightClass.Versatile,
     category: WeaponCategory.Projectile,
     rating: 5,
@@ -22,7 +22,7 @@ export const Autogun: WeaponType = {
 }
 
 export const Autocannon: WeaponType = {
-    name: 'Autocannon',
+    name: WeaponName.Autocannon,
     weight: WeaponWeightClass.Versatile,
     category: WeaponCategory.Projectile,
     rating: 5,
@@ -31,7 +31,7 @@ export const Autocannon: WeaponType = {
 }
 
 export const Howler: WeaponType = {
-    name: 'Howler',
+    name: WeaponName.Howler,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Projectile,
     rating: 7,
@@ -40,7 +40,7 @@ export const Howler: WeaponType = {
 }
 
 export const Laser: WeaponType = {
-    name: 'Laser',
+    name: WeaponName.Laser,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Projectile,
     rating: 3,
@@ -49,7 +49,7 @@ export const Laser: WeaponType = {
 }
 
 export const LightMissile: WeaponType = {
-    name: 'Light Missile',
+    name: WeaponName.LightMissile,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Projectile,
     rating: 5,
@@ -58,7 +58,7 @@ export const LightMissile: WeaponType = {
 }
 
 export const PlasmaBlaster: WeaponType = {
-    name: 'PlasmaBlaster',
+    name: WeaponName.PlasmaBlaster,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Projectile,
     rating: 5,
@@ -67,7 +67,7 @@ export const PlasmaBlaster: WeaponType = {
 }
 
 export const RotorCannon: WeaponType = {
-    name: 'Rotor Cannon',
+    name: WeaponName.RotorCannon,
     weight: WeaponWeightClass.Versatile,
     category: WeaponCategory.Projectile,
     rating: 5,
@@ -76,7 +76,7 @@ export const RotorCannon: WeaponType = {
 }
 
 export const LightCannon: WeaponType = {
-    name: 'Light Cannon',
+    name: WeaponName.LightCannon,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Projectile,
     rating: 7,
@@ -88,7 +88,7 @@ export const LightCannon: WeaponType = {
  * HEAVY WEAPONRY
  */
 export const PulseLaser: WeaponType = {
-    name: 'Pulse Laser',
+    name: WeaponName.PulseLaser,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 4,
@@ -97,7 +97,7 @@ export const PulseLaser: WeaponType = {
 }
 
 export const BlastCannon: WeaponType = {
-    name: 'Blast Cannon',
+    name: WeaponName.BlastCannon,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 8,
@@ -106,7 +106,7 @@ export const BlastCannon: WeaponType = {
 }
 
 export const BattleCannon: WeaponType = {
-    name: 'Battle Cannon',
+    name: WeaponName.BattleCannon,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 9,
@@ -115,7 +115,7 @@ export const BattleCannon: WeaponType = {
 }
 
 export const HeavyRotorCannon: WeaponType = {
-    name: 'Heavy Rotor Cannon',
+    name: WeaponName.HeavyRotorCannon,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 7,
@@ -124,7 +124,7 @@ export const HeavyRotorCannon: WeaponType = {
 }
 
 export const HeavyCannon: WeaponType = {
-    name: 'Heavy Cannon',
+    name: WeaponName.HeavyCannon,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 10,
@@ -133,7 +133,7 @@ export const HeavyCannon: WeaponType = {
 }
 
 export const HeavyLaser: WeaponType = {
-    name: 'Heavy Laser',
+    name: WeaponName.HeavyLaser,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 6,
@@ -142,7 +142,7 @@ export const HeavyLaser: WeaponType = {
 }
 
 export const HeavyMissile: WeaponType = {
-    name: 'Heavy Missile',
+    name: WeaponName.HeavyMissile,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 8,
@@ -151,7 +151,7 @@ export const HeavyMissile: WeaponType = {
 }
 
 export const MagmaBlaster: WeaponType = {
-    name: 'Magma Blaster',
+    name: WeaponName.MagmaBlaster,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 6,
@@ -160,7 +160,7 @@ export const MagmaBlaster: WeaponType = {
 }
 
 export const PlasmaCannon: WeaponType = {
-    name: 'Plasma Cannon',
+    name: WeaponName.PlasmaCannon,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 8,
@@ -169,7 +169,7 @@ export const PlasmaCannon: WeaponType = {
 }
 
 export const Screamer: WeaponType = {
-    name: 'Screamer',
+    name: WeaponName.Screamer,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Projectile,
     rating: 14,
@@ -181,7 +181,7 @@ export const Screamer: WeaponType = {
  * SUPERHEAVY WEAPONRY
  */
 export const SuperBlastCannon: WeaponType = {
-    name: 'Super Blast Cannon',
+    name: WeaponName.SuperBlastCannon,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.Projectile,
     rating: 10,
@@ -190,7 +190,7 @@ export const SuperBlastCannon: WeaponType = {
 }
 
 export const SuperBattleCannon: WeaponType = {
-    name: 'Super Battle Cannon',
+    name: WeaponName.SuperBattleCannon,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.Projectile,
     rating: 11,
@@ -199,7 +199,7 @@ export const SuperBattleCannon: WeaponType = {
 }
 
 export const MissileRack: WeaponType = {
-    name: 'Missile Rack',
+    name: WeaponName.MissileRack,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.Projectile,
     rating: 7,
@@ -208,7 +208,7 @@ export const MissileRack: WeaponType = {
 }
 
 export const MagmaCannon: WeaponType = {
-    name: 'Magma Cannon',
+    name: WeaponName.MagmaCannon,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.Projectile,
     rating: 10,
@@ -217,7 +217,7 @@ export const MagmaCannon: WeaponType = {
 }
 
 export const SuperPlasmaCannon: WeaponType = {
-    name: 'Super Plasma Cannon',
+    name: WeaponName.SuperPlasmaCannon,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.Projectile,
     rating: 10,
@@ -226,7 +226,7 @@ export const SuperPlasmaCannon: WeaponType = {
 }
 
 export const SuperheavyLaser: WeaponType = {
-    name: 'Superheavy Laser',
+    name: WeaponName.SuperheavyLaser,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.Projectile,
     rating: 9,
@@ -238,7 +238,7 @@ export const SuperheavyLaser: WeaponType = {
  * BOMBS
  */
 export const ClusterBombs: WeaponType = {
-    name: 'Cluster Bombs',
+    name: WeaponName.ClusterBombs,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Bomb,
     rating: 4,
@@ -247,7 +247,7 @@ export const ClusterBombs: WeaponType = {
 }
 
 export const IncendiaryBombs: WeaponType = {
-    name: 'Incendiary Bombs',
+    name: WeaponName.IncendiaryBombs,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.Bomb,
     rating: 8,
@@ -256,7 +256,7 @@ export const IncendiaryBombs: WeaponType = {
 }
 
 export const HeavyBombs: WeaponType = {
-    name: 'Heavy Bombs',
+    name: WeaponName.HeavyBombs,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Bomb,
     rating: 6,
@@ -265,7 +265,7 @@ export const HeavyBombs: WeaponType = {
 }
 
 export const PlasmaBombs: WeaponType = {
-    name: 'Plasma Bombs',
+    name: WeaponName.PlasmaBombs,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.Bomb,
     rating: 4,
@@ -277,7 +277,7 @@ export const PlasmaBombs: WeaponType = {
  * CLOSE COMBAT WEAPONRY
  */
 export const Blade: WeaponType = {
-    name: 'Blade',
+    name: WeaponName.Blade,
     weight: WeaponWeightClass.Light,
     category: WeaponCategory.CloseCombat,
     rating: 6,
@@ -286,7 +286,7 @@ export const Blade: WeaponType = {
 }
 
 export const Wrecker: WeaponType = {
-    name: 'Wrecker',
+    name: WeaponName.Wrecker,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.CloseCombat,
     rating: 8,
@@ -295,7 +295,7 @@ export const Wrecker: WeaponType = {
 }
 
 export const TurboBlade: WeaponType = {
-    name: 'Turbo-blade',
+    name: WeaponName.TurboBlade,
     weight: WeaponWeightClass.Heavy,
     category: WeaponCategory.CloseCombat,
     rating: 8,
@@ -304,7 +304,7 @@ export const TurboBlade: WeaponType = {
 }
 
 export const MagmaWrecker: WeaponType = {
-    name: 'Magma Wrecker',
+    name: WeaponName.MagmaWrecker,
     weight: WeaponWeightClass.Superheavy,
     category: WeaponCategory.CloseCombat,
     rating: 8,
