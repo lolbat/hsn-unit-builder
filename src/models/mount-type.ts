@@ -1,16 +1,28 @@
-import { MountLocation, VehicleSize, WeaponWeightClass } from "./constants";
+import { MountLocation, VehicleSize, WeaponCategory, WeaponWeightClass } from "./constants";
 import { WeaponType, WeaponTypes } from "./weapon-class";
 
 export function compatibleWeaponTypes(mount: MountType): ReadonlyArray<WeaponType> {
-    return WeaponTypes.filter(w => mount.maximumWeaponWeight >= w.weight)
+    return WeaponTypes.filter((w) => 
+        mount.maximumWeaponWeight >= w.weight 
+                && weaponCategoriesForMountLocations.get(mount.mountType)?.includes(w.category)
+    )
 }
 
 export interface MountType {
     readonly size: VehicleSize;
     readonly mountType: MountLocation;
     readonly maximumWeaponWeight: WeaponWeightClass;
-
 }
+
+const weaponCategoriesForMountLocations = new Map<MountLocation, WeaponCategory[]>([
+    [MountLocation.Arm, [WeaponCategory.CloseCombat, WeaponCategory.Projectile]],
+    [MountLocation.BombBay, [WeaponCategory.Bomb]],
+    [MountLocation.Fixed, [WeaponCategory.Projectile]],
+    [MountLocation.Hull, [WeaponCategory.Projectile]],
+    [MountLocation.MegaTurret, [WeaponCategory.Projectile]],
+    [MountLocation.Sponsons, [WeaponCategory.Projectile]],
+    [MountLocation.Turret, [WeaponCategory.Projectile]],
+]);
 
 export let LightTurretMount: MountType = { size: VehicleSize.Light, mountType: MountLocation.Turret, maximumWeaponWeight: WeaponWeightClass.Light }
 export let LightFixedMount: MountType = { size: VehicleSize.Light, mountType: MountLocation.Fixed, maximumWeaponWeight: WeaponWeightClass.Heavy }
