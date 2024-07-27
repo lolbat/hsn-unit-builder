@@ -5,7 +5,7 @@ interface VehicleClassSelectProps {
     handleVehicleClassChange: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-export function VehicleClassSelect({vehicleClass, handleVehicleClassChange}: VehicleClassSelectProps) {
+export default function VehicleClassSelect({vehicleClass, handleVehicleClassChange}: VehicleClassSelectProps) {
     let classList = VehicleClasses.map((v) =>
         <option value={v.name} key={v.name}>{v.name}</option>
     )

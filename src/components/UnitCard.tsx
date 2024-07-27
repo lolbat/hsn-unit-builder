@@ -6,7 +6,7 @@ interface UnitCardProps {
     handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>
 }
 
-export function UnitCard({unit, handleWeaponChange}: UnitCardProps) {
+export default function UnitCard({unit, handleWeaponChange}: UnitCardProps) {
     return (
         <div className="unit">
         <div className="name">{unit.name}</div>
