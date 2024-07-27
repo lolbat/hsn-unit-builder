@@ -85,6 +85,45 @@ export const LightCannon: WeaponType = {
 }
 
 /**
+ * BOMBS
+ */
+export const ClusterBombs: WeaponType = {
+    name: 'Cluster Bombs',
+    weight: WeaponWeightClass.Light,
+    category: WeaponCategory.Bomb,
+    rating: 4,
+    special: ['Volley', 'Bomb'],
+    cost: 2
+}
+
+export const IncendiaryBombs: WeaponType = {
+    name: 'Incendiary Bombs',
+    weight: WeaponWeightClass.Light,
+    category: WeaponCategory.Bomb,
+    rating: 8,
+    special: ['Inferno', 'No Pen', 'Volley', 'Bomb'],
+    cost: 2
+}
+
+export const HeavyBombs: WeaponType = {
+    name: 'Heavy Bombs',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Bomb,
+    rating: 6,
+    special: ['Volley', 'Bomb'],
+    cost: 3
+}
+
+export const PlasmaBombs: WeaponType = {
+    name: 'Plasma Bombs',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Bomb,
+    rating: 4,
+    special: ['Plasma Burn', 'Volley', 'Bomb'],
+    cost: 4
+}
+
+/**
  * CLOSE COMBAT WEAPONRY
  */
 export const Blade: WeaponType = {
@@ -132,6 +171,10 @@ export const WeaponTypes: ReadonlyArray<WeaponType> = [
     PlasmaBlaster,
     RotorCannon,
     LightCannon,
+    ClusterBombs,
+    IncendiaryBombs,
+    HeavyBombs,
+    PlasmaBombs,
     Blade,
     Wrecker,
     TurboBlade,
