@@ -5,6 +5,12 @@ export enum VehicleSize {
     Behemoth = 'Behemoth'
 }
 
+export enum WeaponCategory {
+    Projectile,
+    Bomb,
+    CloseCombat
+}
+
 export enum WeaponWeightClass {
     Versatile,
     Light,
