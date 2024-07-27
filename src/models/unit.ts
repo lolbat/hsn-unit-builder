@@ -1,5 +1,5 @@
 import Armour from "./armour";
-import { Mount } from "./mount";
+import { EmptyMount, Mount } from "./mount";
 import VehicleClass from "./vehicle-class";
 
 class Unit {
@@ -28,7 +28,7 @@ class Unit {
     this.hullPoints = vehicleClass.hullPoints;
     this.special = structuredClone(vehicleClass.special);
     this.mounts = vehicleClass.mounts.map(
-      (mountType, index) => new Mount(mountType, index),
+      (mountType, index) => new EmptyMount(mountType, index),
     );
     this.modifications = [];
   }
