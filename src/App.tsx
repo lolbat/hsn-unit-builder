@@ -244,10 +244,6 @@ function App() {
     }
   }
 
-  let classList = VehicleClasses.map((v) =>
-    <option value={v.name} key={v.name}>{v.name}</option>
-  )
-
   let {vehicleClass, unit} = unitForm;
 
   return (
