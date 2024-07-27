@@ -1,5 +1,5 @@
 import { MountLocation } from "./constants";
-import { WeaponType } from "./weapon-class";
+import { WeaponType } from "./weapon-type";
 
 class Weapon {
   private readonly weaponType: WeaponType;

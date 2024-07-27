@@ -6,7 +6,7 @@ import VehicleClass, {
   LightBattleVehicle,
 } from "../models/vehicle-class";
 import Weapon from "../models/weapon";
-import { WeaponTypes } from "../models/weapon-class";
+import { WeaponTypes } from "../models/weapon-type";
 import VehicleClassSelect from "./VehicleClassSelect";
 import UnitCard from "./UnitCard";
 
