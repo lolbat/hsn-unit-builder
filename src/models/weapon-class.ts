@@ -9,6 +9,9 @@ export interface WeaponType {
     readonly cost: number;
 }
 
+/**
+ * LIGHT WEAPONRY
+ */
 export const Autogun: WeaponType = {
     name: 'Autogun',
     weight: WeaponWeightClass.Versatile,
@@ -81,6 +84,45 @@ export const LightCannon: WeaponType = {
     cost: 3
 }
 
+/**
+ * CLOSE COMBAT WEAPONRY
+ */
+export const Blade: WeaponType = {
+    name: 'Blade',
+    weight: WeaponWeightClass.Light,
+    category: WeaponCategory.CloseCombat,
+    rating: 6,
+    special: ['Close Combat'],
+    cost: 1
+}
+
+export const Wrecker: WeaponType = {
+    name: 'Wrecker',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.CloseCombat,
+    rating: 8,
+    special: ['Close Combat'],
+    cost: 2
+}
+
+export const TurboBlade: WeaponType = {
+    name: 'Turbo-blade',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.CloseCombat,
+    rating: 8,
+    special: ['Close Combat', 'Plasma Burn'],
+    cost: 3
+}
+
+export const MagmaWrecker: WeaponType = {
+    name: 'Magma Wrecker',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.CloseCombat,
+    rating: 8,
+    special: ['Close Combat', 'Annihilator'],
+    cost: 4
+}
+
 export const WeaponTypes: ReadonlyArray<WeaponType> = [
     Autogun,
     Autocannon,
@@ -89,5 +131,9 @@ export const WeaponTypes: ReadonlyArray<WeaponType> = [
     LightMissile,
     PlasmaBlaster,
     RotorCannon,
-    LightCannon
+    LightCannon,
+    Blade,
+    Wrecker,
+    TurboBlade,
+    MagmaWrecker
 ]
