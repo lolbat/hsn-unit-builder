@@ -33,7 +33,13 @@ class Unit {
     }
 
     get cost() {
-        return this.vehicleClass.baseCost + [...this.weapons.values()].filter((w) => w !== null).reduceRight((acc, cur) => acc + cur.cost, 0)
+        return this.vehicleClass.baseCost + this.totalWeaponCost();
+    }
+
+    private totalWeaponCost() {
+        return [...this.weapons.values()]
+            .filter((w) => w !== null)
+            .reduce((acc, cur) => acc + cur.cost, 0);
     }
 }
 
