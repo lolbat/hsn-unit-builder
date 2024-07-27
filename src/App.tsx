@@ -1,10 +1,13 @@
-import { useCallback, useReducer } from 'react'
+import { useCallback, useReducer, useState } from 'react'
 import './App.css'
 import VehicleClass, { LightBattleVehicle, VehicleClasses } from './models/vehicle-class';
 import Unit from './models/unit';
 import { Mount } from './models/mount';
 import Weapon from './models/weapon';
-import { WeaponTypes } from './models/weapon-class';
+import { WeaponType, WeaponTypes } from './models/weapon-class';
+import { MountType } from './models/mount-type';
+import { WeaponName } from './models/constants';
+import { toWeaponName } from './models/constants';
 
 interface UnitCardProps {
   unit: Unit,
@@ -22,9 +25,11 @@ interface UnitFormState {
   unit:  Unit
 }
 
+type WeaponSelection = WeaponName | 'None';
+
 type UnitFormAction = 
   | {type: "classChanged", vehicleClass: string}
-  | {type: "weaponChanged", mountKey: string, weaponType: string}
+  | {type: "weaponChanged", mountKey: string, weaponType: WeaponSelection}
 
 const initialState: UnitFormState = {
   clean: true,
@@ -37,17 +42,55 @@ interface WeaponListProps {
   handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>
 }
 
+interface FilledMountListItemProps {
+  filledMount: FilledMount,
+  handleWeaponChange: React.ChangeEventHandler<HTMLSelectElement>
+}
+
+interface FilledMount {
+  readonly type: MountType;
+  readonly index: number;
+  readonly weapon: Weapon;
+  readonly key: string;
+}
+
+function FilledMountListItem({filledMount, handleWeaponChange}: FilledMountListItemProps) {
+  const [open, setOpen] = useState<boolean>(false);
+
+  if (open) {
+    let compatibleWeapons = (filledMount as Mount).compatibleWeaponTypes().map((w) =>
+      <option value={w.name} key={w.name} >{`${w.name} (${w.cost})`}</option>
+    );
+
+    return (
+      <li className="weapon" key={filledMount.key} onBlur={(e) => setOpen(false)}>
+        <div className="weapon-selector">
+          <select autoFocus name={filledMount.key} defaultValue={filledMount.weapon.name}  onChange={(e) => {handleWeaponChange(e); e.target.blur()}}>
+            <option value="None" key="None">None</option>
+            {compatibleWeapons}
+          </select>
+        </div>
+        <div className="mount value">{filledMount.type.mountType}</div>
+        <div className="special value"> </div>
+      </li>
+    );
+  }
+
+  return (
+    <li className="weapon">
+      <div className="weapon value" onClick={(e) => setOpen(true)}>{filledMount.weapon.name}</div>
+      <div className="rating value">{filledMount.weapon.rating}</div>
+      <div className="mount value">{filledMount.type.mountType}</div>
+      <div className="special value">{filledMount.weapon.special}</div>
+    </li>
+  );
+}
+
 function WeaponList({mounts, handleWeaponChange}: WeaponListProps) {
   let weaponList = mounts.map((mount) => {
     if (mount.weapon !== null) {
-      return (
-        <li className="weapon" key={mount.key}>
-          <div className="weapon value">{mount.weapon.name}</div>
-          <div className="rating value">{mount.weapon.rating}</div>
-          <div className="mount value">{mount.type.mountType}</div>
-          <div className="special value">{mount.weapon.special}</div>
-        </li>
-      );
+      let filledMount = mount as FilledMount;
+      return <FilledMountListItem filledMount={filledMount} handleWeaponChange={handleWeaponChange} key={mount.key} />
     }
 
     let compatibleWeapons = mount.compatibleWeaponTypes().map((w) =>
@@ -107,7 +150,7 @@ function UnitCard({unit, handleWeaponChange}: UnitCardProps) {
       <div className="modifications">
         <div className="title">Modifications</div>
         <div className="modifications-list">
-          <div className="modification">Reinforced Side Armour</div>
+          <ul></ul>
         </div>
       </div>
     </div>
@@ -142,10 +185,17 @@ function App() {
   }, [dispatch]);
 
   const handleWeaponChange = useCallback<React.ChangeEventHandler<HTMLSelectElement>>((e) => {
+    let weaponType: WeaponSelection;
+    if (e.target.value === 'None') {
+      weaponType = 'None'
+    } else {
+      weaponType = toWeaponName(e.target.value);
+    }
+
     dispatch({
       type: 'weaponChanged',
       mountKey: e.target.name,
-      weaponType: e.target.value
+      weaponType: weaponType
     });
   }, [dispatch]);
 
@@ -168,6 +218,15 @@ function App() {
         let mountToEquip = unit.mounts.find((m) => m.key === mountKey)
         if (!mountToEquip) {
           throw Error('Unknow mount type: ' + mountKey);
+        }
+
+        if (weaponType === 'None') {
+          mountToEquip.removeWeapon();
+          return {
+            ...unitForm,
+            clean: false,
+            unit: unit
+          }; 
         }
 
         let weaponToEquip = WeaponTypes.find((w) => weaponType === w.name)
