@@ -178,6 +178,63 @@ export const Screamer: WeaponType = {
 }
 
 /**
+ * SUPERHEAVY WEAPONRY
+ */
+export const SuperBlastCannon: WeaponType = {
+    name: 'Super Blast Cannon',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.Projectile,
+    rating: 10,
+    special: ['Close Action'],
+    cost: 4
+}
+
+export const SuperBattleCannon: WeaponType = {
+    name: 'Super Battle Cannon',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.Projectile,
+    rating: 11,
+    special: [],
+    cost: 5
+}
+
+export const MissileRack: WeaponType = {
+    name: 'Missile Rack',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.Projectile,
+    rating: 7,
+    special: ['Anti-Air', 'Guided Fire', 'Unstable', 'Volley'],
+    cost: 5
+}
+
+export const MagmaCannon: WeaponType = {
+    name: 'Magma Cannon',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.Projectile,
+    rating: 10,
+    special: ['Point Blank', 'Annihilator'],
+    cost: 6
+}
+
+export const SuperPlasmaCannon: WeaponType = {
+    name: 'Super Plasma Cannon',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.Projectile,
+    rating: 10,
+    special: ['Close Action', 'Plasma Burn'],
+    cost: 5
+}
+
+export const SuperheavyLaser: WeaponType = {
+    name: 'Superheavy Laser',
+    weight: WeaponWeightClass.Superheavy,
+    category: WeaponCategory.Projectile,
+    rating: 9,
+    special: ['Anti-Air', 'Flashburn', 'Unstable'],
+    cost: 6
+}
+
+/**
  * BOMBS
  */
 export const ClusterBombs: WeaponType = {
@@ -276,6 +333,13 @@ export const WeaponTypes: ReadonlyArray<WeaponType> = [
     MagmaBlaster,
     PlasmaCannon,
     Screamer,
+    // Superheavy Weaponry
+    SuperBlastCannon,
+    SuperBattleCannon,
+    MissileRack,
+    MagmaCannon,
+    SuperPlasmaCannon,
+    SuperheavyLaser,
     // Bombs
     ClusterBombs,
     IncendiaryBombs,
