@@ -1,8 +1,8 @@
 import { MountLocation, VehicleSize, WeaponWeightClass } from "./constants";
-import { WeaponClass, WeaponClasses } from "./weapon-class";
+import { WeaponType, WeaponTypes } from "./weapon-class";
 
-export function compatibleWeaponClasses(mount: MountType): ReadonlyArray<WeaponClass> {
-    return WeaponClasses.filter(w => mount.maximumWeaponWeight >= w.weight)
+export function compatibleWeaponTypes(mount: MountType): ReadonlyArray<WeaponType> {
+    return WeaponTypes.filter(w => mount.maximumWeaponWeight >= w.weight)
 }
 
 export interface MountType {

@@ -1,29 +1,29 @@
 import { MountLocation } from "./constants";
-import { WeaponClass } from "./weapon-class";
+import { WeaponType } from "./weapon-class";
 
 class Weapon {
-    private readonly weaponClass: WeaponClass;
+    private readonly weaponType: WeaponType;
     readonly mount: MountLocation;
 
-    constructor(weaponClass: WeaponClass, mountType: MountLocation) {
-        this.weaponClass = weaponClass;
+    constructor(weaponType: WeaponType, mountType: MountLocation) {
+        this.weaponType = weaponType;
         this.mount = mountType;
     }
 
     get name() {
-        return this.weaponClass.name;
+        return this.weaponType.name;
     }
 
     get rating() {
-        return this.weaponClass.rating;
+        return this.weaponType.rating;
     }
 
     get special() {
-        return this.weaponClass.special;
+        return this.weaponType.special;
     }
 
     get cost() {
-        return this.weaponClass.cost;
+        return this.weaponType.cost;
     }
 }
 

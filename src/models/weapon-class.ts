@@ -1,6 +1,6 @@
 import { WeaponWeightClass } from "./constants";
 
-export interface WeaponClass {
+export interface WeaponType {
     readonly name: string;
     readonly weight: WeaponWeightClass;
     readonly rating: number;
@@ -8,7 +8,7 @@ export interface WeaponClass {
     readonly cost: number;
 }
 
-export const Autogun: WeaponClass = {
+export const Autogun: WeaponType = {
     name: 'Autogun',
     weight: WeaponWeightClass.Versatile,
     rating: 5,
@@ -16,7 +16,7 @@ export const Autogun: WeaponClass = {
     cost: 1
 }
 
-export const Autocannon: WeaponClass = {
+export const Autocannon: WeaponType = {
     name: 'Autocannon',
     weight: WeaponWeightClass.Versatile,
     rating: 5,
@@ -24,7 +24,7 @@ export const Autocannon: WeaponClass = {
     cost: 2
 }
 
-export const Howler: WeaponClass = {
+export const Howler: WeaponType = {
     name: 'Howler',
     weight: WeaponWeightClass.Light,
     rating: 7,
@@ -32,7 +32,7 @@ export const Howler: WeaponClass = {
     cost: 2
 }
 
-export const Laser: WeaponClass = {
+export const Laser: WeaponType = {
     name: 'Laser',
     weight: WeaponWeightClass.Light,
     rating: 3,
@@ -40,7 +40,7 @@ export const Laser: WeaponClass = {
     cost: 2
 }
 
-export const LightMissile: WeaponClass = {
+export const LightMissile: WeaponType = {
     name: 'Light Missile',
     weight: WeaponWeightClass.Light,
     rating: 5,
@@ -48,7 +48,7 @@ export const LightMissile: WeaponClass = {
     cost: 2
 }
 
-export const PlasmaBlaster: WeaponClass = {
+export const PlasmaBlaster: WeaponType = {
     name: 'PlasmaBlaster',
     weight: WeaponWeightClass.Light,
     rating: 5,
@@ -56,7 +56,7 @@ export const PlasmaBlaster: WeaponClass = {
     cost: 2
 }
 
-export const RotorCannon: WeaponClass = {
+export const RotorCannon: WeaponType = {
     name: 'Rotor Cannon',
     weight: WeaponWeightClass.Versatile,
     rating: 5,
@@ -64,7 +64,7 @@ export const RotorCannon: WeaponClass = {
     cost: 3
 }
 
-export const LightCannon: WeaponClass = {
+export const LightCannon: WeaponType = {
     name: 'Light Cannon',
     weight: WeaponWeightClass.Light,
     rating: 7,
@@ -72,7 +72,7 @@ export const LightCannon: WeaponClass = {
     cost: 3
 }
 
-export const WeaponClasses: ReadonlyArray<WeaponClass> = [
+export const WeaponTypes: ReadonlyArray<WeaponType> = [
     Autogun,
     Autocannon,
     Howler,

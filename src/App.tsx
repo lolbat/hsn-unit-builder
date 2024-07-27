@@ -4,7 +4,7 @@ import VehicleClass, { LightBattleVehicle, VehicleClasses } from './models/vehic
 import Unit from './models/unit';
 import { Mount } from './models/mount';
 import Weapon from './models/weapon';
-import { WeaponClasses } from './models/weapon-class';
+import { WeaponTypes } from './models/weapon-class';
 
 interface UnitCardProps {
   unit: Unit,
@@ -51,7 +51,7 @@ function WeaponList({weaponsByMount, handleWeaponChange}: WeaponListProps) {
       );
     }
 
-    let compatibleWeapons = mount.compatibleWeaponClasses().map((w) =>
+    let compatibleWeapons = mount.compatibleWeaponTypes().map((w) =>
       <option value={w.name} key={w.name} >{`${w.name} (${w.cost})`}</option>
     );
 
@@ -172,7 +172,7 @@ function App() {
           throw Error('Unknow mount type: ' + action.mount);
         }
 
-        let weaponToEquip = WeaponClasses.find((w) => weapon === w.name)
+        let weaponToEquip = WeaponTypes.find((w) => weapon === w.name)
         if (!weaponToEquip) {
           throw Error('Unknow weapon type: ' + action.weapon);
         }

@@ -1,4 +1,4 @@
-import { WeaponClass, WeaponClasses } from "./weapon-class";
+import { WeaponType, WeaponTypes } from "./weapon-class";
 import { compatibleWeaponClasses, MountType } from "./mount-type";
 
 export class Mount {
@@ -10,7 +10,7 @@ export class Mount {
         this.index = index;
     }
 
-    compatibleWeaponClasses() {
-        return compatibleWeaponClasses(this.type);
+    compatibleWeaponTypes() {
+        return compatibleWeaponTypes(this.type);
     }
 }
