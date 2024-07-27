@@ -85,6 +85,99 @@ export const LightCannon: WeaponType = {
 }
 
 /**
+ * HEAVY WEAPONRY
+ */
+export const PulseLaser: WeaponType = {
+    name: 'Pulse Laser',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 4,
+    special: ['Flashburn', 'Volley'],
+    cost: 3
+}
+
+export const BlastCannon: WeaponType = {
+    name: 'Blast Cannon',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 8,
+    special: ['Close Action'],
+    cost: 3
+}
+
+export const BattleCannon: WeaponType = {
+    name: 'Battle Cannon',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 9,
+    special: [],
+    cost: 4
+}
+
+export const HeavyRotorCannon: WeaponType = {
+    name: 'Heavy Rotor Cannon',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 7,
+    special: ['Volley'],
+    cost: 4
+}
+
+export const HeavyCannon: WeaponType = {
+    name: 'Heavy Cannon',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 10,
+    special: ['Unstable'],
+    cost: 4
+}
+
+export const HeavyLaser: WeaponType = {
+    name: 'Heavy Laser',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 6,
+    special: ['Anti-Air', 'Flashburn'],
+    cost: 4
+}
+
+export const HeavyMissile: WeaponType = {
+    name: 'Heavy Missile',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 8,
+    special: ['Anti-Air', 'Guided Fire', 'Unstable'],
+    cost: 4
+}
+
+export const MagmaBlaster: WeaponType = {
+    name: 'Magma Blaster',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 6,
+    special: ['Point Blank', 'Annihilator'],
+    cost: 4
+}
+
+export const PlasmaCannon: WeaponType = {
+    name: 'Plasma Cannon',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 8,
+    special: ['Close Action', 'Plasma Burn'],
+    cost: 4
+}
+
+export const Screamer: WeaponType = {
+    name: 'Screamer',
+    weight: WeaponWeightClass.Heavy,
+    category: WeaponCategory.Projectile,
+    rating: 14,
+    special: ['Assault', 'No Pen', 'Point Blank'],
+    cost: 4
+}
+
+/**
  * BOMBS
  */
 export const ClusterBombs: WeaponType = {
@@ -163,6 +256,7 @@ export const MagmaWrecker: WeaponType = {
 }
 
 export const WeaponTypes: ReadonlyArray<WeaponType> = [
+    // Light Weaponry
     Autogun,
     Autocannon,
     Howler,
@@ -171,10 +265,23 @@ export const WeaponTypes: ReadonlyArray<WeaponType> = [
     PlasmaBlaster,
     RotorCannon,
     LightCannon,
+    // Heavy Weaponry
+    PulseLaser,
+    BlastCannon,
+    BattleCannon,
+    HeavyRotorCannon,
+    HeavyCannon,
+    HeavyLaser,
+    HeavyMissile,
+    MagmaBlaster,
+    PlasmaCannon,
+    Screamer,
+    // Bombs
     ClusterBombs,
     IncendiaryBombs,
     HeavyBombs,
     PlasmaBombs,
+    //Close Combat Weaponry
     Blade,
     Wrecker,
     TurboBlade,
