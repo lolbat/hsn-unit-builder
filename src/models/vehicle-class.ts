@@ -1,6 +1,6 @@
 import Armour from './armour';
 import { VehicleSize } from './constants';
-import {MountType, LightHullMount, LightSponsonsMount, LightTurretMount, LightFixedMount } from './mount-type';
+import {MountType, LightHullMount, LightSponsonsMount, LightTurretMount, LightFixedMount, LightArmMount } from './mount-type';
 
 export default interface VehicleClass {
     readonly name: string;
@@ -62,8 +62,24 @@ export const ScoutVehicle: VehicleClass = {
     special: ['Scout']
 }
 
+export const ScoutMech: VehicleClass = {
+    name: 'Scout Mech',
+    baseCost: 2,
+    maxCost: 5,
+    size: VehicleSize.Light,
+    discipline: 2,
+    optics: 10,
+    movement: 7,
+    morale: 2,
+    armour: new Armour(0, 0, 0),
+    hullPoints: 3,
+    mounts: [LightArmMount, LightHullMount],
+    special: ['Scout', 'Walker']
+}
+
 export const VehicleClasses: ReadonlyArray<VehicleClass> = [
     LightBattleVehicle,
     LightSupportVehicle,
-    ScoutVehicle
+    ScoutVehicle,
+    ScoutMech
 ]
