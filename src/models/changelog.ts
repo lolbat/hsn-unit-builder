@@ -40,7 +40,6 @@ export const Changelog: ChangelogEntry[] = [
 export const Todos: string[] = [
   "99% of the UI formatting and layout",
   "Add support for Mega-turret sponsons",
-  "Display a warning when current cost exceeds max cost for class",
   "Upgrades and Compromises",
   "Rules text for special rules and upgrades/modifications",
   "Display armour values correctly for walkers and fast movers",
