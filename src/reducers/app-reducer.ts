@@ -1,56 +1,41 @@
-import VehicleClass from "../models/vehicle-class";
-import Unit from "../models/unit";
+import PageReducer, {
+  initialPageState,
+  isPageAction,
+  PageAction,
+  PageState,
+} from "./page-reducer";
+import UnitFormReducer, {
+  initialUnitFormState,
+  isUnitFormAction,
+  UnitFormAction,
+  UnitFormState,
+} from "./unit-form-reducer";
 
 export interface AppState {
-  unitFormState: {
-    vehicleClass: VehicleClass;
-    unit: Unit;
-  };
-  pageState: {
-    currentPage: string;
-    previousPage: string | null;
-  };
+  unitFormState: UnitFormState;
+  pageState: PageState;
 }
 
-export type AppAction =
-  | { type: "vehicle-class-change"; vehicleClass: VehicleClass }
-  | { type: "unit-change"; unit: Unit }
-  | { type: "page-change"; newPage: string };
+export const initialAppState: AppState = {
+  unitFormState: initialUnitFormState,
+  pageState: initialPageState,
+};
+
+export type AppAction = UnitFormAction | PageAction;
 
 export default function AppReducer(state: AppState, action: AppAction) {
-  switch (action.type) {
-    case "vehicle-class-change": {
-      const newState: AppState = {
-        ...state,
-        unitFormState: {
-          vehicleClass: action.vehicleClass,
-          unit: new Unit(action.vehicleClass),
-        },
-      };
-      return newState;
-    }
-    case "unit-change": {
-      const newState: AppState = {
-        ...state,
-        unitFormState: {
-          ...state.unitFormState,
-          unit: action.unit,
-        },
-      };
-      return newState;
-    }
-    case "page-change": {
-      const newState: AppState = {
-        ...state,
-        pageState: {
-          currentPage: action.newPage,
-          previousPage: state.pageState.currentPage,
-        },
-      };
-      return newState;
-    }
-    default: {
-      throw new Error(`Unhandled action: ${action}`);
-    }
+  if (isPageAction(action)) {
+    return {
+      ...state,
+      pageState: PageReducer(state.pageState, action),
+    };
   }
+  if (isUnitFormAction(action)) {
+    return {
+      ...state,
+      unitFormState: UnitFormReducer(state.unitFormState, action),
+    };
+  }
+
+  throw new Error(`Unhandled action: ${action}`);
 }

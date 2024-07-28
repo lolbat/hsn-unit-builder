@@ -3,24 +3,11 @@ import "./App.css";
 import Page from "./components/Page";
 import { ReactNode, useReducer } from "react";
 import Changelog from "./components/Changelog";
-import { LightBattleVehicle } from "./models/vehicle-class";
-import Unit from "./models/unit";
-import AppReducer, { AppState } from "./reducers/app-reducer";
+import AppReducer, { initialAppState } from "./reducers/app-reducer";
 import DispatchContext from "./contexts/dispatch-context";
 
-const initialState: AppState = {
-  unitFormState: {
-    vehicleClass: LightBattleVehicle,
-    unit: new Unit(LightBattleVehicle),
-  },
-  pageState: {
-    currentPage: "",
-    previousPage: null,
-  },
-};
-
 function App() {
-  const [appState, dispatch] = useReducer(AppReducer, initialState);
+  const [appState, dispatch] = useReducer(AppReducer, initialAppState);
 
   let pageContent: ReactNode;
   if (appState.pageState.currentPage === "changelog") {
