@@ -1,6 +1,7 @@
 import Unit from "../models/unit";
 import { WeaponList } from "./WeaponList";
 import { Mount } from "../models/mount";
+import { UnitName } from "./UnitName";
 
 interface UnitCardProps {
   unit: Unit;
@@ -13,9 +14,14 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
     handleUnitChange(unit);
   };
 
+  const handleNameChange = function (name: string) {
+    unit.name = name;
+    handleUnitChange(unit);
+  };
+
   return (
     <div className="unit">
-      <div className="name">{unit.name}</div>
+      <UnitName name={unit.name} handleNameChange={handleNameChange} />
       <div className="cost title">Cost</div>
       <div className="cost value">{unit.cost}</div>
       <div className="size title">Size</div>
