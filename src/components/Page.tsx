@@ -4,16 +4,15 @@ import Header from "./Header";
 
 interface PageProps {
   page: string;
-  handlePageChange(page: string): void;
   children: ReactNode;
 }
 
-export default function Page({ page, handlePageChange, children }: PageProps) {
+export default function Page({ page, children }: PageProps) {
   return (
     <>
       <Header />
       {children}
-      <Footer page={page} handlePageChange={handlePageChange} />
+      <Footer page={page} />
     </>
   );
 }

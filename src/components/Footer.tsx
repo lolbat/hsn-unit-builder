@@ -1,11 +1,20 @@
-import { ReactNode } from "react";
+import { ReactNode, useContext } from "react";
+import { DispatchContext } from "../App";
 
 interface FooterProps {
   page: string;
-  handlePageChange(page: string): void;
 }
 
-export default function Footer({ page, handlePageChange }: FooterProps) {
+export default function Footer({ page }: FooterProps) {
+  const dispatch = useContext(DispatchContext);
+
+  function handlePageChange(page: string) {
+    dispatch({
+      type: "page-change",
+      newPage: page,
+    });
+  }
+
   let footer: ReactNode;
   if (page === "changelog") {
     footer = (
