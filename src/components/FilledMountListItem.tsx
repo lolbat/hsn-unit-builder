@@ -28,7 +28,7 @@ export function FilledMountListItem({
     if (weaponType === "None") {
       handleMountChange(mount.removeWeapon());
     } else {
-      let weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
+      const weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
       if (!weaponToEquip) {
         throw Error("Unknow weapon type: " + weaponType);
       }
@@ -42,14 +42,14 @@ export function FilledMountListItem({
   }
 
   if (open) {
-    let compatibleWeapons = (mount as Mount)
+    const compatibleWeapons = (mount as Mount)
       .compatibleWeaponTypes()
       .map((w) => (
         <option value={w.name} key={w.name}>{`${w.name} (${w.cost})`}</option>
       ));
 
     return (
-      <li className="weapon" key={mount.key} onBlur={(e) => setOpen(false)}>
+      <li className="weapon" key={mount.key} onBlur={() => setOpen(false)}>
         <div className="weapon-selector">
           <select
             autoFocus
@@ -74,7 +74,7 @@ export function FilledMountListItem({
 
   return (
     <li className="weapon">
-      <div className="weapon value" onClick={(e) => setOpen(true)}>
+      <div className="weapon value" onClick={() => setOpen(true)}>
         {mount.weapon.name}
       </div>
       <div className="rating value">{mount.weapon.rating}</div>

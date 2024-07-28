@@ -17,7 +17,7 @@ export function WeaponList({ mounts, handleMountsChange }: WeaponListProps) {
     ]);
   }
 
-  let weaponList = mounts.map((mount) => {
+  const weaponList = mounts.map((mount) => {
     if (mount.empty === false) {
       return (
         <FilledMountListItem

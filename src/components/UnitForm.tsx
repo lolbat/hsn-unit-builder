@@ -46,7 +46,7 @@ export default function UnitForm() {
   ): UnitFormState {
     switch (action.type) {
       case "classChanged": {
-        let vehicleClass = VehicleClasses.find(
+        const vehicleClass = VehicleClasses.find(
           (vc) => vc.name === action.vehicleClass,
         );
         if (!vehicleClass) {
@@ -68,7 +68,7 @@ export default function UnitForm() {
     }
   }
 
-  let { vehicleClass, unit } = unitForm;
+  const { vehicleClass, unit } = unitForm;
 
   return (
     <>

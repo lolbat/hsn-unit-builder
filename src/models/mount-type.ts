@@ -37,130 +37,130 @@ const weaponCategoriesForMountLocations = new Map<
   [MountLocation.Turret, [WeaponCategory.Projectile]],
 ]);
 
-export let LightTurretMount: MountType = {
+export const LightTurretMount: MountType = {
   size: VehicleSize.Light,
   mountType: MountLocation.Turret,
   maximumWeaponWeight: WeaponWeightClass.Light,
 };
-export let LightFixedMount: MountType = {
+export const LightFixedMount: MountType = {
   size: VehicleSize.Light,
   mountType: MountLocation.Fixed,
   maximumWeaponWeight: WeaponWeightClass.Heavy,
 };
-export let LightHullMount: MountType = {
+export const LightHullMount: MountType = {
   size: VehicleSize.Light,
   mountType: MountLocation.Hull,
   maximumWeaponWeight: WeaponWeightClass.Versatile,
 };
-export let LightSponsonsMount: MountType = {
+export const LightSponsonsMount: MountType = {
   size: VehicleSize.Light,
   mountType: MountLocation.Sponsons,
   maximumWeaponWeight: WeaponWeightClass.Versatile,
 };
-export let LightArmMount: MountType = {
+export const LightArmMount: MountType = {
   size: VehicleSize.Light,
   mountType: MountLocation.Arm,
   maximumWeaponWeight: WeaponWeightClass.Light,
 };
-export let LightBombBayMount: MountType = {
+export const LightBombBayMount: MountType = {
   size: VehicleSize.Light,
   mountType: MountLocation.BombBay,
   maximumWeaponWeight: WeaponWeightClass.Light,
 };
 
-export let HeavyTurretMount: MountType = {
+export const HeavyTurretMount: MountType = {
   size: VehicleSize.Heavy,
   mountType: MountLocation.Turret,
   maximumWeaponWeight: WeaponWeightClass.Heavy,
 };
-export let HeavyFixedMount: MountType = {
+export const HeavyFixedMount: MountType = {
   size: VehicleSize.Heavy,
   mountType: MountLocation.Fixed,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let HeavyHullMount: MountType = {
+export const HeavyHullMount: MountType = {
   size: VehicleSize.Heavy,
   mountType: MountLocation.Hull,
   maximumWeaponWeight: WeaponWeightClass.Light,
 };
-export let HeavySponsonsMount: MountType = {
+export const HeavySponsonsMount: MountType = {
   size: VehicleSize.Heavy,
   mountType: MountLocation.Sponsons,
   maximumWeaponWeight: WeaponWeightClass.Light,
 };
-export let HeavyArmMount: MountType = {
+export const HeavyArmMount: MountType = {
   size: VehicleSize.Heavy,
   mountType: MountLocation.Arm,
   maximumWeaponWeight: WeaponWeightClass.Heavy,
 };
-export let HeavyBombBayMount: MountType = {
+export const HeavyBombBayMount: MountType = {
   size: VehicleSize.Heavy,
   mountType: MountLocation.BombBay,
   maximumWeaponWeight: WeaponWeightClass.Heavy,
 };
 
-export let SuperheavyTurretMount: MountType = {
+export const SuperheavyTurretMount: MountType = {
   size: VehicleSize.Superheavy,
   mountType: MountLocation.Turret,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let SuperheavyFixedMount: MountType = {
+export const SuperheavyFixedMount: MountType = {
   size: VehicleSize.Superheavy,
   mountType: MountLocation.Fixed,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let SuperheavyHullMount: MountType = {
+export const SuperheavyHullMount: MountType = {
   size: VehicleSize.Superheavy,
   mountType: MountLocation.Hull,
   maximumWeaponWeight: WeaponWeightClass.Heavy,
 };
-export let SuperheavySponsonsMount: MountType = {
+export const SuperheavySponsonsMount: MountType = {
   size: VehicleSize.Superheavy,
   mountType: MountLocation.Sponsons,
   maximumWeaponWeight: WeaponWeightClass.Heavy,
 };
-export let SuperheavyArmMount: MountType = {
+export const SuperheavyArmMount: MountType = {
   size: VehicleSize.Superheavy,
   mountType: MountLocation.Arm,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let SuperheavyBombBayMount: MountType = {
+export const SuperheavyBombBayMount: MountType = {
   size: VehicleSize.Superheavy,
   mountType: MountLocation.BombBay,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
 
-export let BehemothTurretMount: MountType = {
+export const BehemothTurretMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.Turret,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let BehemothFixedMount: MountType = {
+export const BehemothFixedMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.Fixed,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let BehemothHullMount: MountType = {
+export const BehemothHullMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.Hull,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let BehemothSponsonsMount: MountType = {
+export const BehemothSponsonsMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.Sponsons,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let BehemothArmMount: MountType = {
+export const BehemothArmMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.Arm,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let BehemothBombBayMount: MountType = {
+export const BehemothBombBayMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.BombBay,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
-export let BehemothMegaTurretMount: MountType = {
+export const BehemothMegaTurretMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.MegaTurret,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,

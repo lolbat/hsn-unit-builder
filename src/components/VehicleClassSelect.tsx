@@ -9,14 +9,16 @@ export default function VehicleClassSelect({
   vehicleClass,
   handleVehicleClassChange,
 }: VehicleClassSelectProps) {
-  let classList = VehicleClasses.map((v) => (
+  const classList = VehicleClasses.map((v) => (
     <option value={v.name} key={v.name}>
       {v.name}
     </option>
   ));
 
   function handleChange(e: React.ChangeEvent<HTMLSelectElement>) {
-    let vehicleClass = VehicleClasses.find((vc) => vc.name === e.target.value);
+    const vehicleClass = VehicleClasses.find(
+      (vc) => vc.name === e.target.value,
+    );
     if (!vehicleClass) {
       throw Error("Unknow vehicle class: " + e.target.value);
     }

@@ -25,7 +25,7 @@ export function EmptyMountListItem({
     if (weaponType === "None") {
       handleMountChange(mount);
     } else {
-      let weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
+      const weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
       if (!weaponToEquip) {
         throw Error("Unknow weapon type: " + weaponType);
       }
@@ -36,7 +36,7 @@ export function EmptyMountListItem({
     }
   }
 
-  let compatibleWeapons = mount
+  const compatibleWeapons = mount
     .compatibleWeaponTypes()
     .map((w) => (
       <option value={w.name} key={w.name}>{`${w.name} (${w.cost})`}</option>
