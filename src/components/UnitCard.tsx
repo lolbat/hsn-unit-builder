@@ -50,9 +50,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
       <div className="morale title">Morale</div>
       <div className="morale value">{unit.morale}</div>
       <div className="armour title">Armour</div>
-      <div className="armour value">
-        {unit.armour.front}/{unit.armour.sides}/{unit.armour.rear}
-      </div>
+      <div className="armour value">{unit.armour.toDisplayFormat()}</div>
       <div className="hullpoints title">Hull Points</div>
       <div className="hullpoints value">{unit.hullPoints}</div>
       <div className="special title">Special</div>

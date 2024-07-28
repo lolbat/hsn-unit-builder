@@ -42,7 +42,6 @@ export const Todos: string[] = [
   "Add support for Mega-turret sponsons",
   "Upgrades and Compromises",
   "Rules text for special rules and upgrades/modifications",
-  "Display armour values correctly for walkers and fast movers",
   "Save unit to browser local storage",
   "List units saved to storage",
   "Delete a stored unit",

@@ -1,24 +1,22 @@
 class Armour {
   readonly front: number;
-  readonly sides: number;
-  readonly rear: number;
+  readonly sides: number | null;
+  readonly rear: number | null;
 
-  constructor(front: number, sides: number, rear: number) {
+  constructor(front: number, sides: number | null, rear: number | null) {
     this.front = front;
     this.sides = sides;
     this.rear = rear;
   }
 
-  setFrontArmour(frontArmour: number): Armour {
-    return new Armour(frontArmour, this.sides, this.rear);
-  }
-
-  setSideArmour(sideArmour: number): Armour {
-    return new Armour(this.front, sideArmour, this.rear);
-  }
-
-  setRearArmour(rearArmour: number): Armour {
-    return new Armour(this.front, this.sides, rearArmour);
+  toDisplayFormat() {
+    if (this.sides !== null) {
+      return `${this.front}/${this.sides}/${this.rear}`;
+    }
+    if (this.rear !== null) {
+      return `${this.front}/${this.rear}`;
+    }
+    return `${this.front}`;
   }
 }
 
