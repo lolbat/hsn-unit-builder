@@ -15,7 +15,11 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   };
 
   const handleNameChange = function (name: string) {
-    unit.name = name;
+    if (name) {
+      unit.name = name;
+    } else {
+      unit.name = unit.vehicleClass.name;
+    }
     handleUnitChange(unit);
   };
 
