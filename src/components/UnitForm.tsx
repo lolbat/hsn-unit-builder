@@ -1,74 +1,34 @@
-import { useReducer } from "react";
+import { useContext } from "react";
 import Unit from "../models/unit";
-import VehicleClass, {
-  VehicleClasses,
-  LightBattleVehicle,
-} from "../models/vehicle-class";
 import VehicleClassSelect from "./VehicleClassSelect";
 import UnitCard from "./UnitCard";
+import VehicleClass from "../models/vehicle-class";
+import DispatchContext from "../contexts/dispatch-context";
 
-interface UnitFormState {
-  clean: boolean;
+interface UnitFormProps {
   vehicleClass: VehicleClass;
   unit: Unit;
 }
 
-type UnitFormAction =
-  | { type: "classChanged"; vehicleClass: string }
-  | { type: "unitChanged"; unit: Unit };
-
-const initialState: UnitFormState = {
-  clean: true,
-  vehicleClass: LightBattleVehicle,
-  unit: new Unit(LightBattleVehicle),
-};
-
-export default function UnitForm() {
-  const [unitForm, dispatch] = useReducer(unitReducer, initialState);
+export default function UnitForm({ vehicleClass, unit }: UnitFormProps) {
+  // const [clean, setClean] = useState(true);
+  const dispatch = useContext(DispatchContext);
 
   function handleVehicleClassChange(vehicleClass: VehicleClass) {
+    // setClean(true);
     dispatch({
-      type: "classChanged",
-      vehicleClass: vehicleClass.name,
+      type: "vehicle-class-change",
+      vehicleClass: vehicleClass,
     });
   }
 
   function handleUnitChange(unit: Unit) {
+    // setClean(false);
     dispatch({
-      type: "unitChanged",
+      type: "unit-change",
       unit,
     });
   }
-
-  function unitReducer(
-    unitForm: UnitFormState,
-    action: UnitFormAction,
-  ): UnitFormState {
-    switch (action.type) {
-      case "classChanged": {
-        const vehicleClass = VehicleClasses.find(
-          (vc) => vc.name === action.vehicleClass,
-        );
-        if (!vehicleClass) {
-          throw Error("Unknow vehicle class: " + action.vehicleClass);
-        }
-        return {
-          clean: true,
-          vehicleClass: vehicleClass,
-          unit: new Unit(vehicleClass),
-        };
-      }
-      case "unitChanged": {
-        return {
-          ...unitForm,
-          clean: false,
-          unit: action.unit,
-        };
-      }
-    }
-  }
-
-  const { vehicleClass, unit } = unitForm;
 
   return (
     <>

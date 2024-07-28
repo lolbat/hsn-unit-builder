@@ -23,8 +23,8 @@ export default function AppReducer(state: AppState, action: AppAction) {
       const newState: AppState = {
         ...state,
         unitFormState: {
-          ...state.unitFormState,
           vehicleClass: action.vehicleClass,
+          unit: new Unit(action.vehicleClass),
         },
       };
       return newState;

@@ -26,7 +26,12 @@ function App() {
   if (appState.pageState.currentPage === "changelog") {
     pageContent = <Changelog />;
   } else {
-    pageContent = <UnitForm />;
+    pageContent = (
+      <UnitForm
+        vehicleClass={appState.unitFormState.vehicleClass}
+        unit={appState.unitFormState.unit}
+      />
+    );
   }
 
   return (
