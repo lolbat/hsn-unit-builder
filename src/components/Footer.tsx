@@ -1,5 +1,5 @@
 import { ReactNode, useContext } from "react";
-import { DispatchContext } from "../App";
+import DispatchContext from "../contexts/dispatch-context";
 
 interface FooterProps {
   page: string;
