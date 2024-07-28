@@ -62,7 +62,11 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
       <div className="modifications">
         <div className="title">Modifications</div>
         <div className="modifications-list">
-          <ul></ul>
+          <ol>
+            {unit.modifications.map((mod) => (
+              <li key={mod.name}>{mod.name}</li>
+            ))}
+          </ol>
         </div>
       </div>
     </div>

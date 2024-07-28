@@ -1,4 +1,5 @@
 import Armour from "./armour";
+import { Modification } from "./modifications";
 import { EmptyMount, Mount } from "./mount";
 import VehicleClass from "./vehicle-class";
 
@@ -14,7 +15,7 @@ class Unit {
   hullPoints: number;
   special: string[];
   mounts: Mount[];
-  modifications: string[];
+  modifications: Modification[];
 
   constructor(vehicleClass: VehicleClass) {
     this.vehicleClass = vehicleClass;
