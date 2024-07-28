@@ -21,7 +21,11 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
 
   return (
     <div className="unit">
-      <UnitName name={unit.name} handleNameChange={handleNameChange} />
+      <UnitName
+        name={unit.name}
+        nameIsDefault={unit.name === unit.vehicleClass.name}
+        handleNameChange={handleNameChange}
+      />
       <div className="cost title">Cost</div>
       <div className="cost value">{unit.cost}</div>
       <div className="size title">Size</div>

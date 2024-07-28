@@ -2,11 +2,30 @@ import { useState } from "react";
 
 interface UnitNameProps {
   name: string;
+  nameIsDefault: boolean;
   handleNameChange(name: string): void;
 }
 
-export function UnitName({ name, handleNameChange }: UnitNameProps) {
+export function UnitName({
+  name,
+  nameIsDefault,
+  handleNameChange,
+}: UnitNameProps) {
   const [open, setOpen] = useState<boolean>(false);
+
+  let nameValue: string;
+  if (nameIsDefault) {
+    nameValue = "";
+  } else {
+    nameValue = name;
+  }
+
+  let namePlaceholder: string;
+  if (nameIsDefault) {
+    namePlaceholder = name;
+  } else {
+    namePlaceholder = "";
+  }
 
   if (open) {
     return (
@@ -15,7 +34,8 @@ export function UnitName({ name, handleNameChange }: UnitNameProps) {
         type="text"
         className="name"
         name="name"
-        value={name}
+        value={nameValue}
+        placeholder={namePlaceholder}
         onChange={(e) => handleNameChange(e.target.value)}
         onBlur={() => setOpen(false)}
         onKeyUp={(e) => {
