@@ -17,8 +17,8 @@ export function UnitName({ name, handleNameChange }: UnitNameProps) {
         name="name"
         value={name}
         onChange={(e) => handleNameChange(e.target.value)}
-        onBlur={(e) => setOpen(false)}
-        onKeyUp={(e) => {
+        onBlur={() => setOpen(false)}
+        onKeyUp={() => {
           if (e.key === "Enter") setOpen(false);
         }}
       />
@@ -26,7 +26,7 @@ export function UnitName({ name, handleNameChange }: UnitNameProps) {
   }
 
   return (
-    <div className="name" onClick={(e) => setOpen(true)}>
+    <div className="name" onClick={() => setOpen(true)}>
       {name}
     </div>
   );
