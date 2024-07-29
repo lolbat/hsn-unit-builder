@@ -54,7 +54,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
       <div className="hullpoints title">Hull Points</div>
       <div className="hullpoints value">{unit.hullPoints}</div>
       <div className="special title">Special</div>
-      <div className="special value">{unit.special}</div>
+      <div className="special value">{unit.special.join(", ")}</div>
       <WeaponList
         mounts={unit.mounts}
         handleMountsChange={handleMountsChange}

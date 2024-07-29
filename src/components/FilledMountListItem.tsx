@@ -79,7 +79,7 @@ export function FilledMountListItem({
       </div>
       <div className="rating value">{mount.weapon.rating}</div>
       <div className="mount value">{mount.type.mountType}</div>
-      <div className="special value">{mount.weapon.special}</div>
+      <div className="special value">{mount.weapon.special.join(", ")}</div>
     </li>
   );
 }

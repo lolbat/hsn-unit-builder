@@ -35,6 +35,12 @@ export const Changelog: ChangelogEntry[] = [
     description:
       "Edit unit name. Add contact details. Show a warning when a unit's cost exceeds the max cost of its class.",
   },
+  {
+    index: 2,
+    date: "2024-07-29",
+    version: new Version(0, 0, 3),
+    description: "Format special ability lists for units and weapons.",
+  },
 ];
 
 export const Todos: string[] = [
