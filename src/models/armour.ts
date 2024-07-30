@@ -1,7 +1,17 @@
-class Armour {
+export interface ArmourShape {
   readonly front: number;
   readonly sides: number | null;
   readonly rear: number | null;
+}
+
+class Armour implements ArmourShape {
+  readonly front: number;
+  readonly sides: number | null;
+  readonly rear: number | null;
+
+  static fromArmourShape(armour: ArmourShape) {
+    return new Armour(armour.front, armour.sides, armour.rear);
+  }
 
   constructor(front: number, sides: number | null, rear: number | null) {
     this.front = front;
