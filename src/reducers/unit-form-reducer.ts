@@ -2,6 +2,7 @@ import Action from "./actions";
 import VehicleClass from "../models/vehicle-class";
 import Unit from "../models/unit";
 import { LightBattleVehicle } from "../models/vehicle-class";
+import { loadUnit, storeUnit } from "../storage/unit-storage";
 
 export interface UnitFormState {
   vehicleClass: VehicleClass;
@@ -15,10 +16,19 @@ export const initialUnitFormState = {
 
 export type UnitFormAction =
   | { type: "vehicle-class-change"; vehicleClass: VehicleClass }
-  | { type: "unit-change"; unit: Unit };
+  | { type: "unit-change"; unit: Unit }
+  | { type: "save-unit" }
+  | { type: "load-unit" }
+  | { type: "reset-unit" };
 
 export function isUnitFormAction(a: Action): a is UnitFormAction {
-  return ["vehicle-class-change", "unit-change"].includes(a.type);
+  return [
+    "vehicle-class-change",
+    "unit-change",
+    "save-unit",
+    "load-unit",
+    "reset-unit",
+  ].includes(a.type);
 }
 
 export default function UnitFormReducer(
@@ -39,6 +49,24 @@ export default function UnitFormReducer(
         unit: action.unit,
       };
       return newState;
+    }
+    case "save-unit": {
+      storeUnit(state.unit);
+      return state;
+    }
+    case "load-unit": {
+      const loadedUnit = loadUnit();
+      if (loadedUnit === null) {
+        return state;
+      }
+      const newState: UnitFormState = {
+        vehicleClass: loadedUnit.vehicleClass,
+        unit: loadedUnit,
+      };
+      return newState;
+    }
+    case "reset-unit": {
+      return initialUnitFormState;
     }
     default: {
       throw new Error(`Unhandled action: ${action}`);
