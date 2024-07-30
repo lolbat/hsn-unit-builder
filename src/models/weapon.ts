@@ -1,8 +1,13 @@
 import { MountLocation } from "./constants";
 import { WeaponType } from "./weapon-type";
 
-class Weapon {
-  private readonly weaponType: WeaponType;
+export interface WeaponShape {
+  readonly weaponType: WeaponType;
+  readonly mount: MountLocation;
+}
+
+class Weapon implements WeaponShape {
+  readonly weaponType: WeaponType;
   readonly mount: MountLocation;
 
   constructor(weaponType: WeaponType, mountType: MountLocation) {
