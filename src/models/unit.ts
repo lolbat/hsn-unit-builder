@@ -1,9 +1,24 @@
-import Armour from "./armour";
+import Armour, { ArmourShape } from "./armour";
 import { Modification } from "./modifications";
 import { EmptyMount, Mount } from "./mount";
 import VehicleClass from "./vehicle-class";
 
-class Unit {
+export interface UnitShape {
+  readonly vehicleClass: VehicleClass;
+  readonly name: string;
+  readonly size: string;
+  readonly discipline: number;
+  readonly optics: number;
+  readonly movement: number;
+  readonly morale: number;
+  readonly armour: ArmourShape;
+  readonly hullPoints: number;
+  readonly special: string[];
+  readonly mounts: Mount[];
+  readonly modifications: Modification[];
+}
+
+class Unit implements UnitShape {
   readonly vehicleClass: VehicleClass;
   name: string;
   size: string;
@@ -17,21 +32,68 @@ class Unit {
   mounts: Mount[];
   modifications: Modification[];
 
-  constructor(vehicleClass: VehicleClass) {
-    this.vehicleClass = vehicleClass;
-    this.name = vehicleClass.name;
-    this.size = vehicleClass.size;
-    this.discipline = vehicleClass.discipline;
-    this.optics = vehicleClass.optics;
-    this.movement = vehicleClass.movement;
-    this.morale = vehicleClass.morale;
-    this.armour = vehicleClass.armour;
-    this.hullPoints = vehicleClass.hullPoints;
-    this.special = structuredClone(vehicleClass.special);
-    this.mounts = vehicleClass.mounts.map(
-      (mountType, index) => new EmptyMount(mountType, index),
+  static fromVehicleClass(vehicleClass: VehicleClass) {
+    return new Unit(
+      vehicleClass,
+      vehicleClass.name,
+      vehicleClass.size,
+      vehicleClass.discipline,
+      vehicleClass.optics,
+      vehicleClass.movement,
+      vehicleClass.morale,
+      vehicleClass.armour,
+      vehicleClass.hullPoints,
+      vehicleClass.special,
+      vehicleClass.mounts.map(
+        (mountType, index) => new EmptyMount(mountType, index),
+      ),
+      [],
     );
-    this.modifications = [];
+  }
+
+  static fromObject(unit: UnitShape) {
+    return new Unit(
+      unit.vehicleClass,
+      unit.name,
+      unit.size,
+      unit.discipline,
+      unit.optics,
+      unit.movement,
+      unit.morale,
+      Armour.fromArmourShape(unit.armour),
+      unit.hullPoints,
+      unit.special,
+      unit.mounts,
+      unit.modifications,
+    );
+  }
+
+  private constructor(
+    vehicleClass: VehicleClass,
+    name: string,
+    size: string,
+    discipline: number,
+    optics: number,
+    movement: number,
+    morale: number,
+    armour: Armour,
+    hullPoints: number,
+    special: string[],
+    mounts: Mount[],
+    modifications: Modification[],
+  ) {
+    this.vehicleClass = vehicleClass;
+    this.name = name;
+    this.size = size;
+    this.discipline = discipline;
+    this.optics = optics;
+    this.movement = movement;
+    this.morale = morale;
+    this.armour = armour;
+    this.hullPoints = hullPoints;
+    this.special = structuredClone(special);
+    this.mounts = mounts;
+    this.modifications = modifications;
   }
 
   get cost() {

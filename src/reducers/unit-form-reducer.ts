@@ -10,7 +10,7 @@ export interface UnitFormState {
 
 export const initialUnitFormState = {
   vehicleClass: LightBattleVehicle,
-  unit: new Unit(LightBattleVehicle),
+  unit: Unit.fromVehicleClass(LightBattleVehicle),
 };
 
 export type UnitFormAction =
@@ -29,7 +29,7 @@ export default function UnitFormReducer(
     case "vehicle-class-change": {
       const newState: UnitFormState = {
         vehicleClass: action.vehicleClass,
-        unit: new Unit(action.vehicleClass),
+        unit: Unit.fromVehicleClass(action.vehicleClass),
       };
       return newState;
     }
