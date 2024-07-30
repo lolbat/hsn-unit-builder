@@ -2,6 +2,14 @@ import { compatibleWeaponTypes, MountType } from "./mount-type";
 import Weapon from "./weapon";
 import { WeaponType } from "./weapon-type";
 
+export interface MountShape {
+  readonly type: MountType;
+  readonly index: number;
+  readonly empty: boolean;
+  readonly weapon: Weapon | null;
+  readonly key: string;
+}
+
 export abstract class Mount {
   abstract readonly type: MountType;
   abstract readonly index: number;
