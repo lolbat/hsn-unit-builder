@@ -24,6 +24,19 @@ export interface MountType {
   readonly maximumWeaponWeight: WeaponWeightClass;
 }
 
+export function isWeaponCompatibleWithMount(
+  weapon: WeaponType,
+  mount: MountType,
+) {
+  return (
+    mount.maximumWeaponWeight >= weapon.weight &&
+    (weaponCategoriesForMountLocations
+      .get(mount.mountType)
+      ?.includes(weapon.category) ||
+      false)
+  );
+}
+
 const weaponCategoriesForMountLocations = new Map<
   MountLocation,
   WeaponCategory[]

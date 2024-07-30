@@ -1,4 +1,8 @@
-import { compatibleWeaponTypes, MountType } from "./mount-type";
+import {
+  compatibleWeaponTypes,
+  isWeaponCompatibleWithMount,
+  MountType,
+} from "./mount-type";
 import Weapon from "./weapon";
 import { WeaponType } from "./weapon-type";
 
@@ -30,7 +34,7 @@ export class FilledMount extends Mount {
 
   constructor(type: MountType, index: number, weapon: Weapon) {
     super();
-    if (!compatibleWeaponTypes(type).includes(weapon.type)) {
+    if (!isWeaponCompatibleWithMount(weapon.type, type)) {
       throw new Error(`Incompatible weapon type: ${weapon.type.name}`);
     }
     this.type = type;
@@ -54,7 +58,7 @@ export class FilledMount extends Mount {
   }
 
   isWeaponCompatible(weaponType: WeaponType) {
-    return compatibleWeaponTypes(this.type).includes(weaponType);
+    return isWeaponCompatibleWithMount(weaponType, this.type);
   }
 
   compatibleWeaponTypes() {
