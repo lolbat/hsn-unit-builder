@@ -41,6 +41,13 @@ export const Changelog: ChangelogEntry[] = [
     version: new Version(0, 0, 3),
     description: "Format special ability lists for units and weapons.",
   },
+  {
+    index: 3,
+    date: "2024-07-30",
+    version: new Version(0, 0, 4),
+    description:
+      "Save the current unit state and load it later. Reset the unit form.",
+  },
 ];
 
 export const Todos: string[] = [
@@ -48,7 +55,6 @@ export const Todos: string[] = [
   "Add support for Mega-turret sponsons",
   "Upgrades and Compromises",
   "Rules text for special rules and upgrades/modifications",
-  "Save unit to browser local storage",
   "List units saved to storage",
   "Delete a stored unit",
   "Modify a stored unit",

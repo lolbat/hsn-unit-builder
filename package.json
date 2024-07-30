@@ -1,7 +1,7 @@
 {
   "name": "hsn-unit-builder",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.4",
   "homepage": "https://EvanDooner.github.io/hsn-unit-builder",
   "type": "module",
   "scripts": {
