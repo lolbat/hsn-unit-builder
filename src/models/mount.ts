@@ -27,7 +27,11 @@ export abstract class Mount {
 
   static fromMountShape(mount: MountShape): FilledMount | EmptyMount {
     if (mount.weapon !== null) {
-      return new FilledMount(mount.type, mount.index, mount.weapon);
+      return new FilledMount(
+        mount.type,
+        mount.index,
+        Weapon.fromWeaponShape(mount.weapon),
+      );
     }
     return new EmptyMount(mount.type, mount.index);
   }
