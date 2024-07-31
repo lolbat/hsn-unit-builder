@@ -33,8 +33,6 @@ export function FilledMountListItem({
         throw Error("Unknow weapon type: " + weaponType);
       }
 
-      mount.setWeapon(new Weapon(weaponToEquip, mount.type.mountType));
-
       handleMountChange(
         mount.setWeapon(new Weapon(weaponToEquip, mount.type.mountType)),
       );
