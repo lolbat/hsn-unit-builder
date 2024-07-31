@@ -7,7 +7,7 @@ import deserialiseMount from "./mount-deserialiser";
 import deserialiseWeapon from "./weapon-deserialiser";
 
 function deserialiseUnit(unit: UnitShape) {
-  return Unit.fromObject(unit);
+  return Unit.fromUnitShape(unit);
 }
 
 export default function handleUnitDeserialisation(key: string, value: object) {

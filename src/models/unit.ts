@@ -51,7 +51,7 @@ class Unit implements UnitShape {
     );
   }
 
-  static fromObject(unit: UnitShape) {
+  static fromUnitShape(unit: UnitShape) {
     return new Unit(
       unit.vehicleClass,
       unit.name,
