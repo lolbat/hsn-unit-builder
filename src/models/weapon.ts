@@ -10,6 +10,10 @@ class Weapon implements WeaponShape {
   readonly weaponType: WeaponType;
   readonly mount: MountLocation;
 
+  static fromWeaponShape(weapon: WeaponShape) {
+    return new Weapon(weapon.weaponType, weapon.mount);
+  }
+
   constructor(weaponType: WeaponType, mountType: MountLocation) {
     this.weaponType = weaponType;
     this.mount = mountType;
