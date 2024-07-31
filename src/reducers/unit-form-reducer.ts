@@ -51,11 +51,11 @@ export default function UnitFormReducer(
       return newState;
     }
     case "save-unit": {
-      storeUnit(state.unit);
+      storeUnit("unit-state", state.unit);
       return state;
     }
     case "load-unit": {
-      const loadedUnit = loadUnit();
+      const loadedUnit = loadUnit("unit-state");
       if (loadedUnit === null) {
         return state;
       }
