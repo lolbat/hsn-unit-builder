@@ -24,6 +24,13 @@ export abstract class Mount {
   abstract removeWeapon(): EmptyMount;
   abstract isWeaponCompatible(weaponType: WeaponType): boolean;
   abstract compatibleWeaponTypes(): readonly WeaponType[];
+
+  static fromMountShape(mount: MountShape): FilledMount | EmptyMount {
+    if (mount.weapon !== null) {
+      return new FilledMount(mount.type, mount.index, mount.weapon);
+    }
+    return new EmptyMount(mount.type, mount.index);
+  }
 }
 
 export class FilledMount extends Mount {
