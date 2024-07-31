@@ -1,14 +1,16 @@
-import { VehicleSize } from "./constants";
+import { ModificationType, VehicleSize } from "./constants";
 import Unit from "./unit";
 
 export interface Modification {
-  name: string;
-  cost: number;
+  readonly type: ModificationType;
+  readonly name: string;
+  readonly cost: number;
   isValidForUnit(unit: Unit): boolean;
   applyToUnit(unit: Unit): Unit;
 }
 
 export const Resilient: Modification = {
+  type: ModificationType.Upgrade,
   name: "Resilient",
   cost: 1,
   isValidForUnit: function (unit: Unit) {

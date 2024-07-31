@@ -143,3 +143,8 @@ export enum MountLocation {
   BombBay = "Bomb bay",
   MegaTurret = "Mega-turret",
 }
+
+export enum ModificationType {
+  Upgrade,
+  Compromise,
+}
