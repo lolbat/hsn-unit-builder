@@ -21,7 +21,7 @@ export const Resilient: Modification = {
     );
   },
   applyToUnit: function (unit: Unit) {
-    const modifiedUnit = structuredClone(unit);
+    const modifiedUnit = Unit.fromUnit(unit);
     modifiedUnit.morale = unit.morale + 1;
     return modifiedUnit;
   },
