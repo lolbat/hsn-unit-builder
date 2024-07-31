@@ -53,7 +53,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   }
 
   return (
-    <>
+    <div className="unit-card">
       <div className="unit">
         <UnitName
           name={unit.name}
@@ -93,10 +93,11 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
           </div>
         </div>
       </div>
-
-      <button onClick={handleSave}>Save</button>
-      <button onClick={handleLoad}>Load</button>
-      <button onClick={handleReset}>Reset</button>
-    </>
+      <div className="button-set">
+        <button onClick={handleSave}>Save</button>
+        <button onClick={handleLoad}>Load</button>
+        <button onClick={handleReset}>Reset</button>
+      </div>
+    </div>
   );
 }

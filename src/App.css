@@ -138,3 +138,13 @@
     color: crimson;
   }
 }
+
+.button-set {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+footer {
+  margin-top: 50px;
+}
