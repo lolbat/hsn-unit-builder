@@ -68,6 +68,23 @@ class Unit implements UnitShape {
     );
   }
 
+  static fromUnit(unit: Unit) {
+    return new Unit(
+      unit.vehicleClass,
+      unit.name,
+      unit.size,
+      unit.discipline,
+      unit.optics,
+      unit.movement,
+      unit.morale,
+      Armour.fromArmourShape(unit.armour),
+      unit.hullPoints,
+      unit.special,
+      unit.mounts.map((m) => Mount.fromMountShape(m)),
+      [...unit.modifications],
+    );
+  }
+
   private constructor(
     vehicleClass: VehicleClass,
     name: string,
