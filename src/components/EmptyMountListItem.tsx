@@ -22,9 +22,7 @@ export function EmptyMountListItem({
       weaponType = toWeaponName(e.target.value);
     }
 
-    if (weaponType === "None") {
-      handleMountChange(mount);
-    } else {
+    if (weaponType !== "None") {
       const weaponToEquip = WeaponTypes.find((w) => weaponType === w.name);
       if (!weaponToEquip) {
         throw Error("Unknow weapon type: " + weaponType);
