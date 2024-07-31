@@ -14,17 +14,19 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   const dispatch = useContext(DispatchContext);
 
   const handleMountsChange = function (mounts: Mount[]) {
-    unit.mounts = mounts;
-    handleUnitChange(unit);
+    const updatedUnit = Unit.fromUnit(unit);
+    updatedUnit.mounts = mounts;
+    handleUnitChange(updatedUnit);
   };
 
   const handleNameChange = function (name: string) {
+    const updatedUnit = Unit.fromUnit(unit);
     if (name) {
-      unit.name = name;
+      updatedUnit.name = name;
     } else {
-      unit.name = unit.vehicleClass.name;
+      updatedUnit.name = updatedUnit.vehicleClass.name;
     }
-    handleUnitChange(unit);
+    handleUnitChange(updatedUnit);
   };
 
   const handleSave = function () {
