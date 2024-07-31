@@ -27,7 +27,7 @@ export default function VehicleClassSelect({
   }
 
   return (
-    <div>
+    <div className="vehicle-class-selector">
       <label>
         <select
           name="vehicle-class"
