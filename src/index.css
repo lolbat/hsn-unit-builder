@@ -1,7 +1,8 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  font-family: "Alegreya", serif;
+  font-optical-sizing: auto;
   font-weight: 400;
+  font-style: normal;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
@@ -67,7 +68,7 @@ ol {
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #000000;
     background-color: #ffffff;
   }
   a:hover {
