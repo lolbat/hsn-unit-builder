@@ -48,10 +48,17 @@ export const Changelog: ChangelogEntry[] = [
     description:
       "Save the current unit state and load it later. Reset the unit form.",
   },
+  {
+    index: 4,
+    date: "2024-07-31",
+    version: new Version(0, 0, 5),
+    description:
+      "Some formatting improvements. Fixed bug in resetting the unit when weapons had been modified.",
+  },
 ];
 
 export const Todos: string[] = [
-  "99% of the UI formatting and layout",
+  "90% of the UI formatting and layout",
   "Add support for Mega-turret sponsons",
   "Upgrades and Compromises",
   "Rules text for special rules and upgrades/modifications",
