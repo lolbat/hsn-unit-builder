@@ -15,31 +15,29 @@ export function isOneOfSizes(unit: Unit, sizes: VehicleSize[]) {
 }
 
 export function isFlyer(unit: Unit) {
-  return unit.special.find((s) => s.includes("Flyer")) !== undefined;
+  return unit.special.some((s) => s.includes("Flyer"));
 }
 
 export function isNotFlyer(unit: Unit) {
-  return unit.special.find((s) => s.includes("Flyer")) === undefined;
+  return unit.special.every((s) => !s.includes("Flyer"));
 }
 
 export function isNotFastMover(unit: Unit) {
-  return unit.special.find((s) => s.includes("Fast Mover")) === undefined;
+  return unit.special.every((s) => !s.includes("Fast Mover"));
 }
 
 export function isWalker(unit: Unit) {
-  return unit.special.find((s) => s.includes("Walker")) !== undefined;
+  return unit.special.some((s) => s.includes("Walker"));
 }
 
 export function isNotWalker(unit: Unit) {
-  return unit.special.find((s) => s.includes("Flyer")) === undefined;
+  return unit.special.every((s) => !s.includes("Flyer"));
 }
 
 export function hasMount(unit: Unit, mount: MountLocation) {
-  return unit.mounts.find((m) => mount === m.type.mountType) !== undefined;
+  return unit.mounts.some((m) => mount === m.type.mountType);
 }
 
 export function hasAtLeastOneOfMounts(unit: Unit, mounts: MountLocation[]) {
-  return (
-    unit.mounts.find((m) => mounts.includes(m.type.mountType)) !== undefined
-  );
+  return unit.mounts.some((m) => mounts.includes(m.type.mountType));
 }
