@@ -1,4 +1,5 @@
 import Modification, {
+  doesNotHaveModification,
   hasAtLeastOneOfMounts,
   isNotFlyer,
   isOneOfSizes,
@@ -17,7 +18,11 @@ export const EnginePowerReduction: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isNotFlyer(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isNotFlyer(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -35,7 +40,10 @@ export const Flammable: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -53,7 +61,10 @@ export const GreenCrew: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -71,7 +82,10 @@ export const LightFrontArmour: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -89,7 +103,10 @@ export const LightSecondaryArmour: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -107,7 +124,10 @@ export const LowMorale: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -126,6 +146,7 @@ export const MainGunRetrofit: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasAtLeastOneOfMounts(unit, [
         MountLocation.Arm,
@@ -150,7 +171,10 @@ export const PoorOptics: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -168,7 +192,10 @@ export const WeakHull: Modification = {
     VehicleSize.Behemoth,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;

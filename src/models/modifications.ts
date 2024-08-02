@@ -10,6 +10,13 @@ export default interface Modification {
   applyToUnit(unit: Unit): Unit;
 }
 
+export function doesNotHaveModification(
+  unit: Unit,
+  modification: Modification,
+) {
+  return unit.modifications.every((m) => m.name !== modification.name);
+}
+
 export function isOneOfSizes(unit: Unit, sizes: VehicleSize[]) {
   return sizes.includes(unit.vehicleClass.size);
 }

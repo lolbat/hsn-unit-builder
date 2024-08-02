@@ -1,4 +1,5 @@
 import Modification, {
+  doesNotHaveModification,
   hasAtLeastOneOfMounts,
   hasMount,
   isFlyer,
@@ -22,6 +23,7 @@ export const AAWeaponConfiguration: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasAtLeastOneOfMounts(unit, [MountLocation.Hull, MountLocation.Turret])
     );
@@ -41,7 +43,10 @@ export const AbominableHorror: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -55,6 +60,7 @@ export const AdditionalSponsons: Modification = {
   compatibleVehicleSizes: [VehicleSize.Superheavy],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasMount(unit, MountLocation.Sponsons)
     );
@@ -71,6 +77,7 @@ export const CoaxialMount: Modification = {
   compatibleVehicleSizes: [VehicleSize.Heavy, VehicleSize.Superheavy],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasMount(unit, MountLocation.Turret)
     );
@@ -91,6 +98,7 @@ export const CommunicationsModule: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasAtLeastOneOfMounts(unit, [MountLocation.Turret, MountLocation.Arm])
     );
@@ -110,7 +118,11 @@ export const EarlyWarningRadarSystem: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isNotFlyer(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isNotFlyer(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -128,7 +140,9 @@ export const EnginePowerIncrease: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
-      isOneOfSizes(unit, this.compatibleVehicleSizes) && isNotFastMover(unit)
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isNotFastMover(unit)
     );
   },
   applyToUnit: function (unit: Unit) {
@@ -146,7 +160,11 @@ export const EnhancedSensors: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isNotFlyer(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isNotFlyer(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -164,6 +182,7 @@ export const ExplosiveShielding: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       isNotFlyer(unit) &&
       isNotWalker(unit)
@@ -185,6 +204,7 @@ export const ImprovedHandlingLight: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       isNotFlyer(unit) &&
       isNotWalker(unit)
@@ -205,7 +225,10 @@ export const ImprovedCountermeasures: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -222,7 +245,10 @@ export const IncendiaryAmmunition: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -235,7 +261,11 @@ export const JumpJets: Modification = {
   cost: 2,
   compatibleVehicleSizes: [VehicleSize.Light, VehicleSize.Heavy],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isWalker(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isWalker(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -252,7 +282,10 @@ export const LowProfile: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -270,6 +303,7 @@ export const MineClearanceEquipment: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       isNotFlyer(unit) &&
       hasAtLeastOneOfMounts(unit, [
@@ -294,7 +328,10 @@ export const OpticRefinement: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -328,7 +365,10 @@ export const ReinforcedFrontArmour: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -345,7 +385,11 @@ export const ReinforcedSideArmour: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isNotWalker(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isNotWalker(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -362,7 +406,10 @@ export const ReinforcedRearArmour: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -379,7 +426,10 @@ export const ReinforcedMount: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -396,7 +446,11 @@ export const RepulsorDrive: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isNotWalker(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isNotWalker(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -413,7 +467,10 @@ export const Resilient: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -431,6 +488,7 @@ export const ReverseFittedGun: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasMount(unit, MountLocation.Fixed)
     );
@@ -447,6 +505,7 @@ export const SecondaryTurretMount: Modification = {
   compatibleVehicleSizes: [VehicleSize.Superheavy],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasMount(unit, MountLocation.Fixed)
     );
@@ -466,7 +525,10 @@ export const SelfRepairProtocols: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -479,7 +541,11 @@ export const ShoulderTurrets: Modification = {
   cost: 3,
   compatibleVehicleSizes: [VehicleSize.Heavy, VehicleSize.Superheavy],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isWalker(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isWalker(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -497,6 +563,7 @@ export const SmokeBelcher: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasAtLeastOneOfMounts(unit, [MountLocation.Turret, MountLocation.Arm])
     );
@@ -512,7 +579,10 @@ export const SpotterRelay: Modification = {
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Light],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -529,7 +599,11 @@ export const TailGun: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isFlyer(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isFlyer(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -546,7 +620,10 @@ export const TargetingProtocols: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -563,7 +640,10 @@ export const ToughenedHull: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -580,7 +660,10 @@ export const Transforming: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -598,6 +681,7 @@ export const TurretGrabber: Modification = {
   ],
   isValidForUnit: function (unit: Unit) {
     return (
+      doesNotHaveModification(unit, this) &&
       isOneOfSizes(unit, this.compatibleVehicleSizes) &&
       hasMount(unit, MountLocation.Turret)
     );
@@ -617,7 +701,10 @@ export const TwinLinked: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -634,7 +721,11 @@ export const UpperTurretConfiguration: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes) && isWalker(unit);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
+      isWalker(unit)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -651,7 +742,10 @@ export const VeteranCrew: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -706,6 +800,10 @@ export const HeavyUpgrades = LightHeavySuperheavyUpgrades.filter((m) =>
 );
 export const SuperheavyUpgrades = LightHeavySuperheavyUpgrades.filter((m) =>
   m.compatibleVehicleSizes.includes(VehicleSize.Superheavy),
+);
+
+export const LightHeavySuperheavyUpgradesByName = new Map(
+  LightHeavySuperheavyUpgrades.map((m) => [m.name, m]),
 );
 
 export const LightUpgradesByName = new Map(
