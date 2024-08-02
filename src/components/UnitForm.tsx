@@ -34,6 +34,7 @@ export default function UnitForm({ vehicleClass, unit }: UnitFormProps) {
     <>
       <VehicleClassSelect
         vehicleClass={vehicleClass}
+        maxCost={unit.maxCost}
         handleVehicleClassChange={handleVehicleClassChange}
       />
       <UnitCard

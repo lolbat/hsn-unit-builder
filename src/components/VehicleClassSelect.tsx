@@ -2,11 +2,13 @@ import VehicleClass, { VehicleClasses } from "../models/vehicle-class";
 
 interface VehicleClassSelectProps {
   vehicleClass: VehicleClass;
+  maxCost: number;
   handleVehicleClassChange(vehicleClass: VehicleClass): void;
 }
 
 export default function VehicleClassSelect({
   vehicleClass,
+  maxCost,
   handleVehicleClassChange,
 }: VehicleClassSelectProps) {
   const classList = VehicleClasses.map((v) => (
@@ -39,7 +41,7 @@ export default function VehicleClassSelect({
         </select>
       </label>
       <div>Base Cost: {vehicleClass.baseCost}</div>
-      <div>Max Cost: {vehicleClass.maxCost}</div>
+      <div>Max Cost: {maxCost}</div>
     </div>
   );
 }
