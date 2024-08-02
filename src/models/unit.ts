@@ -1,5 +1,6 @@
 import Armour, { ArmourShape } from "./armour";
-import { Modification } from "./modifications";
+import { ModificationType } from "./constants";
+import Modification from "./modifications";
 import { EmptyMount, Mount } from "./mount";
 import VehicleClass from "./vehicle-class";
 
@@ -117,8 +118,12 @@ class Unit implements UnitShape {
     return (
       this.vehicleClass.baseCost +
       this.totalWeaponCost() +
-      this.totalModificationsCost()
+      this.totalUpgradesCost()
     );
+  }
+
+  get maxCost() {
+    return this.vehicleClass.maxCost + this.totalCompromisesCost();
   }
 
   private totalWeaponCost() {
@@ -127,8 +132,16 @@ class Unit implements UnitShape {
       .reduce((acc, cur) => acc + (cur.weapon?.cost || 0), 0);
   }
 
-  private totalModificationsCost() {
-    return this.modifications.reduce((acc, cur) => acc + cur.cost, 0);
+  private totalCompromisesCost() {
+    return this.modifications
+      .filter((m) => m.type === ModificationType.Compromise)
+      .reduce((acc, cur) => acc + cur.cost, 0);
+  }
+
+  private totalUpgradesCost() {
+    return this.modifications
+      .filter((m) => m.type === ModificationType.Upgrade)
+      .reduce((acc, cur) => acc + cur.cost, 0);
   }
 }
 
