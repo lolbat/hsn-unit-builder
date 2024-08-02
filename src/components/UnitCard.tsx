@@ -2,15 +2,31 @@ import Unit from "../models/unit";
 import { WeaponList } from "./WeaponList";
 import { Mount } from "../models/mount";
 import { UnitName } from "./UnitName";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import DispatchContext from "../contexts/dispatch-context";
+import {
+  HeavyUpgrades,
+  LightHeavySuperheavyUpgrades,
+  LightHeavySuperheavyUpgradesByName,
+  LightUpgrades,
+  SuperheavyUpgrades,
+} from "../models/upgrades";
+import { VehicleSize } from "../models/constants";
+import Modification from "../models/modifications";
+import { Compromises, CompromisesByName } from "../models/compromises";
 
 interface UnitCardProps {
   unit: Unit;
   handleUnitChange: (unit: Unit) => void;
 }
 
+const ModificationsByName = new Map([
+  ...LightHeavySuperheavyUpgradesByName,
+  ...CompromisesByName,
+]);
+
 export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
+  const [mod, setMod] = useState("");
   const dispatch = useContext(DispatchContext);
 
   const handleMountsChange = function (mounts: Mount[]) {
@@ -46,6 +62,50 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
       type: "reset-unit",
     });
   };
+
+  const handleApplyModification = function () {
+    const selectedMod = ModificationsByName.get(mod);
+    if (selectedMod) {
+      const updatedUnit = Unit.fromUnit(unit);
+      updatedUnit.modifications.push(selectedMod);
+      handleUnitChange(updatedUnit);
+    }
+  };
+
+  let upgradeList: readonly Modification[];
+  switch (unit.vehicleClass.size) {
+    case VehicleSize.Light: {
+      upgradeList = LightUpgrades;
+      break;
+    }
+    case VehicleSize.Heavy: {
+      upgradeList = HeavyUpgrades;
+      break;
+    }
+    case VehicleSize.Superheavy: {
+      upgradeList = SuperheavyUpgrades;
+      break;
+    }
+    default: {
+      upgradeList = LightHeavySuperheavyUpgrades;
+    }
+  }
+
+  const validUpgrades = upgradeList.filter((u) => u.isValidForUnit(unit));
+
+  const validCompromises = Compromises.filter((c) => c.isValidForUnit(unit));
+
+  const upgradeOptions = validUpgrades.map((u) => (
+    <option value={u.name} key={u.name}>
+      {u.name} ({u.cost})
+    </option>
+  ));
+
+  const compromiseOptions = validCompromises.map((c) => (
+    <option value={c.name} key={c.name}>
+      {c.name} ({c.cost})
+    </option>
+  ));
 
   let costElement;
   if (unit.cost > unit.vehicleClass.maxCost) {
@@ -88,12 +148,27 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
           <div className="title">Modifications</div>
           <div className="modifications-list">
             <ol>
-              {unit.modifications.map((mod) => (
-                <li key={mod.name}>{mod.name}</li>
-              ))}
+              {unit.modifications
+                .toSorted((a, b) => a.name.localeCompare(b.name))
+                .map((mod) => (
+                  <li key={mod.name}>{mod.name}</li>
+                ))}
             </ol>
           </div>
         </div>
+      </div>
+      <div className="modifications-selector">
+        <select
+          name="modifications"
+          id="modifications-selector"
+          value={mod}
+          onChange={(e) => setMod(e.target.value)}
+        >
+          <option value="">Add Modifications...</option>
+          <optgroup label="Upgrades">{upgradeOptions}</optgroup>
+          <optgroup label="Compromises">{compromiseOptions}</optgroup>
+        </select>
+        <button onClick={handleApplyModification}>Apply</button>
       </div>
       <div className="button-set">
         <button onClick={handleSave}>Save</button>
