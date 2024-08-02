@@ -114,13 +114,21 @@ class Unit implements UnitShape {
   }
 
   get cost() {
-    return this.vehicleClass.baseCost + this.totalWeaponCost();
+    return (
+      this.vehicleClass.baseCost +
+      this.totalWeaponCost() +
+      this.totalModificationsCost()
+    );
   }
 
   private totalWeaponCost() {
     return this.mounts
       .filter((w) => w !== null)
       .reduce((acc, cur) => acc + (cur.weapon?.cost || 0), 0);
+  }
+
+  private totalModificationsCost() {
+    return this.modifications.reduce((acc, cur) => acc + cur.cost, 0);
   }
 }
 
