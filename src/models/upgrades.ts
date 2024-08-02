@@ -348,7 +348,10 @@ export const Ram: Modification = {
     VehicleSize.Superheavy,
   ],
   isValidForUnit: function (unit: Unit) {
-    return isOneOfSizes(unit, this.compatibleVehicleSizes);
+    return (
+      doesNotHaveModification(unit, this) &&
+      isOneOfSizes(unit, this.compatibleVehicleSizes)
+    );
   },
   applyToUnit: function (unit: Unit) {
     return unit;
@@ -752,7 +755,7 @@ export const VeteranCrew: Modification = {
   },
 };
 
-export const LightHeavySuperheavyUpgrades = [
+export const LightHeavySuperheavyUpgrades: readonly Modification[] = [
   AAWeaponConfiguration,
   AbominableHorror,
   AdditionalSponsons,
