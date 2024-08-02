@@ -36,7 +36,10 @@ export default function UnitForm({ vehicleClass, unit }: UnitFormProps) {
         vehicleClass={vehicleClass}
         handleVehicleClassChange={handleVehicleClassChange}
       />
-      <UnitCard unit={unit} handleUnitChange={handleUnitChange} />
+      <UnitCard
+        unit={unit.modifications.reduce((u, m) => m.applyToUnit(u), unit)}
+        handleUnitChange={handleUnitChange}
+      />
     </>
   );
 }
