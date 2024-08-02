@@ -9,6 +9,7 @@ export interface WeaponShape {
 class Weapon implements WeaponShape {
   readonly weaponType: WeaponType;
   readonly mount: MountLocation;
+  private _special: string[];
 
   static fromWeaponShape(weapon: WeaponShape) {
     return new Weapon(weapon.weaponType, weapon.mount);
@@ -17,6 +18,7 @@ class Weapon implements WeaponShape {
   constructor(weaponType: WeaponType, mountType: MountLocation) {
     this.weaponType = weaponType;
     this.mount = mountType;
+    this._special = weaponType.special;
   }
 
   get name() {
@@ -28,7 +30,11 @@ class Weapon implements WeaponShape {
   }
 
   get special() {
-    return this.weaponType.special;
+    return this._special;
+  }
+
+  set special(special: string[]) {
+    this._special = special;
   }
 
   get cost() {
