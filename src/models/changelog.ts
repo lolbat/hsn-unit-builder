@@ -55,12 +55,18 @@ export const Changelog: ChangelogEntry[] = [
     description:
       "Some formatting improvements. Fixed bug in resetting the unit when weapons had been modified.",
   },
+  {
+    index: 5,
+    date: "2024-08-02",
+    version: new Version(0, 0, 6),
+    description:
+      "Added Upgrades and Compromises. Only costs have been implemented. Variable costs, multiple instaces of a modification, and changes to the unit stat card are not yet supported.",
+  },
 ];
 
 export const Todos: string[] = [
   "90% of the UI formatting and layout",
   "Add support for Mega-turret sponsons",
-  "Upgrades and Compromises",
   "Rules text for special rules and upgrades/modifications",
   "List units saved to storage",
   "Delete a stored unit",
