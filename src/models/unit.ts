@@ -1,5 +1,5 @@
 import Armour, { ArmourShape } from "./armour";
-import { ModificationType } from "./constants";
+import { ModificationType, VehicleSize } from "./constants";
 import {
   AppliedModification,
   costOfAppliedModification,
@@ -10,7 +10,7 @@ import VehicleClass from "./vehicle-class";
 export interface UnitShape {
   readonly vehicleClass: VehicleClass;
   readonly name: string;
-  readonly size: string;
+  readonly size: VehicleSize;
   readonly discipline: number;
   readonly optics: number;
   readonly movement: number;
@@ -25,7 +25,7 @@ export interface UnitShape {
 class Unit implements UnitShape {
   readonly vehicleClass: VehicleClass;
   name: string;
-  size: string;
+  size: VehicleSize;
   discipline: number;
   optics: number;
   movement: number;
@@ -92,7 +92,7 @@ class Unit implements UnitShape {
   private constructor(
     vehicleClass: VehicleClass,
     name: string,
-    size: string,
+    size: VehicleSize,
     discipline: number,
     optics: number,
     movement: number,
