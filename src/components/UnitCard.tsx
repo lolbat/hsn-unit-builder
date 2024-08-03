@@ -119,7 +119,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   ));
 
   let costElement;
-  if (unit.cost > unit.vehicleClass.maxCost) {
+  if (unit.cost > unit.maxCost) {
     costElement = <div className="cost value error">{unit.cost}</div>;
   } else {
     costElement = <div className="cost value">{unit.cost}</div>;
