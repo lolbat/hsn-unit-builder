@@ -5,7 +5,6 @@ import { UnitName } from "./UnitName";
 import { useContext, useState } from "react";
 import DispatchContext from "../contexts/dispatch-context";
 import {
-  getCostForUpgrade,
   HeavyUpgrades,
   LightHeavySuperheavyUpgrades,
   LightHeavySuperheavyUpgradesByName,
@@ -13,12 +12,11 @@ import {
   SuperheavyUpgrades,
 } from "../models/upgrades";
 import { toModificationName, VehicleSize } from "../models/constants";
-import Modification, { isModValidForUnit } from "../models/modifications";
-import {
-  Compromises,
-  CompromisesByName,
-  getCostForCompromise,
-} from "../models/compromises";
+import Modification, {
+  costToApplyModification,
+  isModValidForUnit,
+} from "../models/modifications";
+import { Compromises, CompromisesByName } from "../models/compromises";
 
 interface UnitCardProps {
   unit: Unit;
@@ -81,7 +79,18 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
     const selectedMod = ModificationsByName.get(modName);
     if (selectedMod) {
       const updatedUnit = Unit.fromUnit(unit);
-      updatedUnit.modifications.push(selectedMod);
+      const existingModification = updatedUnit.modifications.find(
+        (m) => m.modification.name === modName,
+      );
+      let quantity = 1;
+      if (existingModification !== undefined) {
+        updatedUnit.modifications = updatedUnit.modifications.filter(
+          (m) => m.modification.name !== modName,
+        );
+        quantity = existingModification.quantity + 1;
+      }
+
+      updatedUnit.modifications.push({ modification: selectedMod, quantity });
       handleUnitChange(updatedUnit);
     }
   };
@@ -113,13 +122,13 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
 
   const upgradeOptions = validUpgrades.map((u) => (
     <option value={u.name} key={u.name}>
-      {u.name} ({getCostForUpgrade(unit, u)})
+      {u.name} ({costToApplyModification(unit, u)})
     </option>
   ));
 
   const compromiseOptions = validCompromises.map((c) => (
     <option value={c.name} key={c.name}>
-      {c.name} ({getCostForCompromise(c)})
+      {c.name} ({costToApplyModification(unit, c)})
     </option>
   ));
 
@@ -129,6 +138,19 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   } else {
     costElement = <div className="cost value">{unit.cost}</div>;
   }
+
+  const modificationsElement = unit.modifications
+    .toSorted((a, b) => a.modification.name.localeCompare(b.modification.name))
+    .map((m) => {
+      if (m.quantity === 1) {
+        return <li key={m.modification.name}>{m.modification.name}</li>;
+      }
+      return (
+        <li key={m.modification.name}>
+          {m.modification.name} ({m.quantity})
+        </li>
+      );
+    });
 
   return (
     <div className="unit-card">
@@ -163,13 +185,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
         <div className="modifications">
           <div className="title">Modifications</div>
           <div className="modifications-list">
-            <ol>
-              {unit.modifications
-                .toSorted((a, b) => a.name.localeCompare(b.name))
-                .map((mod) => (
-                  <li key={mod.name}>{mod.name}</li>
-                ))}
-            </ol>
+            <ol>{modificationsElement}</ol>
           </div>
         </div>
       </div>

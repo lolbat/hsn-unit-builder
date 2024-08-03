@@ -1,9 +1,10 @@
 import Armour, { ArmourShape } from "./armour";
-import { getCostForCompromise } from "./compromises";
 import { ModificationType } from "./constants";
-import Modification from "./modifications";
+import {
+  AppliedModification,
+  costOfAppliedModification,
+} from "./modifications";
 import { EmptyMount, Mount } from "./mount";
-import { getCostForUpgrade } from "./upgrades";
 import VehicleClass from "./vehicle-class";
 
 export interface UnitShape {
@@ -18,7 +19,7 @@ export interface UnitShape {
   readonly hullPoints: number;
   readonly special: string[];
   readonly mounts: Mount[];
-  readonly modifications: Modification[];
+  readonly modifications: AppliedModification[];
 }
 
 class Unit implements UnitShape {
@@ -33,7 +34,7 @@ class Unit implements UnitShape {
   hullPoints: number;
   special: string[];
   mounts: Mount[];
-  modifications: Modification[];
+  modifications: AppliedModification[];
 
   static fromVehicleClass(vehicleClass: VehicleClass) {
     return new Unit(
@@ -100,7 +101,7 @@ class Unit implements UnitShape {
     hullPoints: number,
     special: string[],
     mounts: Mount[],
-    modifications: Modification[],
+    modifications: AppliedModification[],
   ) {
     this.vehicleClass = vehicleClass;
     this.name = name;
@@ -136,17 +137,14 @@ class Unit implements UnitShape {
 
   private totalCompromisesCost() {
     return this.modifications
-      .filter((m) => m.type === ModificationType.Compromise)
-      .reduce((acc, cur) => acc + (getCostForCompromise(cur) || cur.cost), 0);
+      .filter((m) => m.modification.type === ModificationType.Compromise)
+      .reduce((acc, cur) => acc + costOfAppliedModification(this, cur), 0);
   }
 
   private totalUpgradesCost() {
     return this.modifications
-      .filter((m) => m.type === ModificationType.Upgrade)
-      .reduce(
-        (acc, cur) => acc + (getCostForUpgrade(this, cur) || cur.cost),
-        0,
-      );
+      .filter((m) => m.modification.type === ModificationType.Upgrade)
+      .reduce((acc, cur) => acc + costOfAppliedModification(this, cur), 0);
   }
 }
 
