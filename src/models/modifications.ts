@@ -281,13 +281,92 @@ export function costToApplyModification(
   }
 }
 
+export function maxAllowedForModification(
+  unit: Unit,
+  modification: Modification,
+) {
+  switch (modification.name) {
+    case UpgradeName.AAWeaponConfiguration:
+    case UpgradeName.AdditionalSponsons:
+    case UpgradeName.CoaxialMount:
+    case UpgradeName.EarlyWarningRadarSystem:
+    case UpgradeName.CommunicationsModule:
+    case UpgradeName.EnhancedSensors:
+    case UpgradeName.ExplosiveShielding:
+    case UpgradeName.ImprovedHandling:
+    case UpgradeName.IncendiaryAmmunition:
+    case UpgradeName.JumpJets:
+    case UpgradeName.LowProfile:
+    case UpgradeName.MineClearanceEquipment:
+    case UpgradeName.OpticRefinement:
+    case UpgradeName.ReinforcedFrontArmour:
+    case UpgradeName.ReinforcedMount:
+    case UpgradeName.RepulsorDrive:
+    case UpgradeName.ReverseFittedGun:
+    case UpgradeName.SecondaryTurretMount:
+    case UpgradeName.SelfRepairProtocols:
+    case UpgradeName.ShoulderTurrets:
+    case UpgradeName.SmokeBelcher:
+    case UpgradeName.SpotterRelay:
+    case UpgradeName.TailGun:
+    case UpgradeName.TargetingProtocols:
+    case UpgradeName.Transforming:
+    case UpgradeName.TurretGrabber:
+    case UpgradeName.UpperTurretConfiguration:
+    case UpgradeName.VeteranCrew:
+    case CompromiseName.Flammable:
+    case CompromiseName.GreenCrew:
+    case CompromiseName.LightFrontArmour:
+    case CompromiseName.LightSecondaryArmour:
+    case CompromiseName.LowMorale:
+    case CompromiseName.PoorOptics:
+    case CompromiseName.WeakHull: {
+      return 1;
+    }
+    case UpgradeName.ImprovedCountermeasures:
+    case UpgradeName.ToughenedHull: {
+      switch (unit.size) {
+        case VehicleSize.Light: {
+          return 1;
+        }
+        case VehicleSize.Heavy: {
+          return 2;
+        }
+        case VehicleSize.Superheavy:
+        case VehicleSize.Behemoth: {
+          return 3;
+        }
+        default: {
+          throw new Error(
+            `Cannot determine maxmimum allowed instances of ${modification.name}. Unrecognised vehicle size ${unit.size}`,
+          );
+        }
+      }
+    }
+    case UpgradeName.AbominableHorror:
+    case UpgradeName.Ram:
+    case UpgradeName.Resilient: {
+      return "no-limit";
+    }
+    case UpgradeName.EnginePowerIncrease:
+    case UpgradeName.ReinforcedSideArmour:
+    case UpgradeName.ReinforcedRearArmour:
+    case UpgradeName.TwinLinked:
+    case CompromiseName.EnginePowerReduction:
+    case CompromiseName.MainGunRetrofit: {
+      return "special";
+    }
+  }
+}
+
 export function isModValidForUnit(unit: Unit, modification: Modification) {
   return (
     hasLessThanMaxInstances(unit, modification) &&
     isOneOfSizes(unit, modification.compatibleVehicleSizes) &&
     meetsSpecialRuleRequirements(unit, modification) &&
     hasAtLeastOneOfMounts(unit, modification.requiredMounts) &&
-    hasNoExclusiveModifications(unit, modification)
+    hasNoExclusiveModifications(unit, modification) &&
+    specialRequirementsSatisfied(unit, modification)
   );
 }
 
@@ -326,11 +405,25 @@ export function hasLessThanMaxInstances(
   unit: Unit,
   modification: Modification,
 ) {
-  return (
-    modification.maxAllowed === null ||
-    unit.modifications.filter((m) => m.modification.name === modification.name)
-      .length < (modification.maxAllowed || 1)
+  const appliedModification = unit.modifications.find(
+    (m) => m.modification.name === modification.name,
   );
+  if (appliedModification === undefined) {
+    return true;
+  }
+
+  const maxAllowed = maxAllowedForModification(unit, modification);
+  switch (maxAllowed) {
+    case 1:
+    case 2:
+    case 3: {
+      return appliedModification.quantity < maxAllowed;
+    }
+    case "no-limit":
+    case "special": {
+      return true;
+    }
+  }
 }
 
 export function isOneOfSizes(unit: Unit, sizes: VehicleSize[]) {
@@ -369,4 +462,54 @@ export function hasAtLeastOneOfMounts(
     mounts.length === 0 ||
     unit.mounts.some((m) => mounts.includes(m.type.mountType))
   );
+}
+
+function specialRequirementsSatisfied(unit: Unit, modification: Modification) {
+  switch (modification.name) {
+    case UpgradeName.EnginePowerIncrease: {
+      return unit.movement < Math.min(12, unit.vehicleClass.movement * 2);
+    }
+    case UpgradeName.ReinforcedSideArmour: {
+      return (unit.armour.sides || unit.armour.front) < unit.armour.front;
+    }
+    case UpgradeName.ReinforcedRearArmour: {
+      return (unit.armour.rear || unit.armour.front) < unit.armour.front;
+    }
+    case UpgradeName.TargetingProtocols: {
+      const incompatibleWeaponSpecialRules = ["Close Combat", "Close Action"];
+      return unit.mounts.some((m) => {
+        if (m.weapon === null) {
+          return false;
+        }
+        return m.weapon.special.every((s) =>
+          incompatibleWeaponSpecialRules.every((r) => !s.includes(r)),
+        );
+      });
+    }
+    case UpgradeName.TwinLinked: {
+      const incompatibleWeaponSpecialRules = ["Close Combat", "Bomb", "Burst"];
+      return unit.mounts.some((m) => {
+        if (m.weapon === null) {
+          return false;
+        }
+        return m.weapon.special.every((s) =>
+          incompatibleWeaponSpecialRules.every((r) => !s.includes(r)),
+        );
+      });
+    }
+    case CompromiseName.EnginePowerReduction: {
+      return unit.movement > 2;
+    }
+    case CompromiseName.LightFrontArmour: {
+      return (
+        unit.armour.front >
+        Math.max(unit.armour.sides || 0, unit.armour.rear || 0)
+      );
+    }
+    case CompromiseName.WeakHull: {
+      return unit.hullPoints > 2;
+    }
+    default:
+      return true;
+  }
 }
