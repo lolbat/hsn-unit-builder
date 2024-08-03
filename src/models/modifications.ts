@@ -168,12 +168,16 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.OpticRefinement: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.optics += 2;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.JumpJets:
-    case UpgradeName.OpticRefinement:
     case UpgradeName.Ram:
     case UpgradeName.ReinforcedFrontArmour:
     case UpgradeName.ReinforcedSideArmour:
