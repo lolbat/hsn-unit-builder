@@ -62,8 +62,29 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.CommunicationsModule: {
+      const turretAndArmMounts = unit.mounts
+        .filter(
+          (m) =>
+            m.type.mountType === MountLocation.Turret ||
+            m.type.mountType === MountLocation.Arm,
+        )
+        .toSorted((a, b) => b.id.localeCompare(a.id));
+
+      if (turretAndArmMounts.length === 0) {
+        throw new Error(
+          "Cannot apply CommunicationsModule. No Arm or Turrent mount found",
+        );
+      }
+
+      const mountToRemove = turretAndArmMounts[0];
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.filter(
+        (m) => m.id !== mountToRemove.id,
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
-    case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.EnginePowerIncrease:
     case UpgradeName.EnhancedSensors:
