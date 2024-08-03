@@ -66,7 +66,13 @@ export class FilledMount extends Mount {
   }
 
   get key() {
-    return `${this.type.size}-${this.type.mountType}-${this.id}`;
+    let sizeSlug: string;
+    if (this.type.size === null) {
+      sizeSlug = "";
+    } else {
+      sizeSlug = `${this.type.size}-`;
+    }
+    return `${sizeSlug}${this.type.mountType}-${this.id}`;
   }
 
   setWeapon(weapon: Weapon) {
@@ -133,7 +139,13 @@ export class EmptyMount extends Mount {
   }
 
   get key() {
-    return `${this.type.size}-${this.type.mountType}-${this.id}`;
+    let sizeSlug: string;
+    if (this.type.size === null) {
+      sizeSlug = "";
+    } else {
+      sizeSlug = `${this.type.size}-`;
+    }
+    return `${sizeSlug}${this.type.mountType}-${this.id}`;
   }
 
   setWeapon(weapon: Weapon) {

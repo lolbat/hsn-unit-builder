@@ -19,7 +19,7 @@ export function compatibleWeaponTypes(
 }
 
 export interface MountType {
-  readonly size: VehicleSize;
+  readonly size: VehicleSize | null;
   readonly mountType: MountLocation;
   readonly maximumWeaponWeight: WeaponWeightClass;
 }
@@ -177,4 +177,10 @@ export const BehemothMegaTurretMount: MountType = {
   size: VehicleSize.Behemoth,
   mountType: MountLocation.MegaTurret,
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
+};
+
+export const CoaxialMount: MountType = {
+  size: null,
+  mountType: MountLocation.Coaxial,
+  maximumWeaponWeight: WeaponWeightClass.Light,
 };

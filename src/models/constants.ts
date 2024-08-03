@@ -142,6 +142,7 @@ export enum MountLocation {
   Arm = "Arm",
   BombBay = "Bomb bay",
   MegaTurret = "Mega-turret",
+  Coaxial = "Coaxial",
 }
 
 export enum ModificationType {
