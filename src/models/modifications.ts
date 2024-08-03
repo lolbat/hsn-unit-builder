@@ -135,12 +135,44 @@ export function applyModificationToUnit(
       ];
       return modifiedUnit;
     }
+    case UpgradeName.MineClearanceEquipment: {
+      const turretFixedAndArmMounts = unit.mounts
+        .filter(
+          (m) =>
+            m.type.mountType === MountLocation.Turret ||
+            m.type.mountType === MountLocation.Arm ||
+            m.type.mountType === MountLocation.Fixed,
+        )
+        .toSorted((a, b) => {
+          const compareMountLocations = a.type.mountType.localeCompare(
+            b.type.mountType,
+          );
+
+          if (compareMountLocations === 0) {
+            return b.id.localeCompare(a.id);
+          }
+
+          return compareMountLocations;
+        });
+
+      if (turretFixedAndArmMounts.length === 0) {
+        throw new Error(
+          "Cannot apply MineClearanceEquipment. No Arm, Fixed or Turrent mount found",
+        );
+      }
+
+      const mountToRemove = turretFixedAndArmMounts[0];
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.filter(
+        (m) => m.id !== mountToRemove.id,
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.JumpJets:
-    case UpgradeName.MineClearanceEquipment:
     case UpgradeName.OpticRefinement:
     case UpgradeName.Ram:
     case UpgradeName.ReinforcedFrontArmour:
