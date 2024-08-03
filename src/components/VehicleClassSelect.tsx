@@ -28,6 +28,17 @@ export default function VehicleClassSelect({
     handleVehicleClassChange(vehicleClass);
   }
 
+  let maxCostElement: JSX.Element;
+  if (maxCost != vehicleClass.maxCost) {
+    maxCostElement = (
+      <div>
+        Max Cost: {maxCost} ({vehicleClass.maxCost})
+      </div>
+    );
+  } else {
+    maxCostElement = <div>Max Cost: {maxCost}</div>;
+  }
+
   return (
     <div className="vehicle-class-selector">
       <label>
@@ -41,7 +52,7 @@ export default function VehicleClassSelect({
         </select>
       </label>
       <div>Base Cost: {vehicleClass.baseCost}</div>
-      <div>Max Cost: {maxCost}</div>
+      {maxCostElement}
     </div>
   );
 }
