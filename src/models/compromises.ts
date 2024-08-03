@@ -1,9 +1,4 @@
-import Modification, {
-  doesNotHaveModification,
-  hasAtLeastOneOfMounts,
-  isNotFlyer,
-  isOneOfSizes,
-} from "./modifications";
+import Modification from "./modifications";
 import { ModificationType, VehicleSize, MountLocation } from "./constants";
 import Unit from "./unit";
 
@@ -21,13 +16,6 @@ export const EnginePowerReduction: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Flyer"],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
-      isNotFlyer(unit)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -47,12 +35,6 @@ export const Flammable: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -72,12 +54,6 @@ export const GreenCrew: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -97,12 +73,6 @@ export const LightFrontArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -122,12 +92,6 @@ export const LightSecondaryArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -147,12 +111,6 @@ export const LowMorale: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -176,17 +134,6 @@ export const MainGunRetrofit: Modification = {
     MountLocation.Fixed,
     MountLocation.Turret,
   ],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes) &&
-      hasAtLeastOneOfMounts(unit, [
-        MountLocation.Arm,
-        MountLocation.Fixed,
-        MountLocation.Turret,
-      ])
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -206,12 +153,6 @@ export const PoorOptics: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -231,12 +172,6 @@ export const WeakHull: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  isValidForUnit: function (unit: Unit) {
-    return (
-      doesNotHaveModification(unit, this) &&
-      isOneOfSizes(unit, this.compatibleVehicleSizes)
-    );
-  },
   applyToUnit: function (unit: Unit) {
     return unit;
   },

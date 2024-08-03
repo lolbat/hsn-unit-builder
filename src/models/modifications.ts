@@ -10,12 +10,12 @@ export default interface Modification {
   readonly requiredSpecialRuleGroups: readonly string[];
   readonly excludedSpecialRuleGroups: readonly string[];
   readonly requiredMounts: readonly MountLocation[];
-  isValidForUnit(unit: Unit): boolean;
   applyToUnit(unit: Unit): Unit;
 }
 
 export function isModValidForUnit(unit: Unit, modification: Modification) {
   return (
+    hasLessThanMaxInstances(unit, modification) &&
     isOneOfSizes(unit, modification.compatibleVehicleSizes) &&
     meetsSpecialRuleRequirements(unit, modification) &&
     hasAtLeastOneOfMounts(unit, modification.requiredMounts)
@@ -24,12 +24,14 @@ export function isModValidForUnit(unit: Unit, modification: Modification) {
 
 function meetsSpecialRuleRequirements(unit: Unit, modification: Modification) {
   return (
-    unit.special.some((s) =>
-      modification.requiredSpecialRuleGroups.includes(s),
-    ) &&
-    unit.special.every(
-      (s) => !modification.excludedSpecialRuleGroups.includes(s),
-    )
+    (modification.requiredSpecialRuleGroups.length === 0 ||
+      unit.special.some((s) =>
+        modification.requiredSpecialRuleGroups.includes(s),
+      )) &&
+    (modification.excludedSpecialRuleGroups.length === 0 ||
+      unit.special.every(
+        (s) => !modification.excludedSpecialRuleGroups.includes(s),
+      ))
   );
 }
 
@@ -83,5 +85,8 @@ export function hasAtLeastOneOfMounts(
   unit: Unit,
   mounts: readonly MountLocation[],
 ) {
-  return unit.mounts.some((m) => mounts.includes(m.type.mountType));
+  return (
+    mounts.length === 0 ||
+    unit.mounts.some((m) => mounts.includes(m.type.mountType))
+  );
 }

@@ -12,7 +12,7 @@ import {
   SuperheavyUpgrades,
 } from "../models/upgrades";
 import { VehicleSize } from "../models/constants";
-import Modification from "../models/modifications";
+import Modification, { isModValidForUnit } from "../models/modifications";
 import { Compromises, CompromisesByName } from "../models/compromises";
 
 interface UnitCardProps {
@@ -91,9 +91,11 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
     }
   }
 
-  const validUpgrades = upgradeList.filter((u) => u.isValidForUnit(unit));
+  const validUpgrades = upgradeList.filter((u) => isModValidForUnit(unit, u));
 
-  const validCompromises = Compromises.filter((c) => c.isValidForUnit(unit));
+  const validCompromises = Compromises.filter((c) =>
+    isModValidForUnit(unit, c),
+  );
 
   const upgradeOptions = validUpgrades.map((u) => (
     <option value={u.name} key={u.name}>
