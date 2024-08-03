@@ -12,6 +12,7 @@ export interface MountShape {
   readonly empty: boolean;
   readonly weapon: Weapon | null;
   readonly specialOverrides: readonly string[];
+  readonly fromModification: boolean;
   readonly key: string;
 }
 
@@ -21,6 +22,7 @@ export abstract class Mount {
   abstract readonly empty: boolean;
   abstract readonly weapon: Weapon | null;
   abstract readonly specialOverrides: readonly string[];
+  abstract readonly fromModification: boolean;
   abstract readonly key: string;
   abstract setWeapon(weapon: Weapon): FilledMount;
   abstract removeWeapon(): EmptyMount;
@@ -48,12 +50,14 @@ export class FilledMount extends Mount {
   readonly empty = false;
   readonly weapon: Weapon;
   readonly specialOverrides: readonly string[];
+  readonly fromModification: boolean;
 
   constructor(
     type: MountType,
     id: string,
     weapon: Weapon,
     specialOverrides: readonly string[],
+    fromModification: boolean = false,
   ) {
     super();
     if (!isWeaponCompatibleWithMount(weapon.type, type)) {
@@ -62,6 +66,7 @@ export class FilledMount extends Mount {
     this.type = type;
     this.id = id;
     this.specialOverrides = [...specialOverrides];
+    this.fromModification = fromModification;
     this.weapon = new Weapon(weapon.type, weapon.mount, this.specialOverrides);
   }
 
@@ -80,7 +85,13 @@ export class FilledMount extends Mount {
       throw new Error(`Incompatible weapon type: ${weapon.type.name}`);
     }
 
-    return new FilledMount(this.type, this.id, weapon, this.specialOverrides);
+    return new FilledMount(
+      this.type,
+      this.id,
+      weapon,
+      this.specialOverrides,
+      this.fromModification,
+    );
   }
 
   removeWeapon() {
@@ -104,6 +115,7 @@ export class FilledMount extends Mount {
       this.id,
       this.weapon,
       [...this.specialOverrides, override].toSorted(),
+      this.fromModification,
     );
   }
 
@@ -116,6 +128,7 @@ export class FilledMount extends Mount {
       this.id,
       this.weapon,
       this.specialOverrides.filter((s) => s !== override),
+      this.fromModification,
     );
   }
 }
@@ -126,16 +139,19 @@ export class EmptyMount extends Mount {
   readonly empty = true;
   readonly weapon = null;
   readonly specialOverrides: readonly string[];
+  readonly fromModification: boolean;
 
   constructor(
     type: MountType,
     id: string,
     specialOverrides: readonly string[],
+    fromModification: boolean = false,
   ) {
     super();
     this.type = type;
     this.id = id;
     this.specialOverrides = [...specialOverrides];
+    this.fromModification = fromModification;
   }
 
   get key() {
@@ -152,7 +168,13 @@ export class EmptyMount extends Mount {
     if (!compatibleWeaponTypes(this.type).includes(weapon.type)) {
       throw new Error(`Incompatible weapon type: ${weapon.type.name}`);
     }
-    return new FilledMount(this.type, this.id, weapon, this.specialOverrides);
+    return new FilledMount(
+      this.type,
+      this.id,
+      weapon,
+      this.specialOverrides,
+      this.fromModification,
+    );
   }
 
   removeWeapon() {
@@ -175,6 +197,7 @@ export class EmptyMount extends Mount {
       this.type,
       this.id,
       [...this.specialOverrides, override].toSorted(),
+      this.fromModification,
     );
   }
 
@@ -186,6 +209,7 @@ export class EmptyMount extends Mount {
       this.type,
       this.id,
       this.specialOverrides.filter((s) => s !== override),
+      this.fromModification,
     );
   }
 }

@@ -42,7 +42,7 @@ export function applyModificationToUnit(
     case UpgradeName.AdditionalSponsons: {
       const modifiedUnit = Unit.fromUnit(unit);
       modifiedUnit.mounts.push(
-        new EmptyMount(SuperheavySponsonsMount, "AdditionalSponsons", []),
+        new EmptyMount(SuperheavySponsonsMount, "AdditionalSponsons", [], true),
       );
       return modifiedUnit;
     }
