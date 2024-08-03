@@ -21,6 +21,10 @@ export const AAWeaponConfiguration: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Hull, MountLocation.Turret],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -42,6 +46,10 @@ export const AbominableHorror: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -58,6 +66,10 @@ export const AdditionalSponsons: Modification = {
   name: "Additional Sponsons",
   cost: 3,
   compatibleVehicleSizes: [VehicleSize.Superheavy],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Sponsons],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -75,6 +87,10 @@ export const CoaxialMount: Modification = {
   name: "Coaxial Mount",
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Heavy, VehicleSize.Superheavy],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Turret],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -96,6 +112,10 @@ export const CommunicationsModule: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Arm, MountLocation.Turret],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -117,6 +137,10 @@ export const EarlyWarningRadarSystem: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Flyer"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -138,6 +162,10 @@ export const EnginePowerIncrease: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Fast Mover"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -159,6 +187,10 @@ export const EnhancedSensors: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Flyer"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -180,6 +212,10 @@ export const ExplosiveShielding: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Flyer", "Walker"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -202,6 +238,10 @@ export const ImprovedHandlingLight: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Flyer", "Walker"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -224,6 +264,10 @@ export const ImprovedCountermeasures: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -244,6 +288,10 @@ export const IncendiaryAmmunition: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -260,6 +308,10 @@ export const JumpJets: Modification = {
   name: "Jump Jets",
   cost: 2,
   compatibleVehicleSizes: [VehicleSize.Light, VehicleSize.Heavy],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: ["Walker"],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -281,6 +333,10 @@ export const LowProfile: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -300,6 +356,14 @@ export const MineClearanceEquipment: Modification = {
     VehicleSize.Light,
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
+  ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Flyer"],
+  requiredMounts: [
+    MountLocation.Arm,
+    MountLocation.Fixed,
+    MountLocation.Turret,
   ],
   isValidForUnit: function (unit: Unit) {
     return (
@@ -327,6 +391,10 @@ export const OpticRefinement: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -347,6 +415,10 @@ export const Ram: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -367,6 +439,10 @@ export const ReinforcedFrontArmour: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -387,6 +463,10 @@ export const ReinforcedSideArmour: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Walker"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -408,6 +488,10 @@ export const ReinforcedRearArmour: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -428,6 +512,10 @@ export const ReinforcedMount: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -448,6 +536,10 @@ export const RepulsorDrive: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Walker"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -469,6 +561,10 @@ export const Resilient: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -489,6 +585,10 @@ export const ReverseFittedGun: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Fixed],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -506,6 +606,10 @@ export const SecondaryTurretMount: Modification = {
   name: "Secondary Turret Mount",
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Superheavy],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Fixed],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -527,6 +631,10 @@ export const SelfRepairProtocols: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -543,6 +651,10 @@ export const ShoulderTurrets: Modification = {
   name: "Shoulder Turrets",
   cost: 3,
   compatibleVehicleSizes: [VehicleSize.Heavy, VehicleSize.Superheavy],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: ["Walker"],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -564,6 +676,10 @@ export const SmokeBelcher: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Arm, MountLocation.Turret],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -581,6 +697,10 @@ export const SpotterRelay: Modification = {
   name: "Spotter Relay",
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Light],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -601,6 +721,10 @@ export const TailGun: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: ["Flyer"],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -622,6 +746,10 @@ export const TargetingProtocols: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -642,6 +770,10 @@ export const ToughenedHull: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -662,6 +794,10 @@ export const Transforming: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -682,6 +818,10 @@ export const TurretGrabber: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [MountLocation.Turret],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -703,6 +843,10 @@ export const TwinLinked: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -723,6 +867,10 @@ export const UpperTurretConfiguration: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: ["Walker"],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -744,6 +892,10 @@ export const VeteranCrew: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&

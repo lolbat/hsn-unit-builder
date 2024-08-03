@@ -17,6 +17,10 @@ export const EnginePowerReduction: Modification = {
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Flyer"],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -39,6 +43,10 @@ export const Flammable: Modification = {
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -60,6 +68,10 @@ export const GreenCrew: Modification = {
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -75,12 +87,16 @@ export const LightFrontArmour: Modification = {
   type: ModificationType.Compromise,
   name: "Light Front Armour",
   cost: 3,
+  maxAllowed: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -96,12 +112,16 @@ export const LightSecondaryArmour: Modification = {
   type: ModificationType.Compromise,
   name: "Light Secondary Armour",
   cost: 2,
+  maxAllowed: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -123,6 +143,10 @@ export const LowMorale: Modification = {
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -143,6 +167,14 @@ export const MainGunRetrofit: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
+  ],
+  maxAllowed: null,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [
+    MountLocation.Arm,
+    MountLocation.Fixed,
+    MountLocation.Turret,
   ],
   isValidForUnit: function (unit: Unit) {
     return (
@@ -170,6 +202,10 @@ export const PoorOptics: Modification = {
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
@@ -191,6 +227,10 @@ export const WeakHull: Modification = {
     VehicleSize.Superheavy,
     VehicleSize.Behemoth,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
   isValidForUnit: function (unit: Unit) {
     return (
       doesNotHaveModification(unit, this) &&
