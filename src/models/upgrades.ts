@@ -1,10 +1,15 @@
 import Modification from "./modifications";
-import { ModificationType, VehicleSize, MountLocation } from "./constants";
+import {
+  ModificationType,
+  VehicleSize,
+  MountLocation,
+  UpgradeName,
+} from "./constants";
 import Unit from "./unit";
 
 export const AAWeaponConfiguration: Modification = {
   type: ModificationType.Upgrade,
-  name: "AA Weapon Configuration",
+  name: UpgradeName.AAWeaponConfiguration,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -23,7 +28,7 @@ export const AAWeaponConfiguration: Modification = {
 
 export const AbominableHorror: Modification = {
   type: ModificationType.Upgrade,
-  name: "Abominable Horror",
+  name: UpgradeName.AbominableHorror,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -42,7 +47,7 @@ export const AbominableHorror: Modification = {
 
 export const AdditionalSponsons: Modification = {
   type: ModificationType.Upgrade,
-  name: "Additional Sponsons",
+  name: UpgradeName.AdditionalSponsons,
   cost: 3,
   compatibleVehicleSizes: [VehicleSize.Superheavy],
   maxAllowed: 1,
@@ -57,7 +62,7 @@ export const AdditionalSponsons: Modification = {
 
 export const CoaxialMount: Modification = {
   type: ModificationType.Upgrade,
-  name: "Coaxial Mount",
+  name: UpgradeName.CoaxialMount,
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Heavy, VehicleSize.Superheavy],
   maxAllowed: 1,
@@ -72,7 +77,7 @@ export const CoaxialMount: Modification = {
 
 export const CommunicationsModule: Modification = {
   type: ModificationType.Upgrade,
-  name: "Communications Module",
+  name: UpgradeName.CommunicationsModule,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -91,7 +96,7 @@ export const CommunicationsModule: Modification = {
 
 export const EarlyWarningRadarSystem: Modification = {
   type: ModificationType.Upgrade,
-  name: "Early Warning Radar System",
+  name: UpgradeName.EarlyWarningRadarSystem,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -110,7 +115,7 @@ export const EarlyWarningRadarSystem: Modification = {
 
 export const EnginePowerIncrease: Modification = {
   type: ModificationType.Upgrade,
-  name: "Engine Power Increase",
+  name: UpgradeName.EnginePowerIncrease,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -129,7 +134,7 @@ export const EnginePowerIncrease: Modification = {
 
 export const EnhancedSensors: Modification = {
   type: ModificationType.Upgrade,
-  name: "Enhanced Sensors",
+  name: UpgradeName.EnhancedSensors,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -148,7 +153,7 @@ export const EnhancedSensors: Modification = {
 
 export const ExplosiveShielding: Modification = {
   type: ModificationType.Upgrade,
-  name: "Explosive Shielding",
+  name: UpgradeName.ExplosiveShielding,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -167,7 +172,7 @@ export const ExplosiveShielding: Modification = {
 
 export const ImprovedHandling: Modification = {
   type: ModificationType.Upgrade,
-  name: "Improved Handling",
+  name: UpgradeName.ImprovedHandling,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -186,7 +191,7 @@ export const ImprovedHandling: Modification = {
 
 export const ImprovedCountermeasures: Modification = {
   type: ModificationType.Upgrade,
-  name: "Improved Countermeasures",
+  name: UpgradeName.ImprovedCountermeasures,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -205,7 +210,7 @@ export const ImprovedCountermeasures: Modification = {
 
 export const IncendiaryAmmunition: Modification = {
   type: ModificationType.Upgrade,
-  name: "Incendiary Ammunition",
+  name: UpgradeName.IncendiaryAmmunition,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -224,7 +229,7 @@ export const IncendiaryAmmunition: Modification = {
 
 export const JumpJets: Modification = {
   type: ModificationType.Upgrade,
-  name: "Jump Jets",
+  name: UpgradeName.JumpJets,
   cost: 2,
   compatibleVehicleSizes: [VehicleSize.Light, VehicleSize.Heavy],
   maxAllowed: 1,
@@ -239,7 +244,7 @@ export const JumpJets: Modification = {
 
 export const LowProfile: Modification = {
   type: ModificationType.Upgrade,
-  name: "Low Profile",
+  name: UpgradeName.LowProfile,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -258,7 +263,7 @@ export const LowProfile: Modification = {
 
 export const MineClearanceEquipment: Modification = {
   type: ModificationType.Upgrade,
-  name: "Mine Clearance Equipement",
+  name: UpgradeName.MineClearanceEquipment,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -281,7 +286,7 @@ export const MineClearanceEquipment: Modification = {
 
 export const OpticRefinement: Modification = {
   type: ModificationType.Upgrade,
-  name: "Optic Refinement",
+  name: UpgradeName.OpticRefinement,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -300,7 +305,7 @@ export const OpticRefinement: Modification = {
 
 export const Ram: Modification = {
   type: ModificationType.Upgrade,
-  name: "Ram",
+  name: UpgradeName.Ram,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -319,7 +324,7 @@ export const Ram: Modification = {
 
 export const ReinforcedFrontArmour: Modification = {
   type: ModificationType.Upgrade,
-  name: "Reinforced Front Armour",
+  name: UpgradeName.ReinforcedFrontArmour,
   cost: 3,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -338,7 +343,7 @@ export const ReinforcedFrontArmour: Modification = {
 
 export const ReinforcedSideArmour: Modification = {
   type: ModificationType.Upgrade,
-  name: "Reinforced Side Armour",
+  name: UpgradeName.ReinforcedSideArmour,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -357,7 +362,7 @@ export const ReinforcedSideArmour: Modification = {
 
 export const ReinforcedRearArmour: Modification = {
   type: ModificationType.Upgrade,
-  name: "Reinforced Rear Armour",
+  name: UpgradeName.ReinforcedRearArmour,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -376,7 +381,7 @@ export const ReinforcedRearArmour: Modification = {
 
 export const ReinforcedMount: Modification = {
   type: ModificationType.Upgrade,
-  name: "Reinforced Mount",
+  name: UpgradeName.ReinforcedMount,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -395,7 +400,7 @@ export const ReinforcedMount: Modification = {
 
 export const RepulsorDrive: Modification = {
   type: ModificationType.Upgrade,
-  name: "Repulsor Drive",
+  name: UpgradeName.RepulsorDrive,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -414,7 +419,7 @@ export const RepulsorDrive: Modification = {
 
 export const Resilient: Modification = {
   type: ModificationType.Upgrade,
-  name: "Resilient",
+  name: UpgradeName.Resilient,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -433,7 +438,7 @@ export const Resilient: Modification = {
 
 export const ReverseFittedGun: Modification = {
   type: ModificationType.Upgrade,
-  name: "Reverse Fitted Gun",
+  name: UpgradeName.ReverseFittedGun,
   cost: 0,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -452,7 +457,7 @@ export const ReverseFittedGun: Modification = {
 
 export const SecondaryTurretMount: Modification = {
   type: ModificationType.Upgrade,
-  name: "Secondary Turret Mount",
+  name: UpgradeName.SecondaryTurretMount,
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Superheavy],
   maxAllowed: 1,
@@ -467,7 +472,7 @@ export const SecondaryTurretMount: Modification = {
 
 export const SelfRepairProtocols: Modification = {
   type: ModificationType.Upgrade,
-  name: "Self Repair Protocols",
+  name: UpgradeName.SelfRepairProtocols,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -486,7 +491,7 @@ export const SelfRepairProtocols: Modification = {
 
 export const ShoulderTurrets: Modification = {
   type: ModificationType.Upgrade,
-  name: "Shoulder Turrets",
+  name: UpgradeName.ShoulderTurrets,
   cost: 3,
   compatibleVehicleSizes: [VehicleSize.Heavy, VehicleSize.Superheavy],
   maxAllowed: 1,
@@ -501,7 +506,7 @@ export const ShoulderTurrets: Modification = {
 
 export const SmokeBelcher: Modification = {
   type: ModificationType.Upgrade,
-  name: "Smoke Belcher",
+  name: UpgradeName.SmokeBelcher,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -520,7 +525,7 @@ export const SmokeBelcher: Modification = {
 
 export const SpotterRelay: Modification = {
   type: ModificationType.Upgrade,
-  name: "Spotter Relay",
+  name: UpgradeName.SpotterRelay,
   cost: 1,
   compatibleVehicleSizes: [VehicleSize.Light],
   maxAllowed: 1,
@@ -535,7 +540,7 @@ export const SpotterRelay: Modification = {
 
 export const TailGun: Modification = {
   type: ModificationType.Upgrade,
-  name: "Tail Gun",
+  name: UpgradeName.TailGun,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -554,7 +559,7 @@ export const TailGun: Modification = {
 
 export const TargetingProtocols: Modification = {
   type: ModificationType.Upgrade,
-  name: "Targeting Protocols",
+  name: UpgradeName.TargetingProtocols,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -573,7 +578,7 @@ export const TargetingProtocols: Modification = {
 
 export const ToughenedHull: Modification = {
   type: ModificationType.Upgrade,
-  name: "Toughened Hull",
+  name: UpgradeName.ToughenedHull,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -592,7 +597,7 @@ export const ToughenedHull: Modification = {
 
 export const Transforming: Modification = {
   type: ModificationType.Upgrade,
-  name: "Transforming",
+  name: UpgradeName.Transforming,
   cost: 3,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -611,7 +616,7 @@ export const Transforming: Modification = {
 
 export const TurretGrabber: Modification = {
   type: ModificationType.Upgrade,
-  name: "Turret-Grabber",
+  name: UpgradeName.TurretGrabber,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -630,7 +635,7 @@ export const TurretGrabber: Modification = {
 
 export const TwinLinked: Modification = {
   type: ModificationType.Upgrade,
-  name: "Twin-Linked",
+  name: UpgradeName.TwinLinked,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -649,7 +654,7 @@ export const TwinLinked: Modification = {
 
 export const UpperTurretConfiguration: Modification = {
   type: ModificationType.Upgrade,
-  name: "Upper Turret Configuration",
+  name: UpgradeName.UpperTurretConfiguration,
   cost: 0,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -668,7 +673,7 @@ export const UpperTurretConfiguration: Modification = {
 
 export const VeteranCrew: Modification = {
   type: ModificationType.Upgrade,
-  name: "Veteran Crew",
+  name: UpgradeName.VeteranCrew,
   cost: 3,
   compatibleVehicleSizes: [
     VehicleSize.Light,
