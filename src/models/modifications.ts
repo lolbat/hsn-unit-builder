@@ -1,18 +1,28 @@
-import { ModificationType, MountLocation, VehicleSize } from "./constants";
+import {
+  ModificationName,
+  ModificationType,
+  MountLocation,
+  VehicleSize,
+} from "./constants";
 import Unit from "./unit";
 
 export default interface Modification {
   readonly type: ModificationType;
-  readonly name: string;
+  readonly name: ModificationName;
   readonly cost: number;
   readonly compatibleVehicleSizes: VehicleSize[];
   readonly maxAllowed: number | null;
   readonly requiredSpecialRuleGroups: readonly string[];
   readonly excludedSpecialRuleGroups: readonly string[];
   readonly requiredMounts: readonly MountLocation[];
-  readonly exclusiveModifications: readonly string[];
+  readonly exclusiveModifications: readonly ModificationName[];
   applyToUnit(unit: Unit): Unit;
 }
+
+export type getModificationCost = (
+  unit: Unit,
+  modification: Modification,
+) => number;
 
 export function isModValidForUnit(unit: Unit, modification: Modification) {
   return (

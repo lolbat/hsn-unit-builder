@@ -188,3 +188,175 @@ export enum UpgradeName {
   UpperTurretConfiguration = "Upper Turret Configuration",
   VeteranCrew = "Veteran Crew",
 }
+
+export enum CompromiseName {
+  EnginePowerReduction = "Engine Power Reduction",
+  Flammable = "Flammable",
+  GreenCrew = "Green Crew",
+  LightFrontArmour = "Light Front Armour",
+  LightSecondaryArmour = "Light Secondary Armour",
+  LowMorale = "Low Morale",
+  MainGunRetrofit = "Main Gun Retrofit",
+  PoorOptics = "Poor Optics",
+  WeakHull = "Weak Hull",
+}
+
+export type ModificationName = UpgradeName | CompromiseName;
+
+function toUpgradeName(name: string) {
+  switch (name) {
+    case "AA Weapon Configuration": {
+      return UpgradeName.AAWeaponConfiguration;
+    }
+    case "Abominable Horror": {
+      return UpgradeName.AbominableHorror;
+    }
+    case "Additional Sponsons": {
+      return UpgradeName.AdditionalSponsons;
+    }
+    case "Coaxial Mount": {
+      return UpgradeName.CoaxialMount;
+    }
+    case "Communications Module": {
+      return UpgradeName.CommunicationsModule;
+    }
+    case "Early Warning Radar System": {
+      return UpgradeName.EarlyWarningRadarSystem;
+    }
+    case "Engine Power Increase": {
+      return UpgradeName.EnginePowerIncrease;
+    }
+    case "Enhanced Sensors": {
+      return UpgradeName.EnhancedSensors;
+    }
+    case "Explosive Shielding": {
+      return UpgradeName.ExplosiveShielding;
+    }
+    case "Improved Handling": {
+      return UpgradeName.ImprovedHandling;
+    }
+    case "Improved Countermeasures": {
+      return UpgradeName.ImprovedCountermeasures;
+    }
+    case "Incendiary Ammunition": {
+      return UpgradeName.IncendiaryAmmunition;
+    }
+    case "Jump Jets": {
+      return UpgradeName.JumpJets;
+    }
+    case "Low Profile": {
+      return UpgradeName.LowProfile;
+    }
+    case "Mine Clearance Equipement": {
+      return UpgradeName.MineClearanceEquipment;
+    }
+    case "Optic Refinement": {
+      return UpgradeName.OpticRefinement;
+    }
+    case "Ram": {
+      return UpgradeName.Ram;
+    }
+    case "Reinforced Front Armour": {
+      return UpgradeName.ReinforcedFrontArmour;
+    }
+    case "Reinforced Side Armour": {
+      return UpgradeName.ReinforcedSideArmour;
+    }
+    case "Reinforced Rear Armour": {
+      return UpgradeName.ReinforcedRearArmour;
+    }
+    case "Reinforced Mount": {
+      return UpgradeName.ReinforcedMount;
+    }
+    case "Repulsor Drive": {
+      return UpgradeName.RepulsorDrive;
+    }
+    case "Resilient": {
+      return UpgradeName.Resilient;
+    }
+    case "Reverse Fitted Gun": {
+      return UpgradeName.ReverseFittedGun;
+    }
+    case "Secondary Turret Mount": {
+      return UpgradeName.SecondaryTurretMount;
+    }
+    case "Self Repair Protocols": {
+      return UpgradeName.SelfRepairProtocols;
+    }
+    case "Shoulder Turrets": {
+      return UpgradeName.ShoulderTurrets;
+    }
+    case "Smoke Belcher": {
+      return UpgradeName.SmokeBelcher;
+    }
+    case "Spotter Relay": {
+      return UpgradeName.SpotterRelay;
+    }
+    case "Tail Gun": {
+      return UpgradeName.TailGun;
+    }
+    case "Targeting Protocols": {
+      return UpgradeName.TargetingProtocols;
+    }
+    case "Toughened Hull": {
+      return UpgradeName.ToughenedHull;
+    }
+    case "Transforming": {
+      return UpgradeName.Transforming;
+    }
+    case "Turret-Grabber": {
+      return UpgradeName.TurretGrabber;
+    }
+    case "Twin-Linked": {
+      return UpgradeName.TwinLinked;
+    }
+    case "Upper Turret Configuration": {
+      return UpgradeName.UpperTurretConfiguration;
+    }
+    case "Veteran Crew": {
+      return UpgradeName.VeteranCrew;
+    }
+    default: {
+      return null;
+    }
+  }
+}
+
+function toCompromiseName(name: string) {
+  switch (name) {
+    case "Engine Power Reduction": {
+      return CompromiseName.EnginePowerReduction;
+    }
+    case "Flammable": {
+      return CompromiseName.Flammable;
+    }
+    case "Green Crew": {
+      return CompromiseName.GreenCrew;
+    }
+    case "Light Front Armour": {
+      return CompromiseName.LightFrontArmour;
+    }
+    case "Light Secondary Armour": {
+      return CompromiseName.LightSecondaryArmour;
+    }
+    case "Low Morale": {
+      return CompromiseName.LowMorale;
+    }
+    case "Main Gun Retrofit": {
+      return CompromiseName.MainGunRetrofit;
+    }
+    case "Poor Optics": {
+      return CompromiseName.PoorOptics;
+    }
+    case "Weak Hull": {
+      return CompromiseName.WeakHull;
+    }
+    default: {
+      return null;
+    }
+  }
+}
+
+export function toModificationName(name: string) {
+  return toUpgradeName(name) || toCompromiseName(name);
+}

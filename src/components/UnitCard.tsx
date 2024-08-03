@@ -11,7 +11,7 @@ import {
   LightUpgrades,
   SuperheavyUpgrades,
 } from "../models/upgrades";
-import { VehicleSize } from "../models/constants";
+import { toModificationName, VehicleSize } from "../models/constants";
 import Modification, { isModValidForUnit } from "../models/modifications";
 import { Compromises, CompromisesByName } from "../models/compromises";
 
@@ -64,7 +64,16 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   };
 
   const handleApplyModification = function () {
-    const selectedMod = ModificationsByName.get(mod);
+    if (mod === "") {
+      return;
+    }
+
+    const modName = toModificationName(mod);
+    if (modName === null) {
+      return;
+    }
+
+    const selectedMod = ModificationsByName.get(modName);
     if (selectedMod) {
       const updatedUnit = Unit.fromUnit(unit);
       updatedUnit.modifications.push(selectedMod);

@@ -1,10 +1,16 @@
 import Modification from "./modifications";
-import { ModificationType, VehicleSize, MountLocation } from "./constants";
+import {
+  ModificationType,
+  VehicleSize,
+  MountLocation,
+  CompromiseName,
+  UpgradeName,
+} from "./constants";
 import Unit from "./unit";
 
 export const EnginePowerReduction: Modification = {
   type: ModificationType.Compromise,
-  name: "Engine Power Reduction",
+  name: CompromiseName.EnginePowerReduction,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -16,7 +22,7 @@ export const EnginePowerReduction: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Flyer"],
   requiredMounts: [],
-  exclusiveModifications: ["Engine Power Increase"],
+  exclusiveModifications: [UpgradeName.EnginePowerIncrease],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -24,7 +30,7 @@ export const EnginePowerReduction: Modification = {
 
 export const Flammable: Modification = {
   type: ModificationType.Compromise,
-  name: "Flammable",
+  name: CompromiseName.Flammable,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -44,7 +50,7 @@ export const Flammable: Modification = {
 
 export const GreenCrew: Modification = {
   type: ModificationType.Compromise,
-  name: "Green Crew",
+  name: CompromiseName.GreenCrew,
   cost: 4,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -56,7 +62,7 @@ export const GreenCrew: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Veteran Crew"],
+  exclusiveModifications: [UpgradeName.VeteranCrew],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -64,7 +70,7 @@ export const GreenCrew: Modification = {
 
 export const LightFrontArmour: Modification = {
   type: ModificationType.Compromise,
-  name: "Light Front Armour",
+  name: CompromiseName.LightFrontArmour,
   cost: 3,
   maxAllowed: 1,
   compatibleVehicleSizes: [
@@ -76,7 +82,7 @@ export const LightFrontArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Reinforced Front Armour"],
+  exclusiveModifications: [UpgradeName.ReinforcedFrontArmour],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -84,7 +90,7 @@ export const LightFrontArmour: Modification = {
 
 export const LightSecondaryArmour: Modification = {
   type: ModificationType.Compromise,
-  name: "Light Secondary Armour",
+  name: CompromiseName.LightSecondaryArmour,
   cost: 2,
   maxAllowed: 1,
   compatibleVehicleSizes: [
@@ -96,7 +102,10 @@ export const LightSecondaryArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Reinforced Side Armour", "Reinforced Rear Armour"],
+  exclusiveModifications: [
+    UpgradeName.ReinforcedSideArmour,
+    UpgradeName.ReinforcedRearArmour,
+  ],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -104,7 +113,7 @@ export const LightSecondaryArmour: Modification = {
 
 export const LowMorale: Modification = {
   type: ModificationType.Compromise,
-  name: "Low Morale",
+  name: CompromiseName.LowMorale,
   cost: 2,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -116,7 +125,7 @@ export const LowMorale: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Resilient"],
+  exclusiveModifications: [UpgradeName.Resilient],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -124,7 +133,7 @@ export const LowMorale: Modification = {
 
 export const MainGunRetrofit: Modification = {
   type: ModificationType.Compromise,
-  name: "Main Gun Retrofit",
+  name: CompromiseName.MainGunRetrofit,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -148,7 +157,7 @@ export const MainGunRetrofit: Modification = {
 
 export const PoorOptics: Modification = {
   type: ModificationType.Compromise,
-  name: "Poor Optics",
+  name: CompromiseName.PoorOptics,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -160,7 +169,7 @@ export const PoorOptics: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Optic Refinement"],
+  exclusiveModifications: [UpgradeName.OpticRefinement],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -168,7 +177,7 @@ export const PoorOptics: Modification = {
 
 export const WeakHull: Modification = {
   type: ModificationType.Compromise,
-  name: "Weak Hull",
+  name: CompromiseName.WeakHull,
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -180,7 +189,7 @@ export const WeakHull: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Toughened Hull"],
+  exclusiveModifications: [UpgradeName.ToughenedHull],
   applyToUnit: function (unit: Unit) {
     return unit;
   },

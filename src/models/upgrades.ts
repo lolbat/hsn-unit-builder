@@ -4,6 +4,7 @@ import {
   VehicleSize,
   MountLocation,
   UpgradeName,
+  CompromiseName,
 } from "./constants";
 import Unit from "./unit";
 
@@ -126,7 +127,7 @@ export const EnginePowerIncrease: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Fast Mover"],
   requiredMounts: [],
-  exclusiveModifications: ["Engine Power Reduction"],
+  exclusiveModifications: [CompromiseName.EnginePowerReduction],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -297,7 +298,7 @@ export const OpticRefinement: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Poor Optics"],
+  exclusiveModifications: [CompromiseName.PoorOptics],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -335,7 +336,7 @@ export const ReinforcedFrontArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Light Front Armour"],
+  exclusiveModifications: [CompromiseName.LightFrontArmour],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -354,7 +355,7 @@ export const ReinforcedSideArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Walker"],
   requiredMounts: [],
-  exclusiveModifications: ["Light Secondary Armour"],
+  exclusiveModifications: [CompromiseName.LightSecondaryArmour],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -373,7 +374,7 @@ export const ReinforcedRearArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Light Secondary Armour"],
+  exclusiveModifications: [CompromiseName.LightSecondaryArmour],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -430,7 +431,7 @@ export const Resilient: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Low Morale"],
+  exclusiveModifications: [CompromiseName.LowMorale],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -589,7 +590,7 @@ export const ToughenedHull: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Weak Hull"],
+  exclusiveModifications: [CompromiseName.WeakHull],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -684,7 +685,7 @@ export const VeteranCrew: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
-  exclusiveModifications: ["Green Crew"],
+  exclusiveModifications: [CompromiseName.GreenCrew],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
