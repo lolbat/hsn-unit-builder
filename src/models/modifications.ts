@@ -84,9 +84,13 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.EnginePowerIncrease: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.movement += 1;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnginePowerIncrease:
     case UpgradeName.EnhancedSensors:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedHandling:
