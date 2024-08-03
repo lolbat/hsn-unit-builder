@@ -155,7 +155,7 @@ export const ImprovedHandling: Modification = {
   ],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
-  excludedSpecialRuleGroups: ["Flyer", "Walker"],
+  excludedSpecialRuleGroups: ["Flyer", "Walker", "Fast"],
   requiredMounts: [],
   exclusiveModifications: [],
 };

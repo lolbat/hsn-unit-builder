@@ -102,10 +102,22 @@ export function applyModificationToUnit(
       ];
       return modifiedUnit;
     }
+    case UpgradeName.ImprovedHandling: {
+      if (unit.special.includes("Fast")) {
+        return unit;
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.special = [
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Fast") < 1),
+        "Fast",
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Fast") > 1),
+      ];
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
-    case UpgradeName.ImprovedHandling:
     case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.IncendiaryAmmunition:
     case UpgradeName.JumpJets:
