@@ -10,6 +10,7 @@ export default interface Modification {
   readonly requiredSpecialRuleGroups: readonly string[];
   readonly excludedSpecialRuleGroups: readonly string[];
   readonly requiredMounts: readonly MountLocation[];
+  readonly exclusiveModifications: readonly string[];
   applyToUnit(unit: Unit): Unit;
 }
 
@@ -18,7 +19,17 @@ export function isModValidForUnit(unit: Unit, modification: Modification) {
     hasLessThanMaxInstances(unit, modification) &&
     isOneOfSizes(unit, modification.compatibleVehicleSizes) &&
     meetsSpecialRuleRequirements(unit, modification) &&
-    hasAtLeastOneOfMounts(unit, modification.requiredMounts)
+    hasAtLeastOneOfMounts(unit, modification.requiredMounts) &&
+    hasNoExclusiveModifications(unit, modification)
+  );
+}
+
+function hasNoExclusiveModifications(unit: Unit, modification: Modification) {
+  return (
+    modification.exclusiveModifications.length === 0 ||
+    unit.modifications.every(
+      (m) => !modification.exclusiveModifications.includes(m.name),
+    )
   );
 }
 

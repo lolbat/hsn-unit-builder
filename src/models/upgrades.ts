@@ -15,6 +15,7 @@ export const AAWeaponConfiguration: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Hull, MountLocation.Turret],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -33,6 +34,7 @@ export const AbominableHorror: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -47,6 +49,7 @@ export const AdditionalSponsons: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Sponsons],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -61,6 +64,7 @@ export const CoaxialMount: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Turret],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -79,6 +83,7 @@ export const CommunicationsModule: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Arm, MountLocation.Turret],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -97,6 +102,7 @@ export const EarlyWarningRadarSystem: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Flyer"],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -115,6 +121,7 @@ export const EnginePowerIncrease: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Fast Mover"],
   requiredMounts: [],
+  exclusiveModifications: ["Engine Power Reduction"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -133,6 +140,7 @@ export const EnhancedSensors: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Flyer"],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -151,12 +159,13 @@ export const ExplosiveShielding: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Flyer", "Walker"],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
 };
 
-export const ImprovedHandlingLight: Modification = {
+export const ImprovedHandling: Modification = {
   type: ModificationType.Upgrade,
   name: "Improved Handling",
   cost: 1,
@@ -169,6 +178,7 @@ export const ImprovedHandlingLight: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Flyer", "Walker"],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -187,6 +197,7 @@ export const ImprovedCountermeasures: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -205,6 +216,7 @@ export const IncendiaryAmmunition: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -219,6 +231,7 @@ export const JumpJets: Modification = {
   requiredSpecialRuleGroups: ["Walker"],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -237,6 +250,7 @@ export const LowProfile: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -259,6 +273,7 @@ export const MineClearanceEquipment: Modification = {
     MountLocation.Fixed,
     MountLocation.Turret,
   ],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -277,6 +292,7 @@ export const OpticRefinement: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: ["Poor Optics"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -295,6 +311,7 @@ export const Ram: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -313,6 +330,7 @@ export const ReinforcedFrontArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: ["Light Front Armour"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -331,6 +349,7 @@ export const ReinforcedSideArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Walker"],
   requiredMounts: [],
+  exclusiveModifications: ["Light Secondary Armour"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -349,6 +368,7 @@ export const ReinforcedRearArmour: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: ["Light Secondary Armour"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -367,6 +387,7 @@ export const ReinforcedMount: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -385,6 +406,7 @@ export const RepulsorDrive: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: ["Walker"],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -403,6 +425,7 @@ export const Resilient: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: ["Low Morale"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -421,6 +444,7 @@ export const ReverseFittedGun: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Fixed],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -435,6 +459,7 @@ export const SecondaryTurretMount: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Fixed],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -453,6 +478,7 @@ export const SelfRepairProtocols: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -467,6 +493,7 @@ export const ShoulderTurrets: Modification = {
   requiredSpecialRuleGroups: ["Walker"],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -485,6 +512,7 @@ export const SmokeBelcher: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Arm, MountLocation.Turret],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -499,6 +527,7 @@ export const SpotterRelay: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -517,6 +546,7 @@ export const TailGun: Modification = {
   requiredSpecialRuleGroups: ["Flyer"],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -535,6 +565,7 @@ export const TargetingProtocols: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -542,7 +573,7 @@ export const TargetingProtocols: Modification = {
 
 export const ToughenedHull: Modification = {
   type: ModificationType.Upgrade,
-  name: "ToughenedHull",
+  name: "Toughened Hull",
   cost: 1,
   compatibleVehicleSizes: [
     VehicleSize.Light,
@@ -553,6 +584,7 @@ export const ToughenedHull: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: ["Weak Hull"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -571,6 +603,7 @@ export const Transforming: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -589,6 +622,7 @@ export const TurretGrabber: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [MountLocation.Turret],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -607,6 +641,7 @@ export const TwinLinked: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -625,6 +660,7 @@ export const UpperTurretConfiguration: Modification = {
   requiredSpecialRuleGroups: ["Walker"],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: [],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -643,6 +679,7 @@ export const VeteranCrew: Modification = {
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
+  exclusiveModifications: ["Green Crew"],
   applyToUnit: function (unit: Unit) {
     return unit;
   },
@@ -658,7 +695,7 @@ export const LightHeavySuperheavyUpgrades: readonly Modification[] = [
   EnginePowerIncrease,
   EnhancedSensors,
   ExplosiveShielding,
-  ImprovedHandlingLight,
+  ImprovedHandling,
   ImprovedCountermeasures,
   IncendiaryAmmunition,
   JumpJets,
