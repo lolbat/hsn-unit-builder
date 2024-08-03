@@ -137,10 +137,7 @@ class Unit implements UnitShape {
   private totalCompromisesCost() {
     return this.modifications
       .filter((m) => m.type === ModificationType.Compromise)
-      .reduce(
-        (acc, cur) => acc + (getCostForCompromise(this, cur) || cur.cost),
-        0,
-      );
+      .reduce((acc, cur) => acc + (getCostForCompromise(cur) || cur.cost), 0);
   }
 
   private totalUpgradesCost() {

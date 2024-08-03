@@ -119,7 +119,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
 
   const compromiseOptions = validCompromises.map((c) => (
     <option value={c.name} key={c.name}>
-      {c.name} ({getCostForCompromise(unit, c)})
+      {c.name} ({getCostForCompromise(c)})
     </option>
   ));
 

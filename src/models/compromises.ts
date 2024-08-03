@@ -6,7 +6,6 @@ import {
   CompromiseName,
   UpgradeName,
 } from "./constants";
-import Unit from "./unit";
 
 export const EnginePowerReduction: Modification = {
   type: ModificationType.Compromise,
@@ -182,8 +181,8 @@ export const Compromises: readonly Modification[] = [
 
 export const CompromisesByName = new Map(Compromises.map((c) => [c.name, c]));
 
-export function getCostForCompromise(unit: Unit, modification: Modification) {
-  switch (modification.name) {
+export function getCostForCompromise({ name, cost }: Modification) {
+  switch (name) {
     case CompromiseName.EnginePowerReduction:
     case CompromiseName.Flammable:
     case CompromiseName.GreenCrew:
@@ -193,7 +192,7 @@ export function getCostForCompromise(unit: Unit, modification: Modification) {
     case CompromiseName.MainGunRetrofit:
     case CompromiseName.PoorOptics:
     case CompromiseName.WeakHull: {
-      return modification.cost;
+      return cost;
     }
     default: {
       return null;
