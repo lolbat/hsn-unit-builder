@@ -25,7 +25,9 @@ class Weapon implements WeaponShape {
     if (special === null) {
       this.special = weaponType.special;
     } else {
-      this.special = [...weaponType.special, ...special].toSorted();
+      this.special = [
+        ...new Set([...weaponType.special, ...special]),
+      ].toSorted();
     }
   }
 

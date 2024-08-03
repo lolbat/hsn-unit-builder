@@ -115,11 +115,17 @@ export function applyModificationToUnit(
       ];
       return modifiedUnit;
     }
+    case UpgradeName.IncendiaryAmmunition: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.map((m) =>
+        m.addSpecialOverride("Inferno"),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
-    case UpgradeName.IncendiaryAmmunition:
     case UpgradeName.JumpJets:
     case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
