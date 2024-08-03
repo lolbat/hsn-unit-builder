@@ -1,3 +1,4 @@
+import Armour from "./armour";
 import {
   CompromiseName,
   ModificationName,
@@ -173,15 +174,41 @@ export function applyModificationToUnit(
       modifiedUnit.optics += 2;
       return modifiedUnit;
     }
+    case UpgradeName.ReinforcedFrontArmour: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.armour = new Armour(
+        modifiedUnit.armour.front + 1,
+        modifiedUnit.armour.sides,
+        modifiedUnit.armour.rear,
+      );
+      return modifiedUnit;
+    }
+    case UpgradeName.ReinforcedSideArmour: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.armour = new Armour(
+        modifiedUnit.armour.front,
+        modifiedUnit.armour.sides === null
+          ? null
+          : modifiedUnit.armour.sides + 1,
+        modifiedUnit.armour.rear,
+      );
+      return modifiedUnit;
+    }
+    case UpgradeName.ReinforcedRearArmour: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.armour = new Armour(
+        modifiedUnit.armour.front,
+        modifiedUnit.armour.sides,
+        modifiedUnit.armour.rear === null ? null : modifiedUnit.armour.rear + 1,
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.JumpJets:
     case UpgradeName.Ram:
-    case UpgradeName.ReinforcedFrontArmour:
-    case UpgradeName.ReinforcedSideArmour:
-    case UpgradeName.ReinforcedRearArmour:
     case UpgradeName.ReinforcedMount:
     case UpgradeName.RepulsorDrive:
     case UpgradeName.Resilient:
@@ -498,7 +525,7 @@ export function isModValidForUnit(unit: Unit, modification: Modification) {
     meetsSpecialRuleRequirements(unit, modification) &&
     hasAtLeastOneOfMounts(unit, modification.requiredMounts) &&
     hasNoExclusiveModifications(unit, modification) &&
-    specialRequirementsSatisfied(unit, modification)
+    uniqueRequirementsSatisfied(unit, modification)
   );
 }
 
@@ -596,16 +623,18 @@ export function hasAtLeastOneOfMounts(
   );
 }
 
-function specialRequirementsSatisfied(unit: Unit, modification: Modification) {
+function uniqueRequirementsSatisfied(unit: Unit, modification: Modification) {
   switch (modification.name) {
     case UpgradeName.EnginePowerIncrease: {
       return unit.movement < Math.min(12, unit.vehicleClass.movement * 2);
     }
     case UpgradeName.ReinforcedSideArmour: {
-      return (unit.armour.sides || unit.armour.front) < unit.armour.front;
+      return (
+        unit.armour.sides !== null && unit.armour.sides < unit.armour.front
+      );
     }
     case UpgradeName.ReinforcedRearArmour: {
-      return (unit.armour.rear || unit.armour.front) < unit.armour.front;
+      return unit.armour.rear !== null && unit.armour.rear < unit.armour.front;
     }
     case UpgradeName.TargetingProtocols: {
       const incompatibleWeaponSpecialRules = ["Close Combat", "Close Action"];
