@@ -754,3 +754,85 @@ export const HeavyUpgradesByName = new Map(
 export const SuperheavyUpgradesByName = new Map(
   SuperheavyUpgrades.map((m) => [m.name, m]),
 );
+
+export function getCostForUpgrade(unit: Unit, modification: Modification) {
+  switch (modification.name) {
+    case UpgradeName.AAWeaponConfiguration:
+    case UpgradeName.AdditionalSponsons:
+    case UpgradeName.CoaxialMount:
+    case UpgradeName.CommunicationsModule:
+    case UpgradeName.EarlyWarningRadarSystem:
+    case UpgradeName.EnginePowerIncrease:
+    case UpgradeName.EnhancedSensors:
+    case UpgradeName.ExplosiveShielding:
+    case UpgradeName.IncendiaryAmmunition:
+    case UpgradeName.JumpJets:
+    case UpgradeName.LowProfile:
+    case UpgradeName.MineClearanceEquipment:
+    case UpgradeName.OpticRefinement:
+    case UpgradeName.ReinforcedFrontArmour:
+    case UpgradeName.ReinforcedSideArmour:
+    case UpgradeName.ReinforcedRearArmour:
+    case UpgradeName.ReverseFittedGun:
+    case UpgradeName.SecondaryTurretMount:
+    case UpgradeName.SelfRepairProtocols:
+    case UpgradeName.ShoulderTurrets:
+    case UpgradeName.SmokeBelcher:
+    case UpgradeName.SpotterRelay:
+    case UpgradeName.TargetingProtocols:
+    case UpgradeName.ToughenedHull:
+    case UpgradeName.TurretGrabber:
+    case UpgradeName.UpperTurretConfiguration:
+    case UpgradeName.VeteranCrew: {
+      return modification.cost;
+    }
+    case UpgradeName.ImprovedHandling:
+    case UpgradeName.TailGun:
+    case UpgradeName.TwinLinked: {
+      switch (unit.size) {
+        case VehicleSize.Light: {
+          return 1;
+        }
+        default: {
+          return 2;
+        }
+      }
+    }
+    case UpgradeName.RepulsorDrive: {
+      switch (unit.size) {
+        case VehicleSize.Heavy: {
+          return 2;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
+    case UpgradeName.Transforming: {
+      switch (unit.size) {
+        case VehicleSize.Light: {
+          return 3;
+        }
+        case VehicleSize.Heavy: {
+          return 5;
+        }
+        case VehicleSize.Superheavy: {
+          return 8;
+        }
+        default: {
+          throw new Error(
+            `The Transforming upgrade is invalid for the Unit's size. Unit size is ${unit.size}`,
+          );
+        }
+      }
+    }
+    case UpgradeName.AbominableHorror:
+    case UpgradeName.ImprovedCountermeasures:
+    case UpgradeName.Ram:
+    case UpgradeName.ReinforcedMount:
+    case UpgradeName.Resilient:
+    default: {
+      return null;
+    }
+  }
+}

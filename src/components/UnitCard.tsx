@@ -5,6 +5,7 @@ import { UnitName } from "./UnitName";
 import { useContext, useState } from "react";
 import DispatchContext from "../contexts/dispatch-context";
 import {
+  getCostForUpgrade,
   HeavyUpgrades,
   LightHeavySuperheavyUpgrades,
   LightHeavySuperheavyUpgradesByName,
@@ -13,7 +14,11 @@ import {
 } from "../models/upgrades";
 import { toModificationName, VehicleSize } from "../models/constants";
 import Modification, { isModValidForUnit } from "../models/modifications";
-import { Compromises, CompromisesByName } from "../models/compromises";
+import {
+  Compromises,
+  CompromisesByName,
+  getCostForCompromise,
+} from "../models/compromises";
 
 interface UnitCardProps {
   unit: Unit;
@@ -108,13 +113,13 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
 
   const upgradeOptions = validUpgrades.map((u) => (
     <option value={u.name} key={u.name}>
-      {u.name} ({u.cost})
+      {u.name} ({getCostForUpgrade(unit, u)})
     </option>
   ));
 
   const compromiseOptions = validCompromises.map((c) => (
     <option value={c.name} key={c.name}>
-      {c.name} ({c.cost})
+      {c.name} ({getCostForCompromise(unit, c)})
     </option>
   ));
 

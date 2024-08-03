@@ -1,7 +1,9 @@
 import Armour, { ArmourShape } from "./armour";
+import { getCostForCompromise } from "./compromises";
 import { ModificationType } from "./constants";
 import Modification from "./modifications";
 import { EmptyMount, Mount } from "./mount";
+import { getCostForUpgrade } from "./upgrades";
 import VehicleClass from "./vehicle-class";
 
 export interface UnitShape {
@@ -135,13 +137,19 @@ class Unit implements UnitShape {
   private totalCompromisesCost() {
     return this.modifications
       .filter((m) => m.type === ModificationType.Compromise)
-      .reduce((acc, cur) => acc + cur.cost, 0);
+      .reduce(
+        (acc, cur) => acc + (getCostForCompromise(this, cur) || cur.cost),
+        0,
+      );
   }
 
   private totalUpgradesCost() {
     return this.modifications
       .filter((m) => m.type === ModificationType.Upgrade)
-      .reduce((acc, cur) => acc + cur.cost, 0);
+      .reduce(
+        (acc, cur) => acc + (getCostForUpgrade(this, cur) || cur.cost),
+        0,
+      );
   }
 }
 

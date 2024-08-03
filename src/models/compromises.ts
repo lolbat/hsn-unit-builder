@@ -208,3 +208,22 @@ export const Compromises: readonly Modification[] = [
 ];
 
 export const CompromisesByName = new Map(Compromises.map((c) => [c.name, c]));
+
+export function getCostForCompromise(unit: Unit, modification: Modification) {
+  switch (modification.name) {
+    case CompromiseName.EnginePowerReduction:
+    case CompromiseName.Flammable:
+    case CompromiseName.GreenCrew:
+    case CompromiseName.LightFrontArmour:
+    case CompromiseName.LightSecondaryArmour:
+    case CompromiseName.LowMorale:
+    case CompromiseName.MainGunRetrofit:
+    case CompromiseName.PoorOptics:
+    case CompromiseName.WeakHull: {
+      return modification.cost;
+    }
+    default: {
+      return null;
+    }
+  }
+}
