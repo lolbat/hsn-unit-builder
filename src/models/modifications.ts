@@ -89,9 +89,21 @@ export function applyModificationToUnit(
       modifiedUnit.movement += 1;
       return modifiedUnit;
     }
+    case UpgradeName.EnhancedSensors: {
+      if (unit.special.includes("Recce")) {
+        return unit;
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.special = [
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Recce") < 1),
+        "Recce",
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Recce") > 1),
+      ];
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnhancedSensors:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedHandling:
     case UpgradeName.ImprovedCountermeasures:

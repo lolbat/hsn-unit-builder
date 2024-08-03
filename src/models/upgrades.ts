@@ -123,7 +123,7 @@ export const EnhancedSensors: Modification = {
   ],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
-  excludedSpecialRuleGroups: ["Flyer"],
+  excludedSpecialRuleGroups: ["Flyer", "Recce"],
   requiredMounts: [],
   exclusiveModifications: [],
 };
