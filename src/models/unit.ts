@@ -49,7 +49,7 @@ class Unit implements UnitShape {
       vehicleClass.hullPoints,
       vehicleClass.special,
       vehicleClass.mounts.map(
-        (mountType, index) => new EmptyMount(mountType, index),
+        (mountType, index) => new EmptyMount(mountType, index, []),
       ),
       [],
     );

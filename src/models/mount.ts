@@ -11,6 +11,7 @@ export interface MountShape {
   readonly index: number;
   readonly empty: boolean;
   readonly weapon: Weapon | null;
+  readonly specialOverrides: readonly string[];
   readonly key: string;
 }
 
@@ -19,6 +20,7 @@ export abstract class Mount {
   abstract readonly index: number;
   abstract readonly empty: boolean;
   abstract readonly weapon: Weapon | null;
+  abstract readonly specialOverrides: readonly string[];
   abstract readonly key: string;
   abstract setWeapon(weapon: Weapon): FilledMount;
   abstract removeWeapon(): EmptyMount;
@@ -31,9 +33,10 @@ export abstract class Mount {
         mount.type,
         mount.index,
         Weapon.fromWeaponShape(mount.weapon),
+        mount.specialOverrides,
       );
     }
-    return new EmptyMount(mount.type, mount.index);
+    return new EmptyMount(mount.type, mount.index, mount.specialOverrides);
   }
 }
 
@@ -42,15 +45,22 @@ export class FilledMount extends Mount {
   readonly index: number;
   readonly empty = false;
   readonly weapon: Weapon;
+  readonly specialOverrides: readonly string[];
 
-  constructor(type: MountType, index: number, weapon: Weapon) {
+  constructor(
+    type: MountType,
+    index: number,
+    weapon: Weapon,
+    specialOverrides: readonly string[],
+  ) {
     super();
     if (!isWeaponCompatibleWithMount(weapon.type, type)) {
       throw new Error(`Incompatible weapon type: ${weapon.type.name}`);
     }
     this.type = type;
     this.index = index;
-    this.weapon = weapon;
+    this.specialOverrides = [...specialOverrides];
+    this.weapon = new Weapon(weapon.type, weapon.mount, this.specialOverrides);
   }
 
   get key() {
@@ -61,11 +71,17 @@ export class FilledMount extends Mount {
     if (!compatibleWeaponTypes(this.type).includes(weapon.type)) {
       throw new Error(`Incompatible weapon type: ${weapon.type.name}`);
     }
-    return new FilledMount(this.type, this.index, weapon);
+
+    return new FilledMount(
+      this.type,
+      this.index,
+      weapon,
+      this.specialOverrides,
+    );
   }
 
   removeWeapon() {
-    return new EmptyMount(this.type, this.index);
+    return new EmptyMount(this.type, this.index, this.specialOverrides);
   }
 
   isWeaponCompatible(weaponType: WeaponType) {
@@ -82,11 +98,17 @@ export class EmptyMount extends Mount {
   readonly index: number;
   readonly empty = true;
   readonly weapon = null;
+  readonly specialOverrides: readonly string[];
 
-  constructor(type: MountType, index: number) {
+  constructor(
+    type: MountType,
+    index: number,
+    specialOverrides: readonly string[],
+  ) {
     super();
     this.type = type;
     this.index = index;
+    this.specialOverrides = [...specialOverrides];
   }
 
   get key() {
@@ -97,7 +119,12 @@ export class EmptyMount extends Mount {
     if (!compatibleWeaponTypes(this.type).includes(weapon.type)) {
       throw new Error(`Incompatible weapon type: ${weapon.type.name}`);
     }
-    return new FilledMount(this.type, this.index, weapon);
+    return new FilledMount(
+      this.type,
+      this.index,
+      weapon,
+      this.specialOverrides,
+    );
   }
 
   removeWeapon() {
