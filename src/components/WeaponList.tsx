@@ -11,9 +11,9 @@ interface WeaponListProps {
 export function WeaponList({ mounts, handleMountsChange }: WeaponListProps) {
   function handleMountChange(mount: Mount) {
     handleMountsChange([
-      ...mounts.filter((m) => m.index < mount.index),
+      ...mounts.filter((m) => m.id < mount.id),
       mount,
-      ...mounts.filter((m) => m.index > mount.index),
+      ...mounts.filter((m) => m.id > mount.id),
     ]);
   }
 

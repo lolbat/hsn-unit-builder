@@ -78,19 +78,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
 
     const selectedMod = ModificationsByName.get(modName);
     if (selectedMod) {
-      const updatedUnit = Unit.fromUnit(unit);
-      const existingModification = updatedUnit.modifications.find(
-        (m) => m.modification.name === modName,
-      );
-      let quantity = 1;
-      if (existingModification !== undefined) {
-        updatedUnit.modifications = updatedUnit.modifications.filter(
-          (m) => m.modification.name !== modName,
-        );
-        quantity = existingModification.quantity + 1;
-      }
-
-      updatedUnit.modifications.push({ modification: selectedMod, quantity });
+      const updatedUnit = unit.applyModification(selectedMod);
       handleUnitChange(updatedUnit);
     }
   };

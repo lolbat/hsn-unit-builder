@@ -1,8 +1,10 @@
 import Armour, { ArmourShape } from "./armour";
 import { ModificationType, VehicleSize } from "./constants";
-import {
+import Modification, {
   AppliedModification,
+  applyModificationToUnit,
   costOfAppliedModification,
+  isModValidForUnit,
 } from "./modifications";
 import { EmptyMount, Mount } from "./mount";
 import VehicleClass from "./vehicle-class";
@@ -49,7 +51,7 @@ class Unit implements UnitShape {
       vehicleClass.hullPoints,
       vehicleClass.special,
       vehicleClass.mounts.map(
-        (mountType, index) => new EmptyMount(mountType, index, []),
+        (mountType, index) => new EmptyMount(mountType, `${index}`, []),
       ),
       [],
     );
@@ -145,6 +147,27 @@ class Unit implements UnitShape {
     return this.modifications
       .filter((m) => m.modification.type === ModificationType.Upgrade)
       .reduce((acc, cur) => acc + costOfAppliedModification(this, cur), 0);
+  }
+
+  applyModification(modification: Modification): Unit {
+    if (!isModValidForUnit(this, modification)) {
+      throw new Error(`Cannot apply modification ${modification.name} to unit`);
+    }
+
+    const updatedUnit = Unit.fromUnit(this);
+    const existingModification = updatedUnit.modifications.find(
+      (m) => m.modification.name === modification.name,
+    );
+    let quantity = 1;
+    if (existingModification !== undefined) {
+      updatedUnit.modifications = updatedUnit.modifications.filter(
+        (m) => m.modification.name !== modification.name,
+      );
+      quantity = existingModification.quantity + 1;
+    }
+
+    updatedUnit.modifications.push({ modification, quantity });
+    return applyModificationToUnit(updatedUnit, modification);
   }
 }
 

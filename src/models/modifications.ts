@@ -6,6 +6,8 @@ import {
   UpgradeName,
   VehicleSize,
 } from "./constants";
+import { EmptyMount } from "./mount";
+import { SuperheavySponsonsMount } from "./mount-type";
 import Unit from "./unit";
 
 export default interface Modification {
@@ -30,9 +32,21 @@ export function applyModificationToUnit(
   modification: Modification,
 ) {
   switch (modification.name) {
-    case UpgradeName.AAWeaponConfiguration:
+    case UpgradeName.AAWeaponConfiguration: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.map((m) =>
+        m.addSpecialOverride("Anti-Air"),
+      );
+      return modifiedUnit;
+    }
+    case UpgradeName.AdditionalSponsons: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts.push(
+        new EmptyMount(SuperheavySponsonsMount, "AdditionalSponsons", []),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
-    case UpgradeName.AdditionalSponsons:
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
