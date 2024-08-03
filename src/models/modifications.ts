@@ -122,12 +122,24 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.LowProfile: {
+      if (unit.special.includes("Short")) {
+        return unit;
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.special = [
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Short") < 1),
+        "Short",
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Short") > 1),
+      ];
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.JumpJets:
-    case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
     case UpgradeName.OpticRefinement:
     case UpgradeName.Ram:

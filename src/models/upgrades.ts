@@ -215,7 +215,7 @@ export const LowProfile: Modification = {
   ],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
-  excludedSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Short"],
   requiredMounts: [],
   exclusiveModifications: [],
 };
