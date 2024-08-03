@@ -1,7 +1,9 @@
 import {
+  CompromiseName,
   ModificationName,
   ModificationType,
   MountLocation,
+  UpgradeName,
   VehicleSize,
 } from "./constants";
 import Unit from "./unit";
@@ -16,7 +18,62 @@ export default interface Modification {
   readonly excludedSpecialRuleGroups: readonly string[];
   readonly requiredMounts: readonly MountLocation[];
   readonly exclusiveModifications: readonly ModificationName[];
-  applyToUnit(unit: Unit): Unit;
+}
+
+export function applyModificationToUnit(
+  unit: Unit,
+  modification: Modification,
+) {
+  switch (modification.name) {
+    case UpgradeName.AAWeaponConfiguration:
+    case UpgradeName.AbominableHorror:
+    case UpgradeName.AdditionalSponsons:
+    case UpgradeName.CoaxialMount:
+    case UpgradeName.CommunicationsModule:
+    case UpgradeName.EarlyWarningRadarSystem:
+    case UpgradeName.EnginePowerIncrease:
+    case UpgradeName.EnhancedSensors:
+    case UpgradeName.ExplosiveShielding:
+    case UpgradeName.ImprovedHandling:
+    case UpgradeName.ImprovedCountermeasures:
+    case UpgradeName.IncendiaryAmmunition:
+    case UpgradeName.JumpJets:
+    case UpgradeName.LowProfile:
+    case UpgradeName.MineClearanceEquipment:
+    case UpgradeName.OpticRefinement:
+    case UpgradeName.Ram:
+    case UpgradeName.ReinforcedFrontArmour:
+    case UpgradeName.ReinforcedSideArmour:
+    case UpgradeName.ReinforcedRearArmour:
+    case UpgradeName.ReinforcedMount:
+    case UpgradeName.RepulsorDrive:
+    case UpgradeName.Resilient:
+    case UpgradeName.ReverseFittedGun:
+    case UpgradeName.SecondaryTurretMount:
+    case UpgradeName.SelfRepairProtocols:
+    case UpgradeName.ShoulderTurrets:
+    case UpgradeName.SmokeBelcher:
+    case UpgradeName.SpotterRelay:
+    case UpgradeName.TailGun:
+    case UpgradeName.TargetingProtocols:
+    case UpgradeName.ToughenedHull:
+    case UpgradeName.Transforming:
+    case UpgradeName.TurretGrabber:
+    case UpgradeName.TwinLinked:
+    case UpgradeName.UpperTurretConfiguration:
+    case UpgradeName.VeteranCrew:
+    case CompromiseName.EnginePowerReduction:
+    case CompromiseName.Flammable:
+    case CompromiseName.GreenCrew:
+    case CompromiseName.LightFrontArmour:
+    case CompromiseName.LightSecondaryArmour:
+    case CompromiseName.LowMorale:
+    case CompromiseName.MainGunRetrofit:
+    case CompromiseName.PoorOptics:
+    case CompromiseName.WeakHull: {
+      return unit;
+    }
+  }
 }
 
 export type getModificationCost = (

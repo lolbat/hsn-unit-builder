@@ -37,10 +37,7 @@ export default function UnitForm({ vehicleClass, unit }: UnitFormProps) {
         maxCost={unit.maxCost}
         handleVehicleClassChange={handleVehicleClassChange}
       />
-      <UnitCard
-        unit={unit.modifications.reduce((u, m) => m.applyToUnit(u), unit)}
-        handleUnitChange={handleUnitChange}
-      />
+      <UnitCard unit={unit} handleUnitChange={handleUnitChange} />
     </>
   );
 }

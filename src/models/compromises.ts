@@ -23,9 +23,6 @@ export const EnginePowerReduction: Modification = {
   excludedSpecialRuleGroups: ["Flyer"],
   requiredMounts: [],
   exclusiveModifications: [UpgradeName.EnginePowerIncrease],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const Flammable: Modification = {
@@ -43,9 +40,6 @@ export const Flammable: Modification = {
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
   exclusiveModifications: [],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const GreenCrew: Modification = {
@@ -63,9 +57,6 @@ export const GreenCrew: Modification = {
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
   exclusiveModifications: [UpgradeName.VeteranCrew],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const LightFrontArmour: Modification = {
@@ -83,9 +74,6 @@ export const LightFrontArmour: Modification = {
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
   exclusiveModifications: [UpgradeName.ReinforcedFrontArmour],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const LightSecondaryArmour: Modification = {
@@ -106,9 +94,6 @@ export const LightSecondaryArmour: Modification = {
     UpgradeName.ReinforcedSideArmour,
     UpgradeName.ReinforcedRearArmour,
   ],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const LowMorale: Modification = {
@@ -126,9 +111,6 @@ export const LowMorale: Modification = {
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
   exclusiveModifications: [UpgradeName.Resilient],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const MainGunRetrofit: Modification = {
@@ -150,9 +132,6 @@ export const MainGunRetrofit: Modification = {
     MountLocation.Turret,
   ],
   exclusiveModifications: [],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const PoorOptics: Modification = {
@@ -170,9 +149,6 @@ export const PoorOptics: Modification = {
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
   exclusiveModifications: [UpgradeName.OpticRefinement],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const WeakHull: Modification = {
@@ -190,9 +166,6 @@ export const WeakHull: Modification = {
   excludedSpecialRuleGroups: [],
   requiredMounts: [],
   exclusiveModifications: [UpgradeName.ToughenedHull],
-  applyToUnit: function (unit: Unit) {
-    return unit;
-  },
 };
 
 export const Compromises: readonly Modification[] = [
