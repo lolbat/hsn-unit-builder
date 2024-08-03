@@ -7,7 +7,7 @@ import {
   VehicleSize,
 } from "./constants";
 import { EmptyMount } from "./mount";
-import { SuperheavySponsonsMount } from "./mount-type";
+import { CoaxialMount, SuperheavySponsonsMount } from "./mount-type";
 import Unit from "./unit";
 
 export default interface Modification {
@@ -46,8 +46,23 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.CoaxialMount: {
+      const turretMount = unit.mounts.find(
+        (m) => m.type.mountType === MountLocation.Turret && !m.fromModification,
+      );
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts.push(
+        new EmptyMount(
+          CoaxialMount,
+          "CoaxialMount",
+          turretMount ? turretMount.specialOverrides : [],
+          true,
+        ),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
-    case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.EnginePowerIncrease:

@@ -48,6 +48,7 @@ const weaponCategoriesForMountLocations = new Map<
   [MountLocation.MegaTurret, [WeaponCategory.Projectile]],
   [MountLocation.Sponsons, [WeaponCategory.Projectile]],
   [MountLocation.Turret, [WeaponCategory.Projectile]],
+  [MountLocation.Coaxial, [WeaponCategory.Projectile]],
 ]);
 
 export const LightTurretMount: MountType = {
