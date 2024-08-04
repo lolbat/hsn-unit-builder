@@ -445,6 +445,28 @@ export function applyModificationToUnit(
       modifiedUnit.discipline -= 1;
       return modifiedUnit;
     }
+    case CompromiseName.LightFrontArmour: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.armour = new Armour(
+        modifiedUnit.armour.front - 1,
+        modifiedUnit.armour.sides,
+        modifiedUnit.armour.rear,
+      );
+      return modifiedUnit;
+    }
+    case CompromiseName.LightSecondaryArmour: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.armour = new Armour(
+        modifiedUnit.armour.front,
+        modifiedUnit.armour.sides === null
+          ? null
+          : Math.max(modifiedUnit.armour.sides - 1, 0),
+        modifiedUnit.armour.rear === null
+          ? null
+          : Math.max(modifiedUnit.armour.rear - 1, 0),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -459,8 +481,6 @@ export function applyModificationToUnit(
     case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
     case CompromiseName.Flammable:
-    case CompromiseName.LightFrontArmour:
-    case CompromiseName.LightSecondaryArmour:
     case CompromiseName.LowMorale:
     case CompromiseName.MainGunRetrofit:
     case CompromiseName.PoorOptics:
