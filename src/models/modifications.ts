@@ -97,9 +97,9 @@ export function applyModificationToUnit(
 
       const modifiedUnit = Unit.fromUnit(unit);
       modifiedUnit.special = [
-        ...modifiedUnit.special.filter((s) => s.localeCompare("Recce") < 1),
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Recce") < 0),
         "Recce",
-        ...modifiedUnit.special.filter((s) => s.localeCompare("Recce") > 1),
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Recce") > 0),
       ];
       return modifiedUnit;
     }
@@ -110,9 +110,9 @@ export function applyModificationToUnit(
 
       const modifiedUnit = Unit.fromUnit(unit);
       modifiedUnit.special = [
-        ...modifiedUnit.special.filter((s) => s.localeCompare("Fast") < 1),
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Fast") < 0),
         "Fast",
-        ...modifiedUnit.special.filter((s) => s.localeCompare("Fast") > 1),
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Fast") > 0),
       ];
       return modifiedUnit;
     }
@@ -130,9 +130,9 @@ export function applyModificationToUnit(
 
       const modifiedUnit = Unit.fromUnit(unit);
       modifiedUnit.special = [
-        ...modifiedUnit.special.filter((s) => s.localeCompare("Short") < 1),
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Short") < 0),
         "Short",
-        ...modifiedUnit.special.filter((s) => s.localeCompare("Short") > 1),
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Short") > 0),
       ];
       return modifiedUnit;
     }
