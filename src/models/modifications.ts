@@ -482,20 +482,24 @@ export function applyModificationToUnit(
       modifiedUnit.hullPoints -= 2;
       return modifiedUnit;
     }
+    // No stat changes to apply (more or less)
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.JumpJets:
     case UpgradeName.Ram:
-    case UpgradeName.ReinforcedMount:
     case UpgradeName.ReverseFittedGun:
     case UpgradeName.SelfRepairProtocols:
+    case UpgradeName.Transforming:
+    case CompromiseName.Flammable: {
+      return unit;
+    }
+    // Not implemented
+    case UpgradeName.ReinforcedMount:
     case UpgradeName.SmokeBelcher:
     case UpgradeName.TargetingProtocols:
-    case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
-    case CompromiseName.Flammable:
     case CompromiseName.MainGunRetrofit: {
       return unit;
     }
