@@ -440,6 +440,11 @@ export function applyModificationToUnit(
       modifiedUnit.movement -= 1;
       return modifiedUnit;
     }
+    case CompromiseName.GreenCrew: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.discipline -= 1;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -454,7 +459,6 @@ export function applyModificationToUnit(
     case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
     case CompromiseName.Flammable:
-    case CompromiseName.GreenCrew:
     case CompromiseName.LightFrontArmour:
     case CompromiseName.LightSecondaryArmour:
     case CompromiseName.LowMorale:
