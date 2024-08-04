@@ -430,6 +430,11 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.VeteranCrew: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.discipline += 1;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -443,7 +448,6 @@ export function applyModificationToUnit(
     case UpgradeName.TargetingProtocols:
     case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
-    case UpgradeName.VeteranCrew:
     case CompromiseName.EnginePowerReduction:
     case CompromiseName.Flammable:
     case CompromiseName.GreenCrew:
