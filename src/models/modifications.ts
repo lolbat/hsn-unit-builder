@@ -10,8 +10,11 @@ import {
 import { EmptyMount } from "./mount";
 import {
   CoaxialMount,
+  HeavyHullMount,
   HeavySponsonsMount,
+  LightHullMount,
   MountType,
+  SuperheavyHullMount,
   SuperheavySponsonsMount,
   SuperheavyTurretMount,
 } from "./mount-type";
@@ -292,6 +295,34 @@ export function applyModificationToUnit(
       ];
       return modifiedUnit;
     }
+    case UpgradeName.TailGun: {
+      let hullMount: MountType;
+      switch (unit.size) {
+        case VehicleSize.Light: {
+          hullMount = LightHullMount;
+          break;
+        }
+        case VehicleSize.Heavy: {
+          hullMount = HeavyHullMount;
+          break;
+        }
+        case VehicleSize.Superheavy: {
+          hullMount = SuperheavyHullMount;
+          break;
+        }
+        default: {
+          throw new Error(
+            `Cannot apply TailGun upgrade to a ${unit.size} vehicle`,
+          );
+        }
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts.push(
+        new EmptyMount(hullMount, UpgradeName.TailGun, [], true),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -302,7 +333,6 @@ export function applyModificationToUnit(
     case UpgradeName.ReverseFittedGun:
     case UpgradeName.SelfRepairProtocols:
     case UpgradeName.SmokeBelcher:
-    case UpgradeName.TailGun:
     case UpgradeName.TargetingProtocols:
     case UpgradeName.ToughenedHull:
     case UpgradeName.Transforming:
