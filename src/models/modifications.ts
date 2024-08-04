@@ -279,6 +279,19 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.SpotterRelay: {
+      if (unit.special.includes("Scout")) {
+        return unit;
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.special = [
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Scout") < 0),
+        "Scout",
+        ...modifiedUnit.special.filter((s) => s.localeCompare("Scout") > 0),
+      ];
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -289,7 +302,6 @@ export function applyModificationToUnit(
     case UpgradeName.ReverseFittedGun:
     case UpgradeName.SelfRepairProtocols:
     case UpgradeName.SmokeBelcher:
-    case UpgradeName.SpotterRelay:
     case UpgradeName.TailGun:
     case UpgradeName.TargetingProtocols:
     case UpgradeName.ToughenedHull:

@@ -447,7 +447,7 @@ export const SpotterRelay: Modification = {
   compatibleVehicleSizes: [VehicleSize.Light],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
-  excludedSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: ["Scout"],
   requiredMounts: [],
   exclusiveModifications: [],
 };
