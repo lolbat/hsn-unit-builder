@@ -15,6 +15,7 @@ import { toModificationName, VehicleSize } from "../models/constants";
 import Modification, {
   costToApplyModification,
   isModValidForUnit,
+  UnimplementedModifications,
 } from "../models/modifications";
 import { Compromises, CompromisesByName } from "../models/compromises";
 
@@ -108,17 +109,29 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
     isModValidForUnit(unit, c),
   );
 
-  const upgradeOptions = validUpgrades.map((u) => (
-    <option value={u.name} key={u.name}>
-      {u.name} ({costToApplyModification(unit, u)})
-    </option>
-  ));
+  const upgradeOptions = validUpgrades.map((u) => {
+    const className = UnimplementedModifications.includes(u.name)
+      ? "error"
+      : "";
 
-  const compromiseOptions = validCompromises.map((c) => (
-    <option value={c.name} key={c.name}>
-      {c.name} ({costToApplyModification(unit, c)})
-    </option>
-  ));
+    return (
+      <option value={u.name} key={u.name} className={className}>
+        {u.name} ({costToApplyModification(unit, u)})
+      </option>
+    );
+  });
+
+  const compromiseOptions = validCompromises.map((c) => {
+    const className = UnimplementedModifications.includes(c.name)
+      ? "error"
+      : "";
+
+    return (
+      <option value={c.name} key={c.name} className={className}>
+        {c.name} ({costToApplyModification(unit, c)})
+      </option>
+    );
+  });
 
   let costElement;
   if (unit.cost > unit.maxCost) {
@@ -188,7 +201,12 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
           <optgroup label="Upgrades">{upgradeOptions}</optgroup>
           <optgroup label="Compromises">{compromiseOptions}</optgroup>
         </select>
-        <button onClick={handleApplyModification}>Apply</button>
+        <button id="apply-modification" onClick={handleApplyModification}>
+          Apply
+        </button>
+        <div>
+          <i>Modifications in red are not yet implemented</i>
+        </div>
       </div>
       <div className="button-set">
         <button onClick={handleSave}>Save</button>

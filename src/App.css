@@ -159,7 +159,17 @@
   }
 }
 
+option.error {
+  color: crimson;
+}
+
+#apply-modification {
+  margin-bottom: 15px;
+  margin-left: 15px;
+}
+
 .button-set {
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

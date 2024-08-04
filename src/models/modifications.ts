@@ -506,6 +506,14 @@ export function applyModificationToUnit(
   }
 }
 
+export const UnimplementedModifications: readonly ModificationName[] = [
+  UpgradeName.ReinforcedMount,
+  UpgradeName.SmokeBelcher,
+  UpgradeName.TargetingProtocols,
+  UpgradeName.TwinLinked,
+  CompromiseName.MainGunRetrofit,
+];
+
 export function costOfAppliedModification(
   { size }: Unit,
   { modification: { name, cost }, quantity }: AppliedModification,
