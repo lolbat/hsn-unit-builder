@@ -8,7 +8,11 @@ import {
   VehicleSize,
 } from "./constants";
 import { EmptyMount } from "./mount";
-import { CoaxialMount, SuperheavySponsonsMount } from "./mount-type";
+import {
+  CoaxialMount,
+  SuperheavySponsonsMount,
+  SuperheavyTurretMount,
+} from "./mount-type";
 import Unit from "./unit";
 
 export default interface Modification {
@@ -224,6 +228,31 @@ export function applyModificationToUnit(
       modifiedUnit.morale += 1;
       return modifiedUnit;
     }
+    case UpgradeName.SecondaryTurretMount: {
+      const fixedMount = unit.mounts.find(
+        (m) => m.type.mountType === MountLocation.Fixed,
+      );
+
+      if (fixedMount === undefined) {
+        throw new Error(
+          "Could not apply SecondaryTurretMount. No Fixed mount found",
+        );
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.filter(
+        (m) => m.id !== fixedMount.id,
+      );
+      modifiedUnit.mounts.push(
+        new EmptyMount(
+          SuperheavyTurretMount,
+          "SecondaryTurretMount",
+          fixedMount ? fixedMount.specialOverrides : [],
+          true,
+        ),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -232,7 +261,6 @@ export function applyModificationToUnit(
     case UpgradeName.Ram:
     case UpgradeName.ReinforcedMount:
     case UpgradeName.ReverseFittedGun:
-    case UpgradeName.SecondaryTurretMount:
     case UpgradeName.SelfRepairProtocols:
     case UpgradeName.ShoulderTurrets:
     case UpgradeName.SmokeBelcher:
