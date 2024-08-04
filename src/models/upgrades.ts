@@ -347,7 +347,7 @@ export const RepulsorDrive: Modification = {
   ],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
-  excludedSpecialRuleGroups: ["Walker"],
+  excludedSpecialRuleGroups: ["Walker", "Float"],
   requiredMounts: [],
   exclusiveModifications: [],
 };

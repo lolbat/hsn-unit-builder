@@ -203,6 +203,22 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.RepulsorDrive: {
+      if (unit.special.includes("Float")) {
+        return unit;
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      const filteredSpecials = modifiedUnit.special.filter(
+        (s) => s !== "Relentless" && s !== "Short",
+      );
+      modifiedUnit.special = [
+        ...filteredSpecials.filter((s) => s.localeCompare("Float") < 0),
+        "Float",
+        ...filteredSpecials.filter((s) => s.localeCompare("Float") > 0),
+      ];
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -210,7 +226,6 @@ export function applyModificationToUnit(
     case UpgradeName.JumpJets:
     case UpgradeName.Ram:
     case UpgradeName.ReinforcedMount:
-    case UpgradeName.RepulsorDrive:
     case UpgradeName.Resilient:
     case UpgradeName.ReverseFittedGun:
     case UpgradeName.SecondaryTurretMount:
