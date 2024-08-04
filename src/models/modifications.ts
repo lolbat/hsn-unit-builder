@@ -13,8 +13,10 @@ import {
   HeavyArmMount,
   HeavyHullMount,
   HeavySponsonsMount,
+  HeavyTurretMount,
   LightArmMount,
   LightHullMount,
+  LightTurretMount,
   MountType,
   SuperheavyArmMount,
   SuperheavyHullMount,
@@ -375,6 +377,59 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.UpperTurretConfiguration: {
+      const armMounts = unit.mounts.filter(
+        (m) => m.type.mountType === MountLocation.Arm,
+      );
+
+      if (armMounts.length === 0) {
+        throw new Error(
+          "Could not apply UpperTurretConfiguration. No Arm mounts found",
+        );
+      }
+
+      let turretMount: MountType;
+      switch (unit.size) {
+        case VehicleSize.Light: {
+          turretMount = LightTurretMount;
+          break;
+        }
+        case VehicleSize.Heavy: {
+          turretMount = HeavyTurretMount;
+          break;
+        }
+        case VehicleSize.Superheavy: {
+          turretMount = SuperheavyTurretMount;
+          break;
+        }
+        default: {
+          throw new Error(
+            `Cannot apply UpperTurretConfiguration upgrade to a ${unit.size} vehicle`,
+          );
+        }
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.filter(
+        (m) => !armMounts.map((a) => a.id).includes(m.id),
+      );
+      modifiedUnit.mounts.push(
+        new EmptyMount(
+          turretMount,
+          UpgradeName.UpperTurretConfiguration,
+          [
+            ...armMounts
+              .map((m) => m.specialOverrides)
+              .reduce((acc, cur) => {
+                cur.forEach((s) => acc.add(s));
+                return acc;
+              }, new Set<string>()),
+          ],
+          true,
+        ),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -388,7 +443,6 @@ export function applyModificationToUnit(
     case UpgradeName.TargetingProtocols:
     case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
-    case UpgradeName.UpperTurretConfiguration:
     case UpgradeName.VeteranCrew:
     case CompromiseName.EnginePowerReduction:
     case CompromiseName.Flammable:
