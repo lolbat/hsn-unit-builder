@@ -70,7 +70,7 @@ export function applyModificationToUnit(
       modifiedUnit.mounts.push(
         new EmptyMount(
           CoaxialMount,
-          "CoaxialMount",
+          UpgradeName.CoaxialMount,
           turretMount ? turretMount.specialOverrides : [],
           true,
         ),
@@ -256,7 +256,7 @@ export function applyModificationToUnit(
       modifiedUnit.mounts.push(
         new EmptyMount(
           SuperheavyTurretMount,
-          "SecondaryTurretMount",
+          UpgradeName.SecondaryTurretMount,
           fixedMount ? fixedMount.specialOverrides : [],
           true,
         ),
@@ -283,7 +283,7 @@ export function applyModificationToUnit(
 
       const modifiedUnit = Unit.fromUnit(unit);
       modifiedUnit.mounts.push(
-        new EmptyMount(sponsonMount, "Shoulder Turrets", [], true),
+        new EmptyMount(sponsonMount, UpgradeName.ShoulderTurrets, [], true),
       );
       return modifiedUnit;
     }
