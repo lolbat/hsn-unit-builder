@@ -10,6 +10,8 @@ import {
 import { EmptyMount } from "./mount";
 import {
   CoaxialMount,
+  HeavySponsonsMount,
+  MountType,
   SuperheavySponsonsMount,
   SuperheavyTurretMount,
 } from "./mount-type";
@@ -253,6 +255,30 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.ShoulderTurrets: {
+      let sponsonMount: MountType;
+      switch (unit.size) {
+        case VehicleSize.Heavy: {
+          sponsonMount = HeavySponsonsMount;
+          break;
+        }
+        case VehicleSize.Superheavy: {
+          sponsonMount = SuperheavySponsonsMount;
+          break;
+        }
+        default: {
+          throw new Error(
+            `Cannot apply ShoulderTurrets upgrade to a ${unit.size} vehicle`,
+          );
+        }
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts.push(
+        new EmptyMount(sponsonMount, "Shoulder Turrets", [], true),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -262,7 +288,6 @@ export function applyModificationToUnit(
     case UpgradeName.ReinforcedMount:
     case UpgradeName.ReverseFittedGun:
     case UpgradeName.SelfRepairProtocols:
-    case UpgradeName.ShoulderTurrets:
     case UpgradeName.SmokeBelcher:
     case UpgradeName.SpotterRelay:
     case UpgradeName.TailGun:
