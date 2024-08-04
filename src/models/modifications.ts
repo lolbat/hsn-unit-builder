@@ -323,6 +323,11 @@ export function applyModificationToUnit(
       );
       return modifiedUnit;
     }
+    case UpgradeName.ToughenedHull: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.hullPoints += 2;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -334,7 +339,6 @@ export function applyModificationToUnit(
     case UpgradeName.SelfRepairProtocols:
     case UpgradeName.SmokeBelcher:
     case UpgradeName.TargetingProtocols:
-    case UpgradeName.ToughenedHull:
     case UpgradeName.Transforming:
     case UpgradeName.TurretGrabber:
     case UpgradeName.TwinLinked:
