@@ -219,6 +219,11 @@ export function applyModificationToUnit(
       ];
       return modifiedUnit;
     }
+    case UpgradeName.Resilient: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.morale += 1;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -226,7 +231,6 @@ export function applyModificationToUnit(
     case UpgradeName.JumpJets:
     case UpgradeName.Ram:
     case UpgradeName.ReinforcedMount:
-    case UpgradeName.Resilient:
     case UpgradeName.ReverseFittedGun:
     case UpgradeName.SecondaryTurretMount:
     case UpgradeName.SelfRepairProtocols:
