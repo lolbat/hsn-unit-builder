@@ -435,6 +435,11 @@ export function applyModificationToUnit(
       modifiedUnit.discipline += 1;
       return modifiedUnit;
     }
+    case CompromiseName.EnginePowerReduction: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.movement -= 1;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -448,7 +453,6 @@ export function applyModificationToUnit(
     case UpgradeName.TargetingProtocols:
     case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
-    case CompromiseName.EnginePowerReduction:
     case CompromiseName.Flammable:
     case CompromiseName.GreenCrew:
     case CompromiseName.LightFrontArmour:
