@@ -477,6 +477,11 @@ export function applyModificationToUnit(
       modifiedUnit.optics -= 1;
       return modifiedUnit;
     }
+    case CompromiseName.WeakHull: {
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.hullPoints -= 2;
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -491,8 +496,7 @@ export function applyModificationToUnit(
     case UpgradeName.Transforming:
     case UpgradeName.TwinLinked:
     case CompromiseName.Flammable:
-    case CompromiseName.MainGunRetrofit:
-    case CompromiseName.WeakHull: {
+    case CompromiseName.MainGunRetrofit: {
       return unit;
     }
   }
