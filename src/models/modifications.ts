@@ -626,11 +626,11 @@ function meetsSpecialRuleRequirements(unit: Unit, modification: Modification) {
   return (
     (modification.requiredSpecialRuleGroups.length === 0 ||
       unit.special.some((s) =>
-        modification.requiredSpecialRuleGroups.includes(s),
+        modification.requiredSpecialRuleGroups.some((req) => s.includes(req)),
       )) &&
     (modification.excludedSpecialRuleGroups.length === 0 ||
-      unit.special.every(
-        (s) => !modification.excludedSpecialRuleGroups.includes(s),
+      unit.special.every((s) =>
+        modification.excludedSpecialRuleGroups.every((ex) => !s.includes(ex)),
       ))
   );
 }
