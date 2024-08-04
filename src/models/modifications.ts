@@ -10,10 +10,13 @@ import {
 import { EmptyMount } from "./mount";
 import {
   CoaxialMount,
+  HeavyArmMount,
   HeavyHullMount,
   HeavySponsonsMount,
+  LightArmMount,
   LightHullMount,
   MountType,
+  SuperheavyArmMount,
   SuperheavyHullMount,
   SuperheavySponsonsMount,
   SuperheavyTurretMount,
@@ -328,6 +331,50 @@ export function applyModificationToUnit(
       modifiedUnit.hullPoints += 2;
       return modifiedUnit;
     }
+    case UpgradeName.TurretGrabber: {
+      const turretMount = unit.mounts.find(
+        (m) => m.type.mountType === MountLocation.Turret,
+      );
+
+      if (turretMount === undefined) {
+        throw new Error("Could not apply TurretGrabber. No Turret mount found");
+      }
+
+      let armMount: MountType;
+      switch (unit.size) {
+        case VehicleSize.Light: {
+          armMount = LightArmMount;
+          break;
+        }
+        case VehicleSize.Heavy: {
+          armMount = HeavyArmMount;
+          break;
+        }
+        case VehicleSize.Superheavy: {
+          armMount = SuperheavyArmMount;
+          break;
+        }
+        default: {
+          throw new Error(
+            `Cannot apply TurretGrabber upgrade to a ${unit.size} vehicle`,
+          );
+        }
+      }
+
+      const modifiedUnit = Unit.fromUnit(unit);
+      modifiedUnit.mounts = modifiedUnit.mounts.filter(
+        (m) => m.id !== turretMount.id,
+      );
+      modifiedUnit.mounts.push(
+        new EmptyMount(
+          armMount,
+          UpgradeName.TurretGrabber,
+          turretMount ? turretMount.specialOverrides : [],
+          true,
+        ),
+      );
+      return modifiedUnit;
+    }
     case UpgradeName.AbominableHorror:
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
@@ -340,7 +387,6 @@ export function applyModificationToUnit(
     case UpgradeName.SmokeBelcher:
     case UpgradeName.TargetingProtocols:
     case UpgradeName.Transforming:
-    case UpgradeName.TurretGrabber:
     case UpgradeName.TwinLinked:
     case UpgradeName.UpperTurretConfiguration:
     case UpgradeName.VeteranCrew:
