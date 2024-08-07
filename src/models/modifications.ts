@@ -561,6 +561,16 @@ export function costOfAppliedModification(
         }
       }
     }
+    case UpgradeName.OpticRefinement: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 5;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
@@ -570,7 +580,6 @@ export function costOfAppliedModification(
     case UpgradeName.JumpJets:
     case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
-    case UpgradeName.OpticRefinement:
     case UpgradeName.ReinforcedFrontArmour:
     case UpgradeName.ReinforcedSideArmour:
     case UpgradeName.ReinforcedRearArmour:
@@ -723,6 +732,16 @@ export function costToApplyModification(
         }
       }
     }
+    case UpgradeName.OpticRefinement: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 5;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
@@ -732,7 +751,6 @@ export function costToApplyModification(
     case UpgradeName.JumpJets:
     case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
-    case UpgradeName.OpticRefinement:
     case UpgradeName.ReinforcedFrontArmour:
     case UpgradeName.ReinforcedSideArmour:
     case UpgradeName.ReinforcedRearArmour:
