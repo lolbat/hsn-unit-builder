@@ -527,10 +527,19 @@ export function costOfAppliedModification(
         }
       }
     }
+    case UpgradeName.EnginePowerIncrease: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 3 * quantity;
+        }
+        default: {
+          return 1 * quantity;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnginePowerIncrease:
     case UpgradeName.EnhancedSensors:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.IncendiaryAmmunition:
@@ -649,10 +658,19 @@ export function costToApplyModification(
         }
       }
     }
+    case UpgradeName.EnginePowerIncrease: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 3;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnginePowerIncrease:
     case UpgradeName.EnhancedSensors:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.IncendiaryAmmunition:
@@ -924,7 +942,10 @@ export function hasAtLeastOneOfMounts(
 function uniqueRequirementsSatisfied(unit: Unit, modification: Modification) {
   switch (modification.name) {
     case UpgradeName.EnginePowerIncrease: {
-      return unit.movement < Math.min(12, unit.vehicleClass.movement * 2);
+      return (
+        (unit.size === VehicleSize.Behemoth && unit.movement < 8) ||
+        unit.movement < Math.min(12, unit.vehicleClass.movement * 2)
+      );
     }
     case UpgradeName.ReinforcedSideArmour: {
       return (
