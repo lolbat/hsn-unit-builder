@@ -1,3 +1,4 @@
+import { MountLocation } from "./constants";
 import {
   compatibleWeaponTypes,
   isWeaponCompatibleWithMount,
@@ -5,6 +6,77 @@ import {
 } from "./mount-type";
 import Weapon from "./weapon";
 import { WeaponType } from "./weapon-type";
+
+export interface MountSetShape {
+  readonly mounts: MountShape[];
+  readonly specialOverrides: string[];
+}
+
+export class MountSet implements MountSetShape {
+  readonly mounts: Mount[];
+  readonly specialOverrides: string[];
+
+  constructor(mounts: Mount[], specialOverrides: string[] = []) {
+    this.mounts = mounts.map((m) => Mount.fromMountShape(m, specialOverrides));
+    this.specialOverrides = specialOverrides;
+  }
+
+  addMount(mount: Mount) {
+    return new MountSet(
+      [
+        ...this.mounts,
+        Mount.fromMountShape(mount, this.specialOverrides),
+      ].toSorted((a, b) => a.id.localeCompare(b.id)),
+      this.specialOverrides,
+    );
+  }
+
+  removeMountById(mountId: string) {
+    if (this.mounts.every((m) => m.id !== mountId)) {
+      return this;
+    }
+
+    return new MountSet(
+      this.mounts.filter((m) => m.id !== mountId),
+      this.specialOverrides,
+    );
+  }
+
+  removeMountFromLocation(location: MountLocation) {
+    const mountsAtLocation = this.mounts
+      .filter((m) => m.type.mountType === location)
+      .toSorted((a, b) => b.id.localeCompare(a.id));
+
+    if (mountsAtLocation.length === 0) {
+      return this;
+    }
+
+    const idOfMountToRemove = mountsAtLocation[0].id;
+    return this.removeMountById(idOfMountToRemove);
+  }
+
+  addSpecialOverride(override: string) {
+    if (this.specialOverrides.includes(override)) {
+      return this;
+    }
+
+    return new MountSet(
+      this.mounts,
+      [...new Set([...this.specialOverrides, override])].toSorted(),
+    );
+  }
+
+  removeSpecialOverride(override: string) {
+    if (!this.specialOverrides.includes(override)) {
+      return this;
+    }
+
+    return new MountSet(
+      this.mounts,
+      this.specialOverrides.filter((so) => so !== override),
+    );
+  }
+}
 
 export interface MountShape {
   readonly type: MountType;
@@ -31,16 +103,23 @@ export abstract class Mount {
   abstract addSpecialOverride(override: string): FilledMount | EmptyMount;
   abstract removeSpecialOverride(override: string): FilledMount | EmptyMount;
 
-  static fromMountShape(mount: MountShape): FilledMount | EmptyMount {
+  static fromMountShape(
+    mount: MountShape,
+    specialOverrides: readonly string[] = [],
+  ): FilledMount | EmptyMount {
     if (mount.weapon !== null) {
       return new FilledMount(
         mount.type,
         mount.id,
         Weapon.fromWeaponShape(mount.weapon),
-        mount.specialOverrides,
+        [...new Set([...mount.specialOverrides, ...specialOverrides])],
       );
     }
-    return new EmptyMount(mount.type, mount.id, mount.specialOverrides);
+    return new EmptyMount(
+      mount.type,
+      mount.id,
+      [...new Set([...mount.specialOverrides, ...specialOverrides])].toSorted(),
+    );
   }
 }
 
