@@ -163,6 +163,7 @@ export enum UpgradeName {
   ImprovedHandling = "Improved Handling",
   ImprovedCountermeasures = "Improved Countermeasures",
   IncendiaryAmmunition = "Incendiary Ammunition",
+  IndependentMovementSubroutines = "Independent Movement Subroutines",
   JumpJets = "Jump Jets",
   LowProfile = "Low Profile",
   MineClearanceEquipment = "Mine Clearance Equipement",
@@ -241,6 +242,9 @@ function toUpgradeName(name: string) {
     }
     case "Incendiary Ammunition": {
       return UpgradeName.IncendiaryAmmunition;
+    }
+    case "Independent Movement Subroutines": {
+      return UpgradeName.IndependentMovementSubroutines;
     }
     case "Jump Jets": {
       return UpgradeName.JumpJets;

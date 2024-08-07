@@ -4,15 +4,9 @@ import { MountSet } from "../models/mount";
 import { UnitName } from "./UnitName";
 import { useContext, useState } from "react";
 import DispatchContext from "../contexts/dispatch-context";
+import { Upgrades, UpgradesByName } from "../models/upgrades";
+import { toModificationName } from "../models/constants";
 import {
-  HeavyUpgrades,
-  LightHeavySuperheavyUpgrades,
-  LightHeavySuperheavyUpgradesByName,
-  LightUpgrades,
-  SuperheavyUpgrades,
-} from "../models/upgrades";
-import { toModificationName, VehicleSize } from "../models/constants";
-import Modification, {
   costToApplyModification,
   isModValidForUnit,
   UnimplementedModifications,
@@ -24,10 +18,7 @@ interface UnitCardProps {
   handleUnitChange: (unit: Unit) => void;
 }
 
-const ModificationsByName = new Map([
-  ...LightHeavySuperheavyUpgradesByName,
-  ...CompromisesByName,
-]);
+const ModificationsByName = new Map([...UpgradesByName, ...CompromisesByName]);
 
 export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   const [mod, setMod] = useState("");
@@ -84,26 +75,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
     }
   };
 
-  let upgradeList: readonly Modification[];
-  switch (unit.vehicleClass.size) {
-    case VehicleSize.Light: {
-      upgradeList = LightUpgrades;
-      break;
-    }
-    case VehicleSize.Heavy: {
-      upgradeList = HeavyUpgrades;
-      break;
-    }
-    case VehicleSize.Superheavy: {
-      upgradeList = SuperheavyUpgrades;
-      break;
-    }
-    default: {
-      upgradeList = LightHeavySuperheavyUpgrades;
-    }
-  }
-
-  const validUpgrades = upgradeList.filter((u) => isModValidForUnit(unit, u));
+  const validUpgrades = Upgrades.filter((u) => isModValidForUnit(unit, u));
 
   const validCompromises = Compromises.filter((c) =>
     isModValidForUnit(unit, c),

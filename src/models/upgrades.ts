@@ -6,7 +6,6 @@ import {
   UpgradeName,
   CompromiseName,
 } from "./constants";
-import Unit from "./unit";
 
 export const AAWeaponConfiguration: Modification = {
   type: ModificationType.Upgrade,
@@ -190,6 +189,18 @@ export const IncendiaryAmmunition: Modification = {
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
   ],
+  maxAllowed: 1,
+  requiredSpecialRuleGroups: [],
+  excludedSpecialRuleGroups: [],
+  requiredMounts: [],
+  exclusiveModifications: [],
+};
+
+export const IndependentMovementSubroutines: Modification = {
+  type: ModificationType.Upgrade,
+  name: UpgradeName.IndependentMovementSubroutines,
+  cost: 15,
+  compatibleVehicleSizes: [VehicleSize.Behemoth],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],
@@ -585,7 +596,7 @@ export const VeteranCrew: Modification = {
   exclusiveModifications: [CompromiseName.GreenCrew],
 };
 
-export const LightHeavySuperheavyUpgrades: readonly Modification[] = [
+export const Upgrades: readonly Modification[] = [
   AAWeaponConfiguration,
   AbominableHorror,
   AdditionalSponsons,
@@ -598,6 +609,7 @@ export const LightHeavySuperheavyUpgrades: readonly Modification[] = [
   ImprovedHandling,
   ImprovedCountermeasures,
   IncendiaryAmmunition,
+  IndependentMovementSubroutines,
   JumpJets,
   LowProfile,
   MineClearanceEquipment,
@@ -625,108 +637,4 @@ export const LightHeavySuperheavyUpgrades: readonly Modification[] = [
   VeteranCrew,
 ];
 
-export const LightUpgrades = LightHeavySuperheavyUpgrades.filter((m) =>
-  m.compatibleVehicleSizes.includes(VehicleSize.Light),
-);
-export const HeavyUpgrades = LightHeavySuperheavyUpgrades.filter((m) =>
-  m.compatibleVehicleSizes.includes(VehicleSize.Heavy),
-);
-export const SuperheavyUpgrades = LightHeavySuperheavyUpgrades.filter((m) =>
-  m.compatibleVehicleSizes.includes(VehicleSize.Superheavy),
-);
-
-export const LightHeavySuperheavyUpgradesByName = new Map(
-  LightHeavySuperheavyUpgrades.map((m) => [m.name, m]),
-);
-
-export const LightUpgradesByName = new Map(
-  LightUpgrades.map((m) => [m.name, m]),
-);
-export const HeavyUpgradesByName = new Map(
-  HeavyUpgrades.map((m) => [m.name, m]),
-);
-export const SuperheavyUpgradesByName = new Map(
-  SuperheavyUpgrades.map((m) => [m.name, m]),
-);
-
-export function getCostForUpgrade(unit: Unit, modification: Modification) {
-  switch (modification.name) {
-    case UpgradeName.AAWeaponConfiguration:
-    case UpgradeName.AdditionalSponsons:
-    case UpgradeName.CoaxialMount:
-    case UpgradeName.CommunicationsModule:
-    case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnginePowerIncrease:
-    case UpgradeName.EnhancedSensors:
-    case UpgradeName.ExplosiveShielding:
-    case UpgradeName.IncendiaryAmmunition:
-    case UpgradeName.JumpJets:
-    case UpgradeName.LowProfile:
-    case UpgradeName.MineClearanceEquipment:
-    case UpgradeName.OpticRefinement:
-    case UpgradeName.ReinforcedFrontArmour:
-    case UpgradeName.ReinforcedSideArmour:
-    case UpgradeName.ReinforcedRearArmour:
-    case UpgradeName.ReverseFittedGun:
-    case UpgradeName.SecondaryTurretMount:
-    case UpgradeName.SelfRepairProtocols:
-    case UpgradeName.ShoulderTurrets:
-    case UpgradeName.SmokeBelcher:
-    case UpgradeName.SpotterRelay:
-    case UpgradeName.TargetingProtocols:
-    case UpgradeName.ToughenedHull:
-    case UpgradeName.TurretGrabber:
-    case UpgradeName.UpperTurretConfiguration:
-    case UpgradeName.VeteranCrew: {
-      return modification.cost;
-    }
-    case UpgradeName.ImprovedHandling:
-    case UpgradeName.TailGun:
-    case UpgradeName.TwinLinked: {
-      switch (unit.size) {
-        case VehicleSize.Light: {
-          return 1;
-        }
-        default: {
-          return 2;
-        }
-      }
-    }
-    case UpgradeName.RepulsorDrive: {
-      switch (unit.size) {
-        case VehicleSize.Heavy: {
-          return 2;
-        }
-        default: {
-          return 1;
-        }
-      }
-    }
-    case UpgradeName.Transforming: {
-      switch (unit.size) {
-        case VehicleSize.Light: {
-          return 3;
-        }
-        case VehicleSize.Heavy: {
-          return 5;
-        }
-        case VehicleSize.Superheavy: {
-          return 8;
-        }
-        default: {
-          throw new Error(
-            `The Transforming upgrade is invalid for the Unit's size. Unit size is ${unit.size}`,
-          );
-        }
-      }
-    }
-    case UpgradeName.AbominableHorror:
-    case UpgradeName.ImprovedCountermeasures:
-    case UpgradeName.Ram:
-    case UpgradeName.ReinforcedMount:
-    case UpgradeName.Resilient:
-    default: {
-      return null;
-    }
-  }
-}
+export const UpgradesByName = new Map(Upgrades.map((m) => [m.name, m]));

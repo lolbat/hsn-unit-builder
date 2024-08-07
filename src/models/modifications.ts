@@ -475,6 +475,7 @@ export function applyModificationToUnit(
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedCountermeasures:
+    case UpgradeName.IndependentMovementSubroutines:
     case UpgradeName.JumpJets:
     case UpgradeName.Ram:
     case UpgradeName.ReverseFittedGun:
@@ -565,6 +566,7 @@ export function costOfAppliedModification(
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.IncendiaryAmmunition:
+    case UpgradeName.IndependentMovementSubroutines:
     case UpgradeName.JumpJets:
     case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
@@ -726,6 +728,7 @@ export function costToApplyModification(
     case UpgradeName.EarlyWarningRadarSystem:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.IncendiaryAmmunition:
+    case UpgradeName.IndependentMovementSubroutines:
     case UpgradeName.JumpJets:
     case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
@@ -830,6 +833,7 @@ export function maxAllowedForModification(
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.ImprovedHandling:
     case UpgradeName.IncendiaryAmmunition:
+    case UpgradeName.IndependentMovementSubroutines:
     case UpgradeName.JumpJets:
     case UpgradeName.LowProfile:
     case UpgradeName.MineClearanceEquipment:
