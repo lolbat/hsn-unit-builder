@@ -281,6 +281,7 @@ export const Ram: Modification = {
     VehicleSize.Light,
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
+    VehicleSize.Behemoth,
   ],
   maxAllowed: null,
   requiredSpecialRuleGroups: [],
