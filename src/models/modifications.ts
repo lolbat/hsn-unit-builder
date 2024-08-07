@@ -547,6 +547,19 @@ export function costOfAppliedModification(
         }
       }
     }
+    case UpgradeName.ImprovedHandling: {
+      switch (size) {
+        case VehicleSize.Light: {
+          return 1;
+        }
+        case VehicleSize.Behemoth: {
+          return 5;
+        }
+        default: {
+          return 2;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
@@ -581,7 +594,6 @@ export function costOfAppliedModification(
     case CompromiseName.WeakHull: {
       return cost * quantity;
     }
-    case UpgradeName.ImprovedHandling:
     case UpgradeName.TailGun:
     case UpgradeName.TwinLinked: {
       switch (size) {
@@ -687,6 +699,19 @@ export function costToApplyModification(
         }
       }
     }
+    case UpgradeName.ImprovedHandling: {
+      switch (size) {
+        case VehicleSize.Light: {
+          return 1;
+        }
+        case VehicleSize.Behemoth: {
+          return 5;
+        }
+        default: {
+          return 2;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
@@ -721,7 +746,6 @@ export function costToApplyModification(
     case CompromiseName.WeakHull: {
       return cost;
     }
-    case UpgradeName.ImprovedHandling:
     case UpgradeName.TailGun:
     case UpgradeName.TwinLinked: {
       switch (size) {
