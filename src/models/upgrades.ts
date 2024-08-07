@@ -16,6 +16,7 @@ export const AAWeaponConfiguration: Modification = {
     VehicleSize.Light,
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
+    VehicleSize.Behemoth,
   ],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],

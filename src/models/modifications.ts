@@ -494,7 +494,16 @@ export function costOfAppliedModification(
   { modification: { name, cost }, quantity }: AppliedModification,
 ) {
   switch (name) {
-    case UpgradeName.AAWeaponConfiguration:
+    case UpgradeName.AAWeaponConfiguration: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 3;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.AdditionalSponsons:
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
@@ -598,7 +607,16 @@ export function costToApplyModification(
   }
 
   switch (name) {
-    case UpgradeName.AAWeaponConfiguration:
+    case UpgradeName.AAWeaponConfiguration: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 3;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.AdditionalSponsons:
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
