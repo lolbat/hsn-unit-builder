@@ -537,10 +537,19 @@ export function costOfAppliedModification(
         }
       }
     }
+    case UpgradeName.EnhancedSensors: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 3;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnhancedSensors:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.IncendiaryAmmunition:
     case UpgradeName.JumpJets:
@@ -668,10 +677,19 @@ export function costToApplyModification(
         }
       }
     }
+    case UpgradeName.EnhancedSensors: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 3;
+        }
+        default: {
+          return 1;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
-    case UpgradeName.EnhancedSensors:
     case UpgradeName.ExplosiveShielding:
     case UpgradeName.IncendiaryAmmunition:
     case UpgradeName.JumpJets:
