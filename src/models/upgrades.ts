@@ -45,7 +45,7 @@ export const AdditionalSponsons: Modification = {
   type: ModificationType.Upgrade,
   name: UpgradeName.AdditionalSponsons,
   cost: 3,
-  compatibleVehicleSizes: [VehicleSize.Superheavy],
+  compatibleVehicleSizes: [VehicleSize.Superheavy, VehicleSize.Behemoth],
   maxAllowed: 1,
   requiredSpecialRuleGroups: [],
   excludedSpecialRuleGroups: [],

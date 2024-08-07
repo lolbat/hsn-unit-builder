@@ -9,6 +9,7 @@ import {
 } from "./constants";
 import { EmptyMount } from "./mount";
 import {
+  BehemothSponsonsMount,
   CoaxialMount,
   HeavyArmMount,
   HeavyHullMount,
@@ -54,8 +55,20 @@ export function applyModificationToUnit(
     }
     case UpgradeName.AdditionalSponsons: {
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts.addMount(
-        new EmptyMount(SuperheavySponsonsMount, "AdditionalSponsons", [], true),
+
+      let mountType: MountType;
+      if (unit.size === VehicleSize.Superheavy) {
+        mountType = SuperheavySponsonsMount;
+      } else if (unit.size === VehicleSize.Behemoth) {
+        mountType = BehemothSponsonsMount;
+      } else {
+        throw new Error(
+          `AdditionalSponsons is invalid for ${unit.size} vehicles`,
+        );
+      }
+
+      modifiedUnit.mounts = modifiedUnit.mounts.addMount(
+        new EmptyMount(mountType, "AdditionalSponsons", [], true),
       );
       return modifiedUnit;
     }
@@ -504,7 +517,16 @@ export function costOfAppliedModification(
         }
       }
     }
-    case UpgradeName.AdditionalSponsons:
+    case UpgradeName.AdditionalSponsons: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 5;
+        }
+        default: {
+          return 3;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
@@ -617,7 +639,16 @@ export function costToApplyModification(
         }
       }
     }
-    case UpgradeName.AdditionalSponsons:
+    case UpgradeName.AdditionalSponsons: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 5;
+        }
+        default: {
+          return 3;
+        }
+      }
+    }
     case UpgradeName.CoaxialMount:
     case UpgradeName.CommunicationsModule:
     case UpgradeName.EarlyWarningRadarSystem:
