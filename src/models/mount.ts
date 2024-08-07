@@ -68,22 +68,9 @@ export class FilledMount extends Mount {
     this.specialOverrides = [...specialOverrides];
     this.fromModification = fromModification;
 
-    let adjustedOverrides: string[];
-    if (
-      [
-        "Annihilator",
-        "Close Combat",
-        "Flashburn",
-        "Guided Fire",
-        "Plasma Burn",
-      ].some((s) => weapon.special.includes(s))
-    ) {
-      adjustedOverrides = this.specialOverrides.filter((s) => s !== "Inferno");
-    } else {
-      adjustedOverrides = [...this.specialOverrides];
-    }
-
-    this.weapon = new Weapon(weapon.type, weapon.mount, adjustedOverrides);
+    this.weapon = new Weapon(weapon.type, weapon.mount, [
+      ...this.specialOverrides,
+    ]);
   }
 
   get key() {

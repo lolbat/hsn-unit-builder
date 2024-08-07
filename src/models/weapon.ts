@@ -6,6 +6,14 @@ export interface WeaponShape {
   readonly mount: MountLocation;
 }
 
+const SpecialRulesIncompatibleWithInferno: readonly string[] = [
+  "Annihilator",
+  "Close Combat",
+  "Flashburn",
+  "Guided Fire",
+  "Plasma Burn",
+];
+
 class Weapon implements WeaponShape {
   readonly weaponType: WeaponType;
   readonly mount: MountLocation;
@@ -23,10 +31,21 @@ class Weapon implements WeaponShape {
     this.weaponType = weaponType;
     this.mount = mountType;
     if (special === null) {
-      this.special = weaponType.special;
+      this.special = [...weaponType.special].toSorted();
     } else {
+      let adjustedOverrides: string[];
+      if (
+        SpecialRulesIncompatibleWithInferno.some((s) =>
+          weaponType.special.includes(s),
+        )
+      ) {
+        adjustedOverrides = special.filter((s) => s !== "Inferno");
+      } else {
+        adjustedOverrides = [...special];
+      }
+
       this.special = [
-        ...new Set([...weaponType.special, ...special]),
+        ...new Set([...weaponType.special, ...adjustedOverrides]),
       ].toSorted();
     }
   }
