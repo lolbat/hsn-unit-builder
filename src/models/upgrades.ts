@@ -172,6 +172,7 @@ export const ImprovedCountermeasures: Modification = {
     VehicleSize.Light,
     VehicleSize.Heavy,
     VehicleSize.Superheavy,
+    VehicleSize.Behemoth,
   ],
   maxAllowed: null,
   requiredSpecialRuleGroups: [],

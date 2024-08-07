@@ -633,8 +633,17 @@ export function costOfAppliedModification(
         }
       }
     }
+    case UpgradeName.ImprovedCountermeasures: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 2;
+        }
+        default: {
+          return (quantity * (quantity + 1)) / 2;
+        }
+      }
+    }
     case UpgradeName.AbominableHorror:
-    case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.Ram:
     case UpgradeName.Resilient: {
       // First one costs 1, second one costs 2, etc. These are called triangle numbers.
@@ -785,8 +794,17 @@ export function costToApplyModification(
         }
       }
     }
+    case UpgradeName.ImprovedCountermeasures: {
+      switch (size) {
+        case VehicleSize.Behemoth: {
+          return 2;
+        }
+        default: {
+          return quantity + 1;
+        }
+      }
+    }
     case UpgradeName.AbominableHorror:
-    case UpgradeName.ImprovedCountermeasures:
     case UpgradeName.Ram:
     case UpgradeName.Resilient: {
       // First one costs 1, second one costs 2, etc.
