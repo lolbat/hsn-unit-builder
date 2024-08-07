@@ -1,6 +1,6 @@
 import Unit from "../models/unit";
 import { WeaponList } from "./WeaponList";
-import { Mount } from "../models/mount";
+import { MountSet } from "../models/mount";
 import { UnitName } from "./UnitName";
 import { useContext, useState } from "react";
 import DispatchContext from "../contexts/dispatch-context";
@@ -33,7 +33,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
   const [mod, setMod] = useState("");
   const dispatch = useContext(DispatchContext);
 
-  const handleMountsChange = function (mounts: Mount[]) {
+  const handleMountsChange = function (mounts: MountSet) {
     const updatedUnit = Unit.fromUnit(unit);
     updatedUnit.mounts = mounts;
     handleUnitChange(updatedUnit);
@@ -180,8 +180,8 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
         <div className="special title">Special</div>
         <div className="special value">{unit.special.join(", ")}</div>
         <WeaponList
-          mounts={unit.mounts}
-          handleMountsChange={handleMountsChange}
+          mountSet={unit.mounts}
+          handleMountSetChange={handleMountsChange}
         />
         <div className="modifications">
           <div className="title">Modifications</div>

@@ -16,9 +16,17 @@ export class MountSet implements MountSetShape {
   readonly mounts: Mount[];
   readonly specialOverrides: string[];
 
-  constructor(mounts: Mount[], specialOverrides: string[] = []) {
+  constructor(mounts: MountShape[], specialOverrides: string[] = []) {
     this.mounts = mounts.map((m) => Mount.fromMountShape(m, specialOverrides));
     this.specialOverrides = specialOverrides;
+  }
+
+  static fromMountSetShape(mountSet: MountSetShape) {
+    return new MountSet(mountSet.mounts, mountSet.specialOverrides);
+  }
+
+  copy() {
+    return new MountSet(this.mounts, this.specialOverrides);
   }
 
   addMount(mount: Mount) {
@@ -53,6 +61,10 @@ export class MountSet implements MountSetShape {
 
     const idOfMountToRemove = mountsAtLocation[0].id;
     return this.removeMountById(idOfMountToRemove);
+  }
+
+  updateMount(mount: Mount) {
+    return this.removeMountById(mount.id).addMount(mount);
   }
 
   addSpecialOverride(override: string) {

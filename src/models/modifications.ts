@@ -49,36 +49,25 @@ export function applyModificationToUnit(
   switch (modification.name) {
     case UpgradeName.AAWeaponConfiguration: {
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.map((m) =>
-        m.addSpecialOverride("Anti-Air"),
-      );
+      modifiedUnit.mounts = modifiedUnit.mounts.addSpecialOverride("Anti-Air");
       return modifiedUnit;
     }
     case UpgradeName.AdditionalSponsons: {
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts.push(
+      modifiedUnit.mounts.addMount(
         new EmptyMount(SuperheavySponsonsMount, "AdditionalSponsons", [], true),
       );
       return modifiedUnit;
     }
     case UpgradeName.CoaxialMount: {
-      const turretMount = unit.mounts.find(
-        (m) => m.type.mountType === MountLocation.Turret && !m.fromModification,
-      );
-
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts.push(
-        new EmptyMount(
-          CoaxialMount,
-          UpgradeName.CoaxialMount,
-          turretMount ? turretMount.specialOverrides : [],
-          true,
-        ),
+      modifiedUnit.mounts.addMount(
+        new EmptyMount(CoaxialMount, UpgradeName.CoaxialMount, [], true),
       );
       return modifiedUnit;
     }
     case UpgradeName.CommunicationsModule: {
-      const turretAndArmMounts = unit.mounts
+      const turretAndArmMounts = unit.mounts.mounts
         .filter(
           (m) =>
             m.type.mountType === MountLocation.Turret ||
@@ -94,8 +83,8 @@ export function applyModificationToUnit(
 
       const mountToRemove = turretAndArmMounts[0];
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.filter(
-        (m) => m.id !== mountToRemove.id,
+      modifiedUnit.mounts = modifiedUnit.mounts.removeMountById(
+        mountToRemove.id,
       );
       return modifiedUnit;
     }
@@ -132,9 +121,7 @@ export function applyModificationToUnit(
     }
     case UpgradeName.IncendiaryAmmunition: {
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.map((m) =>
-        m.addSpecialOverride("Inferno"),
-      );
+      modifiedUnit.mounts = modifiedUnit.mounts.addSpecialOverride("Inferno");
       return modifiedUnit;
     }
     case UpgradeName.LowProfile: {
@@ -151,7 +138,7 @@ export function applyModificationToUnit(
       return modifiedUnit;
     }
     case UpgradeName.MineClearanceEquipment: {
-      const turretFixedAndArmMounts = unit.mounts
+      const turretFixedAndArmMounts = unit.mounts.mounts
         .filter(
           (m) =>
             m.type.mountType === MountLocation.Turret ||
@@ -178,8 +165,8 @@ export function applyModificationToUnit(
 
       const mountToRemove = turretFixedAndArmMounts[0];
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.filter(
-        (m) => m.id !== mountToRemove.id,
+      modifiedUnit.mounts = modifiedUnit.mounts.removeMountById(
+        mountToRemove.id,
       );
       return modifiedUnit;
     }
@@ -239,7 +226,7 @@ export function applyModificationToUnit(
       return modifiedUnit;
     }
     case UpgradeName.SecondaryTurretMount: {
-      const fixedMount = unit.mounts.find(
+      const fixedMount = unit.mounts.mounts.find(
         (m) => m.type.mountType === MountLocation.Fixed,
       );
 
@@ -250,17 +237,16 @@ export function applyModificationToUnit(
       }
 
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.filter(
-        (m) => m.id !== fixedMount.id,
-      );
-      modifiedUnit.mounts.push(
-        new EmptyMount(
-          SuperheavyTurretMount,
-          UpgradeName.SecondaryTurretMount,
-          fixedMount ? fixedMount.specialOverrides : [],
-          true,
-        ),
-      );
+      modifiedUnit.mounts = modifiedUnit.mounts
+        .removeMountById(fixedMount.id)
+        .addMount(
+          new EmptyMount(
+            SuperheavyTurretMount,
+            UpgradeName.SecondaryTurretMount,
+            [],
+            true,
+          ),
+        );
       return modifiedUnit;
     }
     case UpgradeName.ShoulderTurrets: {
@@ -282,7 +268,7 @@ export function applyModificationToUnit(
       }
 
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts.push(
+      modifiedUnit.mounts = modifiedUnit.mounts.addMount(
         new EmptyMount(sponsonMount, UpgradeName.ShoulderTurrets, [], true),
       );
       return modifiedUnit;
@@ -323,7 +309,7 @@ export function applyModificationToUnit(
       }
 
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts.push(
+      modifiedUnit.mounts.addMount(
         new EmptyMount(hullMount, UpgradeName.TailGun, [], true),
       );
       return modifiedUnit;
@@ -334,7 +320,7 @@ export function applyModificationToUnit(
       return modifiedUnit;
     }
     case UpgradeName.TurretGrabber: {
-      const turretMount = unit.mounts.find(
+      const turretMount = unit.mounts.mounts.find(
         (m) => m.type.mountType === MountLocation.Turret,
       );
 
@@ -364,21 +350,15 @@ export function applyModificationToUnit(
       }
 
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.filter(
-        (m) => m.id !== turretMount.id,
-      );
-      modifiedUnit.mounts.push(
-        new EmptyMount(
-          armMount,
-          UpgradeName.TurretGrabber,
-          turretMount ? turretMount.specialOverrides : [],
-          true,
-        ),
-      );
+      modifiedUnit.mounts = modifiedUnit.mounts
+        .removeMountById(turretMount.id)
+        .addMount(
+          new EmptyMount(armMount, UpgradeName.TurretGrabber, [], true),
+        );
       return modifiedUnit;
     }
     case UpgradeName.UpperTurretConfiguration: {
-      const armMounts = unit.mounts.filter(
+      const armMounts = unit.mounts.mounts.filter(
         (m) => m.type.mountType === MountLocation.Arm,
       );
 
@@ -410,24 +390,19 @@ export function applyModificationToUnit(
       }
 
       const modifiedUnit = Unit.fromUnit(unit);
-      modifiedUnit.mounts = modifiedUnit.mounts.filter(
-        (m) => !armMounts.map((a) => a.id).includes(m.id),
-      );
-      modifiedUnit.mounts.push(
-        new EmptyMount(
-          turretMount,
-          UpgradeName.UpperTurretConfiguration,
-          [
-            ...armMounts
-              .map((m) => m.specialOverrides)
-              .reduce((acc, cur) => {
-                cur.forEach((s) => acc.add(s));
-                return acc;
-              }, new Set<string>()),
-          ],
-          true,
-        ),
-      );
+      modifiedUnit.mounts = armMounts
+        .reduce(
+          (mountSet, arm) => mountSet.removeMountById(arm.id),
+          modifiedUnit.mounts,
+        )
+        .addMount(
+          new EmptyMount(
+            turretMount,
+            UpgradeName.UpperTurretConfiguration,
+            [],
+            true,
+          ),
+        );
       return modifiedUnit;
     }
     case UpgradeName.VeteranCrew: {
@@ -884,7 +859,7 @@ export function isNotWalker(unit: Unit) {
 }
 
 export function hasMount(unit: Unit, mount: MountLocation) {
-  return unit.mounts.some((m) => mount === m.type.mountType);
+  return unit.mounts.mounts.some((m) => mount === m.type.mountType);
 }
 
 export function hasAtLeastOneOfMounts(
@@ -893,7 +868,7 @@ export function hasAtLeastOneOfMounts(
 ) {
   return (
     mounts.length === 0 ||
-    unit.mounts.some((m) => mounts.includes(m.type.mountType))
+    unit.mounts.mounts.some((m) => mounts.includes(m.type.mountType))
   );
 }
 
@@ -912,7 +887,7 @@ function uniqueRequirementsSatisfied(unit: Unit, modification: Modification) {
     }
     case UpgradeName.TargetingProtocols: {
       const incompatibleWeaponSpecialRules = ["Close Combat", "Close Action"];
-      return unit.mounts.some((m) => {
+      return unit.mounts.mounts.some((m) => {
         if (m.weapon === null) {
           return false;
         }
@@ -923,7 +898,7 @@ function uniqueRequirementsSatisfied(unit: Unit, modification: Modification) {
     }
     case UpgradeName.TwinLinked: {
       const incompatibleWeaponSpecialRules = ["Close Combat", "Bomb", "Burst"];
-      return unit.mounts.some((m) => {
+      return unit.mounts.mounts.some((m) => {
         if (m.weapon === null) {
           return false;
         }

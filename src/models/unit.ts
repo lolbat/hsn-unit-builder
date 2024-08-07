@@ -6,7 +6,7 @@ import Modification, {
   costOfAppliedModification,
   isModValidForUnit,
 } from "./modifications";
-import { EmptyMount, Mount } from "./mount";
+import { EmptyMount, MountSet, MountSetShape } from "./mount";
 import VehicleClass from "./vehicle-class";
 
 export interface UnitShape {
@@ -20,7 +20,7 @@ export interface UnitShape {
   readonly armour: ArmourShape;
   readonly hullPoints: number;
   readonly special: string[];
-  readonly mounts: Mount[];
+  readonly mounts: MountSetShape;
   readonly modifications: AppliedModification[];
 }
 
@@ -35,7 +35,7 @@ class Unit implements UnitShape {
   armour: Armour;
   hullPoints: number;
   special: string[];
-  mounts: Mount[];
+  mounts: MountSet;
   modifications: AppliedModification[];
 
   static fromVehicleClass(vehicleClass: VehicleClass) {
@@ -49,9 +49,11 @@ class Unit implements UnitShape {
       vehicleClass.morale,
       vehicleClass.armour,
       vehicleClass.hullPoints,
-      vehicleClass.special,
-      vehicleClass.mounts.map(
-        (mountType, index) => new EmptyMount(mountType, `${index}`, []),
+      [...vehicleClass.special],
+      new MountSet(
+        vehicleClass.mounts.map(
+          (mountType, index) => new EmptyMount(mountType, `${index}`, []),
+        ),
       ),
       [],
     );
@@ -68,9 +70,9 @@ class Unit implements UnitShape {
       unit.morale,
       Armour.fromArmourShape(unit.armour),
       unit.hullPoints,
-      unit.special,
-      unit.mounts,
-      unit.modifications,
+      [...unit.special],
+      MountSet.fromMountSetShape(unit.mounts),
+      [...unit.modifications],
     );
   }
 
@@ -85,8 +87,8 @@ class Unit implements UnitShape {
       unit.morale,
       Armour.fromArmourShape(unit.armour),
       unit.hullPoints,
-      unit.special,
-      unit.mounts.map((m) => Mount.fromMountShape(m)),
+      [...unit.special],
+      unit.mounts.copy(),
       [...unit.modifications],
     );
   }
@@ -102,7 +104,7 @@ class Unit implements UnitShape {
     armour: Armour,
     hullPoints: number,
     special: string[],
-    mounts: Mount[],
+    mounts: MountSet,
     modifications: AppliedModification[],
   ) {
     this.vehicleClass = vehicleClass;
@@ -114,7 +116,7 @@ class Unit implements UnitShape {
     this.morale = morale;
     this.armour = armour;
     this.hullPoints = hullPoints;
-    this.special = structuredClone(special);
+    this.special = special;
     this.mounts = mounts;
     this.modifications = modifications;
   }
@@ -132,7 +134,7 @@ class Unit implements UnitShape {
   }
 
   private totalWeaponCost() {
-    return this.mounts
+    return this.mounts.mounts
       .filter((w) => w !== null)
       .reduce((acc, cur) => acc + (cur.weapon?.cost || 0), 0);
   }

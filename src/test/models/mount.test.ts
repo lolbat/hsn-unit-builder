@@ -20,6 +20,32 @@ describe("MountSet", () => {
     });
   });
 
+  describe("fromMountSetShape()", () => {
+    it("should return a MountSet that copies the provided MountSetShape", () => {
+      const initial = new MountSet([
+        new EmptyMount(LightFixedMount, "lfm-1", ["Test"]),
+      ]);
+
+      const modified = MountSet.fromMountSetShape(initial);
+
+      expect(modified).not.toBe(initial);
+      expect(modified).toStrictEqual(initial);
+    });
+  });
+
+  describe("copy()", () => {
+    it("should return a MountSet that copies the provided MountSetShape", () => {
+      const initial = new MountSet([
+        new EmptyMount(LightFixedMount, "lfm-1", ["Test"]),
+      ]);
+
+      const modified = initial.copy();
+
+      expect(modified).not.toBe(initial);
+      expect(modified).toStrictEqual(initial);
+    });
+  });
+
   describe("addMount()", () => {
     it("should return a new MountSet with the added mount", () => {
       const initial = new MountSet([]);

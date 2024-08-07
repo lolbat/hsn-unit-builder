@@ -1,23 +1,22 @@
-import { EmptyMount, Mount } from "../models/mount";
+import { EmptyMount, Mount, MountSet } from "../models/mount";
 import { FilledMountListItem } from "./FilledMountListItem";
 import { FilledMount } from "../models/mount";
 import { EmptyMountListItem } from "./EmptyMountListItem";
 
 interface WeaponListProps {
-  mounts: Mount[];
-  handleMountsChange: (mounts: Mount[]) => void;
+  mountSet: MountSet;
+  handleMountSetChange: (mounts: MountSet) => void;
 }
 
-export function WeaponList({ mounts, handleMountsChange }: WeaponListProps) {
+export function WeaponList({
+  mountSet: mounts,
+  handleMountSetChange: handleMountsChange,
+}: WeaponListProps) {
   function handleMountChange(mount: Mount) {
-    handleMountsChange([
-      ...mounts.filter((m) => m.id < mount.id),
-      mount,
-      ...mounts.filter((m) => m.id > mount.id),
-    ]);
+    handleMountsChange(mounts.updateMount(mount));
   }
 
-  const weaponList = mounts.map((mount) => {
+  const weaponList = mounts.mounts.map((mount) => {
     if (mount.empty === false) {
       return (
         <FilledMountListItem
