@@ -498,6 +498,7 @@ export function applyModificationToUnit(
 export const UnimplementedModifications: readonly ModificationName[] = [
   UpgradeName.ReinforcedMount,
   UpgradeName.SmokeBelcher,
+  UpgradeName.TailGun,
   UpgradeName.TargetingProtocols,
   UpgradeName.TwinLinked,
   CompromiseName.MainGunRetrofit,
