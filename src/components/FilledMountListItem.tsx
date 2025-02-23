@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mount, FilledMount } from "../models/mount";
 import Weapon from "../models/weapon";
 import { toWeaponName, WeaponName } from "../models/constants";
-import { WeaponTypes } from "../models/weapon-type";
+import WeaponTypes from "../models/weapon-types/weapon-types";
 
 interface FilledMountListItemProps {
   mount: FilledMount;

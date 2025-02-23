@@ -1,7 +1,7 @@
 import { EmptyMount, Mount } from "../models/mount";
 import { toWeaponName, WeaponName } from "../models/constants";
 import Weapon from "../models/weapon";
-import { WeaponTypes } from "../models/weapon-type";
+import WeaponTypes from "../models/weapon-types/weapon-types";
 
 interface EmptyMountListItemProps {
   mount: EmptyMount;

@@ -1,14 +1,9 @@
 import { describe, it, expect } from "vitest";
 import Weapon from "../../models/weapon";
-import {
-  Blade,
-  Laser,
-  LightCannon,
-  LightMissile,
-  MagmaBlaster,
-  PlasmaBlaster,
-} from "../../models/weapon-type";
 import { MountLocation } from "../../models/constants";
+import { Laser, LightCannon, LightMissile, PlasmaBlaster } from "../../models/weapon-types/light-weapon-types";
+import { MagmaBlaster } from "../../models/weapon-types/heavy-weapon-types";
+import { Blade } from "../../models/weapon-types/close-combat-weapon-types";
 
 describe("Weapon", () => {
   it("Applies the Inferno special override when WeaponType has no conflicting special rules", () => {

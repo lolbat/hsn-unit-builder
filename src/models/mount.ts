@@ -5,7 +5,7 @@ import {
   MountType,
 } from "./mount-type";
 import Weapon from "./weapon";
-import { WeaponType } from "./weapon-type";
+import WeaponType from "./weapon-types/weapon-type";
 
 export interface MountSetShape {
   readonly mounts: MountShape[];

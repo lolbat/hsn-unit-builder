@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { EmptyMount, FilledMount, Mount, MountSet } from "../../models/mount";
 import { LightArmMount, LightFixedMount } from "../../models/mount-type";
 import Weapon from "../../models/weapon";
-import { Blade } from "../../models/weapon-type";
+import { Blade } from "../../models/weapon-types/close-combat-weapon-types";
 import { MountLocation } from "../../models/constants";
 
 describe("MountSet", () => {

@@ -4,7 +4,8 @@ import {
   WeaponCategory,
   WeaponWeightClass,
 } from "./constants";
-import { WeaponType, WeaponTypes } from "./weapon-type";
+import WeaponType from "./weapon-types/weapon-type";
+import WeaponTypes from "./weapon-types/weapon-types";
 
 export function compatibleWeaponTypes(
   mount: MountType,

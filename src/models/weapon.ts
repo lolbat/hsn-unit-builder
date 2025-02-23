@@ -1,5 +1,5 @@
 import { MountLocation } from "./constants";
-import { WeaponType } from "./weapon-type";
+import WeaponType from "./weapon-types/weapon-type";
 
 export interface WeaponShape {
   readonly weaponType: WeaponType;
