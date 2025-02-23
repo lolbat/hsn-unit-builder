@@ -112,6 +112,7 @@
     display: grid;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    padding: 0;
 
     .weapon.title {
       grid-area: 1 / 1 / 1 / 2;
@@ -152,6 +153,7 @@
     grid-row-start: 6;
     grid-column-start: 5;
     grid-column-end: 6;
+    padding: 0;
   }
 
   .error {
