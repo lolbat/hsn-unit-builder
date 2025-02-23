@@ -4,6 +4,7 @@ import App from "./App.tsx";
 import "./index.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 
+// Handle the case where the app is deployed to GitHub Pages. On GH Pages, the app is not at the root path, but at /hsn-unit-builder.
 const pathname = window.location.pathname;
 
 let basename;
