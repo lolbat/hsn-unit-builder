@@ -88,10 +88,8 @@ export abstract class Modification implements ModificationShape {
   }
 
   private hasLessThanMaxInstances(unit: Unit) {
-    const appliedModification = unit.modifications.find(
-      (m) => m.modification.name === this.name,
-    );
-    if (appliedModification === undefined) {
+    const appliedQuantity = this.countInstancesAppliedToUnit(unit);
+    if (appliedQuantity === 0) {
       return true;
     }
 
@@ -100,13 +98,25 @@ export abstract class Modification implements ModificationShape {
       case 1:
       case 2:
       case 3: {
-        return appliedModification.quantity < maxAllowed;
+        return appliedQuantity < maxAllowed;
       }
       case "no-limit":
       case "special": {
         return true;
       }
     }
+  }
+
+  countInstancesAppliedToUnit({ modifications }: Unit) {
+    const appliedModification = modifications.find(
+      (m) => m.modification.name === this.name,
+    );
+    
+    if (appliedModification === undefined) {
+      return 0;
+    }
+  
+    return appliedModification.quantity
   }
 }
 
