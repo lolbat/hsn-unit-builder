@@ -39,42 +39,20 @@ export default interface ModificationShape {
 }
 
 export abstract class Modification implements ModificationShape {
-  readonly type: ModificationType;
-  readonly name: ModificationName;
-  readonly cost: number;
-  readonly compatibleVehicleSizes: VehicleSize[];
-  readonly maxAllowed: number | null;
-  readonly requiredSpecialRuleGroups: readonly string[];
-  readonly excludedSpecialRuleGroups: readonly string[];
-  readonly requiredMounts: readonly MountLocation[];
-  readonly exclusiveModifications: readonly ModificationName[];
+  abstract type: ModificationType;
+  abstract name: ModificationName;
+  abstract cost: number;
+  abstract compatibleVehicleSizes: VehicleSize[];
+  abstract maxAllowed: number | null;
+  abstract requiredSpecialRuleGroups: readonly string[];
+  abstract excludedSpecialRuleGroups: readonly string[];
+  abstract requiredMounts: readonly MountLocation[];
+  abstract exclusiveModifications: readonly ModificationName[];
   abstract applyModificationToUnit(unit: Unit): Unit;
   abstract costOfAppliedModification(unit: Unit, quantity: number): number;
   abstract costToApplyModification(unit: Unit): number;
   abstract maxAllowedForModification(unit: Unit): 1 | 2 | 3 | "no-limit" | "special";
   abstract uniqueRequirementsSatisfied(unit: Unit): boolean;
-
-  constructor(
-    type: ModificationType,
-    name: ModificationName,
-    cost: number,
-    compatibleVehicleSizes: VehicleSize[],
-    maxAllowed: number | null,
-    requiredSpecialRuleGroups: readonly string[],
-    excludedSpecialRuleGroups: readonly string[],
-    requiredMounts: readonly MountLocation[],
-    exclusiveModifications: readonly ModificationName[],
-  ) {
-    this.type = type;
-    this.name = name;
-    this.cost = cost;
-    this.compatibleVehicleSizes = compatibleVehicleSizes;
-    this.maxAllowed = maxAllowed;
-    this.requiredSpecialRuleGroups = requiredSpecialRuleGroups;
-    this.excludedSpecialRuleGroups = excludedSpecialRuleGroups;
-    this.requiredMounts = requiredMounts;
-    this.exclusiveModifications = exclusiveModifications;
-  }
 
   isModValidForUnit(unit: Unit): boolean {
     return (
@@ -87,7 +65,7 @@ export abstract class Modification implements ModificationShape {
     );
   }
 
-  hasNoExclusiveModifications(unit: Unit) {
+  private hasNoExclusiveModifications(unit: Unit) {
     return (
       this.exclusiveModifications.length === 0 ||
       unit.modifications.every(
@@ -96,7 +74,7 @@ export abstract class Modification implements ModificationShape {
     );
   }
 
-  meetsSpecialRuleRequirements(unit: Unit) {
+  private meetsSpecialRuleRequirements(unit: Unit) {
     return (
       (this.requiredSpecialRuleGroups.length === 0 ||
         unit.special.some((s) =>
@@ -109,7 +87,7 @@ export abstract class Modification implements ModificationShape {
     );
   }
 
-  hasLessThanMaxInstances(unit: Unit) {
+  private hasLessThanMaxInstances(unit: Unit) {
     const appliedModification = unit.modifications.find(
       (m) => m.modification.name === this.name,
     );
