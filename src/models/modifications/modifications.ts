@@ -26,7 +26,7 @@ import {
 } from "../mount-type";
 import Unit from "../unit";
 
-export default interface Modification {
+export default interface ModificationShape {
   readonly type: ModificationType;
   readonly name: ModificationName;
   readonly cost: number;
@@ -38,14 +38,117 @@ export default interface Modification {
   readonly exclusiveModifications: readonly ModificationName[];
 }
 
+export abstract class Modification implements ModificationShape {
+  readonly type: ModificationType;
+  readonly name: ModificationName;
+  readonly cost: number;
+  readonly compatibleVehicleSizes: VehicleSize[];
+  readonly maxAllowed: number | null;
+  readonly requiredSpecialRuleGroups: readonly string[];
+  readonly excludedSpecialRuleGroups: readonly string[];
+  readonly requiredMounts: readonly MountLocation[];
+  readonly exclusiveModifications: readonly ModificationName[];
+  abstract applyModificationToUnit(unit: Unit): Unit;
+  abstract costOfAppliedModification(unit: Unit, quantity: number): number;
+  abstract costToApplyModification(unit: Unit): number;
+  abstract maxAllowedForModification(unit: Unit): 1 | 2 | 3 | "no-limit" | "special";
+  abstract uniqueRequirementsSatisfied(unit: Unit): boolean;
+
+  constructor(
+    type: ModificationType,
+    name: ModificationName,
+    cost: number,
+    compatibleVehicleSizes: VehicleSize[],
+    maxAllowed: number | null,
+    requiredSpecialRuleGroups: readonly string[],
+    excludedSpecialRuleGroups: readonly string[],
+    requiredMounts: readonly MountLocation[],
+    exclusiveModifications: readonly ModificationName[],
+  ) {
+    this.type = type;
+    this.name = name;
+    this.cost = cost;
+    this.compatibleVehicleSizes = compatibleVehicleSizes;
+    this.maxAllowed = maxAllowed;
+    this.requiredSpecialRuleGroups = requiredSpecialRuleGroups;
+    this.excludedSpecialRuleGroups = excludedSpecialRuleGroups;
+    this.requiredMounts = requiredMounts;
+    this.exclusiveModifications = exclusiveModifications;
+  }
+
+  isModValidForUnit(unit: Unit): boolean {
+    return (
+      this.hasLessThanMaxInstances(unit) &&
+      unit.isOneOfSizes(this.compatibleVehicleSizes) &&
+      this.meetsSpecialRuleRequirements(unit) &&
+      unit.hasAtLeastOneOfMounts(this.requiredMounts) &&
+      this.hasNoExclusiveModifications(unit) &&
+      this.uniqueRequirementsSatisfied(unit)
+    );
+  }
+
+  hasNoExclusiveModifications(unit: Unit) {
+    return (
+      this.exclusiveModifications.length === 0 ||
+      unit.modifications.every(
+        (m) => !this.exclusiveModifications.includes(m.modification.name),
+      )
+    );
+  }
+
+  meetsSpecialRuleRequirements(unit: Unit) {
+    return (
+      (this.requiredSpecialRuleGroups.length === 0 ||
+        unit.special.some((s) =>
+          this.requiredSpecialRuleGroups.some((req) => s.includes(req)),
+        )) &&
+      (this.excludedSpecialRuleGroups.length === 0 ||
+        unit.special.every((s) =>
+          this.excludedSpecialRuleGroups.every((ex) => !s.includes(ex)),
+        ))
+    );
+  }
+
+  hasLessThanMaxInstances(unit: Unit) {
+    const appliedModification = unit.modifications.find(
+      (m) => m.modification.name === this.name,
+    );
+    if (appliedModification === undefined) {
+      return true;
+    }
+
+    const maxAllowed = this.maxAllowedForModification(unit);
+    switch (maxAllowed) {
+      case 1:
+      case 2:
+      case 3: {
+        return appliedModification.quantity < maxAllowed;
+      }
+      case "no-limit":
+      case "special": {
+        return true;
+      }
+    }
+  }
+}
+
 export interface AppliedModification {
-  readonly modification: Modification;
+  readonly modification: ModificationShape;
   readonly quantity: number;
 }
 
+export const UnimplementedModifications: readonly ModificationName[] = [
+  UpgradeName.ReinforcedMount,
+  UpgradeName.SmokeBelcher,
+  UpgradeName.TailGun,
+  UpgradeName.TargetingProtocols,
+  UpgradeName.TwinLinked,
+  CompromiseName.MainGunRetrofit,
+];
+
 export function applyModificationToUnit(
   unit: Unit,
-  modification: Modification,
+  modification: ModificationShape,
 ) {
   switch (modification.name) {
     case UpgradeName.AAWeaponConfiguration: {
@@ -495,15 +598,6 @@ export function applyModificationToUnit(
   }
 }
 
-export const UnimplementedModifications: readonly ModificationName[] = [
-  UpgradeName.ReinforcedMount,
-  UpgradeName.SmokeBelcher,
-  UpgradeName.TailGun,
-  UpgradeName.TargetingProtocols,
-  UpgradeName.TwinLinked,
-  CompromiseName.MainGunRetrofit,
-];
-
 export function costOfAppliedModification(
   { size }: Unit,
   { modification: { name, cost }, quantity }: AppliedModification,
@@ -678,7 +772,7 @@ export function costOfAppliedModification(
 
 export function costToApplyModification(
   { size, modifications }: Unit,
-  { name, cost }: Modification,
+  { name, cost }: ModificationShape,
 ) {
   const appliedModification = modifications.find(
     (m) => m.modification.name === name,
@@ -856,9 +950,9 @@ export function costToApplyModification(
   }
 }
 
-export function maxAllowedForModification(
+function maxAllowedForModification(
   unit: Unit,
-  modification: Modification,
+  modification: ModificationShape,
 ) {
   switch (modification.name) {
     case UpgradeName.AAWeaponConfiguration:
@@ -935,18 +1029,18 @@ export function maxAllowedForModification(
   }
 }
 
-export function isModValidForUnit(unit: Unit, modification: Modification) {
+export function isModValidForUnit(unit: Unit, modification: ModificationShape) {
   return (
     hasLessThanMaxInstances(unit, modification) &&
-    isOneOfSizes(unit, modification.compatibleVehicleSizes) &&
+    unit.isOneOfSizes(modification.compatibleVehicleSizes) &&
     meetsSpecialRuleRequirements(unit, modification) &&
-    hasAtLeastOneOfMounts(unit, modification.requiredMounts) &&
+    unit.hasAtLeastOneOfMounts(modification.requiredMounts) &&
     hasNoExclusiveModifications(unit, modification) &&
     uniqueRequirementsSatisfied(unit, modification)
   );
 }
 
-function hasNoExclusiveModifications(unit: Unit, modification: Modification) {
+function hasNoExclusiveModifications(unit: Unit, modification: ModificationShape) {
   return (
     modification.exclusiveModifications.length === 0 ||
     unit.modifications.every(
@@ -955,7 +1049,7 @@ function hasNoExclusiveModifications(unit: Unit, modification: Modification) {
   );
 }
 
-function meetsSpecialRuleRequirements(unit: Unit, modification: Modification) {
+function meetsSpecialRuleRequirements(unit: Unit, modification: ModificationShape) {
   return (
     (modification.requiredSpecialRuleGroups.length === 0 ||
       unit.special.some((s) =>
@@ -968,18 +1062,9 @@ function meetsSpecialRuleRequirements(unit: Unit, modification: Modification) {
   );
 }
 
-export function doesNotHaveModification(
+function hasLessThanMaxInstances(
   unit: Unit,
-  modification: Modification,
-) {
-  return unit.modifications.every(
-    (m) => m.modification.name !== modification.name,
-  );
-}
-
-export function hasLessThanMaxInstances(
-  unit: Unit,
-  modification: Modification,
+  modification: ModificationShape,
 ) {
   const appliedModification = unit.modifications.find(
     (m) => m.modification.name === modification.name,
@@ -1002,45 +1087,7 @@ export function hasLessThanMaxInstances(
   }
 }
 
-export function isOneOfSizes(unit: Unit, sizes: VehicleSize[]) {
-  return sizes.includes(unit.vehicleClass.size);
-}
-
-export function isFlyer(unit: Unit) {
-  return unit.special.some((s) => s.includes("Flyer"));
-}
-
-export function isNotFlyer(unit: Unit) {
-  return unit.special.every((s) => !s.includes("Flyer"));
-}
-
-export function isNotFastMover(unit: Unit) {
-  return unit.special.every((s) => !s.includes("Fast Mover"));
-}
-
-export function isWalker(unit: Unit) {
-  return unit.special.some((s) => s.includes("Walker"));
-}
-
-export function isNotWalker(unit: Unit) {
-  return unit.special.every((s) => !s.includes("Flyer"));
-}
-
-export function hasMount(unit: Unit, mount: MountLocation) {
-  return unit.mounts.mounts.some((m) => mount === m.type.mountType);
-}
-
-export function hasAtLeastOneOfMounts(
-  unit: Unit,
-  mounts: readonly MountLocation[],
-) {
-  return (
-    mounts.length === 0 ||
-    unit.mounts.mounts.some((m) => mounts.includes(m.type.mountType))
-  );
-}
-
-function uniqueRequirementsSatisfied(unit: Unit, modification: Modification) {
+function uniqueRequirementsSatisfied(unit: Unit, modification: ModificationShape) {
   switch (modification.name) {
     case UpgradeName.EnginePowerIncrease: {
       return (

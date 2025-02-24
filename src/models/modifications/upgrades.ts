@@ -1,4 +1,4 @@
-import Modification from "./modifications";
+import ModificationShape from "./modifications";
 import {
   ModificationType,
   VehicleSize,
@@ -7,7 +7,7 @@ import {
   CompromiseName,
 } from "../constants";
 
-export const AAWeaponConfiguration: Modification = {
+export const AAWeaponConfiguration: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.AAWeaponConfiguration,
   cost: 1,
@@ -24,7 +24,7 @@ export const AAWeaponConfiguration: Modification = {
   exclusiveModifications: [],
 };
 
-export const AbominableHorror: Modification = {
+export const AbominableHorror: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.AbominableHorror,
   cost: 1,
@@ -40,7 +40,7 @@ export const AbominableHorror: Modification = {
   exclusiveModifications: [],
 };
 
-export const AdditionalSponsons: Modification = {
+export const AdditionalSponsons: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.AdditionalSponsons,
   cost: 3,
@@ -52,7 +52,7 @@ export const AdditionalSponsons: Modification = {
   exclusiveModifications: [],
 };
 
-export const CoaxialMount: Modification = {
+export const CoaxialMount: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.CoaxialMount,
   cost: 1,
@@ -64,7 +64,7 @@ export const CoaxialMount: Modification = {
   exclusiveModifications: [],
 };
 
-export const CommunicationsModule: Modification = {
+export const CommunicationsModule: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.CommunicationsModule,
   cost: 1,
@@ -80,7 +80,7 @@ export const CommunicationsModule: Modification = {
   exclusiveModifications: [],
 };
 
-export const EarlyWarningRadarSystem: Modification = {
+export const EarlyWarningRadarSystem: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.EarlyWarningRadarSystem,
   cost: 2,
@@ -96,7 +96,7 @@ export const EarlyWarningRadarSystem: Modification = {
   exclusiveModifications: [],
 };
 
-export const EnginePowerIncrease: Modification = {
+export const EnginePowerIncrease: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.EnginePowerIncrease,
   cost: 1,
@@ -113,7 +113,7 @@ export const EnginePowerIncrease: Modification = {
   exclusiveModifications: [CompromiseName.EnginePowerReduction],
 };
 
-export const EnhancedSensors: Modification = {
+export const EnhancedSensors: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.EnhancedSensors,
   cost: 1,
@@ -130,7 +130,7 @@ export const EnhancedSensors: Modification = {
   exclusiveModifications: [],
 };
 
-export const ExplosiveShielding: Modification = {
+export const ExplosiveShielding: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ExplosiveShielding,
   cost: 1,
@@ -146,7 +146,7 @@ export const ExplosiveShielding: Modification = {
   exclusiveModifications: [],
 };
 
-export const ImprovedHandling: Modification = {
+export const ImprovedHandling: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ImprovedHandling,
   cost: 1,
@@ -163,7 +163,7 @@ export const ImprovedHandling: Modification = {
   exclusiveModifications: [],
 };
 
-export const ImprovedCountermeasures: Modification = {
+export const ImprovedCountermeasures: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ImprovedCountermeasures,
   cost: 1,
@@ -180,7 +180,7 @@ export const ImprovedCountermeasures: Modification = {
   exclusiveModifications: [],
 };
 
-export const IncendiaryAmmunition: Modification = {
+export const IncendiaryAmmunition: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.IncendiaryAmmunition,
   cost: 1,
@@ -196,7 +196,7 @@ export const IncendiaryAmmunition: Modification = {
   exclusiveModifications: [],
 };
 
-export const IndependentMovementSubroutines: Modification = {
+export const IndependentMovementSubroutines: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.IndependentMovementSubroutines,
   cost: 15,
@@ -208,7 +208,7 @@ export const IndependentMovementSubroutines: Modification = {
   exclusiveModifications: [],
 };
 
-export const JumpJets: Modification = {
+export const JumpJets: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.JumpJets,
   cost: 2,
@@ -220,7 +220,7 @@ export const JumpJets: Modification = {
   exclusiveModifications: [],
 };
 
-export const LowProfile: Modification = {
+export const LowProfile: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.LowProfile,
   cost: 1,
@@ -236,7 +236,7 @@ export const LowProfile: Modification = {
   exclusiveModifications: [],
 };
 
-export const MineClearanceEquipment: Modification = {
+export const MineClearanceEquipment: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.MineClearanceEquipment,
   cost: 1,
@@ -256,7 +256,7 @@ export const MineClearanceEquipment: Modification = {
   exclusiveModifications: [],
 };
 
-export const OpticRefinement: Modification = {
+export const OpticRefinement: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.OpticRefinement,
   cost: 1,
@@ -273,7 +273,7 @@ export const OpticRefinement: Modification = {
   exclusiveModifications: [CompromiseName.PoorOptics],
 };
 
-export const Ram: Modification = {
+export const Ram: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.Ram,
   cost: 1,
@@ -290,7 +290,7 @@ export const Ram: Modification = {
   exclusiveModifications: [],
 };
 
-export const ReinforcedFrontArmour: Modification = {
+export const ReinforcedFrontArmour: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ReinforcedFrontArmour,
   cost: 3,
@@ -306,7 +306,7 @@ export const ReinforcedFrontArmour: Modification = {
   exclusiveModifications: [CompromiseName.LightFrontArmour],
 };
 
-export const ReinforcedSideArmour: Modification = {
+export const ReinforcedSideArmour: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ReinforcedSideArmour,
   cost: 2,
@@ -322,7 +322,7 @@ export const ReinforcedSideArmour: Modification = {
   exclusiveModifications: [CompromiseName.LightSecondaryArmour],
 };
 
-export const ReinforcedRearArmour: Modification = {
+export const ReinforcedRearArmour: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ReinforcedRearArmour,
   cost: 2,
@@ -338,7 +338,7 @@ export const ReinforcedRearArmour: Modification = {
   exclusiveModifications: [CompromiseName.LightSecondaryArmour],
 };
 
-export const ReinforcedMount: Modification = {
+export const ReinforcedMount: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ReinforcedMount,
   cost: 1,
@@ -354,7 +354,7 @@ export const ReinforcedMount: Modification = {
   exclusiveModifications: [],
 };
 
-export const RepulsorDrive: Modification = {
+export const RepulsorDrive: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.RepulsorDrive,
   cost: 1,
@@ -370,7 +370,7 @@ export const RepulsorDrive: Modification = {
   exclusiveModifications: [],
 };
 
-export const Resilient: Modification = {
+export const Resilient: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.Resilient,
   cost: 1,
@@ -386,7 +386,7 @@ export const Resilient: Modification = {
   exclusiveModifications: [CompromiseName.LowMorale],
 };
 
-export const ReverseFittedGun: Modification = {
+export const ReverseFittedGun: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ReverseFittedGun,
   cost: 0,
@@ -402,7 +402,7 @@ export const ReverseFittedGun: Modification = {
   exclusiveModifications: [],
 };
 
-export const SecondaryTurretMount: Modification = {
+export const SecondaryTurretMount: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.SecondaryTurretMount,
   cost: 1,
@@ -414,7 +414,7 @@ export const SecondaryTurretMount: Modification = {
   exclusiveModifications: [],
 };
 
-export const SelfRepairProtocols: Modification = {
+export const SelfRepairProtocols: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.SelfRepairProtocols,
   cost: 2,
@@ -430,7 +430,7 @@ export const SelfRepairProtocols: Modification = {
   exclusiveModifications: [],
 };
 
-export const ShoulderTurrets: Modification = {
+export const ShoulderTurrets: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ShoulderTurrets,
   cost: 3,
@@ -442,7 +442,7 @@ export const ShoulderTurrets: Modification = {
   exclusiveModifications: [],
 };
 
-export const SmokeBelcher: Modification = {
+export const SmokeBelcher: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.SmokeBelcher,
   cost: 1,
@@ -458,7 +458,7 @@ export const SmokeBelcher: Modification = {
   exclusiveModifications: [],
 };
 
-export const SpotterRelay: Modification = {
+export const SpotterRelay: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.SpotterRelay,
   cost: 1,
@@ -470,7 +470,7 @@ export const SpotterRelay: Modification = {
   exclusiveModifications: [],
 };
 
-export const TailGun: Modification = {
+export const TailGun: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.TailGun,
   cost: 1,
@@ -486,7 +486,7 @@ export const TailGun: Modification = {
   exclusiveModifications: [],
 };
 
-export const TargetingProtocols: Modification = {
+export const TargetingProtocols: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.TargetingProtocols,
   cost: 1,
@@ -502,7 +502,7 @@ export const TargetingProtocols: Modification = {
   exclusiveModifications: [],
 };
 
-export const ToughenedHull: Modification = {
+export const ToughenedHull: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.ToughenedHull,
   cost: 1,
@@ -518,7 +518,7 @@ export const ToughenedHull: Modification = {
   exclusiveModifications: [CompromiseName.WeakHull],
 };
 
-export const Transforming: Modification = {
+export const Transforming: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.Transforming,
   cost: 3,
@@ -534,7 +534,7 @@ export const Transforming: Modification = {
   exclusiveModifications: [],
 };
 
-export const TurretGrabber: Modification = {
+export const TurretGrabber: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.TurretGrabber,
   cost: 1,
@@ -550,7 +550,7 @@ export const TurretGrabber: Modification = {
   exclusiveModifications: [],
 };
 
-export const TwinLinked: Modification = {
+export const TwinLinked: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.TwinLinked,
   cost: 1,
@@ -566,7 +566,7 @@ export const TwinLinked: Modification = {
   exclusiveModifications: [],
 };
 
-export const UpperTurretConfiguration: Modification = {
+export const UpperTurretConfiguration: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.UpperTurretConfiguration,
   cost: 0,
@@ -582,7 +582,7 @@ export const UpperTurretConfiguration: Modification = {
   exclusiveModifications: [],
 };
 
-export const VeteranCrew: Modification = {
+export const VeteranCrew: ModificationShape = {
   type: ModificationType.Upgrade,
   name: UpgradeName.VeteranCrew,
   cost: 3,
@@ -598,7 +598,7 @@ export const VeteranCrew: Modification = {
   exclusiveModifications: [CompromiseName.GreenCrew],
 };
 
-export const Upgrades: readonly Modification[] = [
+export const Upgrades: readonly ModificationShape[] = [
   AAWeaponConfiguration,
   AbominableHorror,
   AdditionalSponsons,

@@ -1,6 +1,6 @@
 import Armour, { ArmourShape } from "./armour";
-import { ModificationType, VehicleSize } from "./constants";
-import Modification, {
+import { ModificationType, MountLocation, VehicleSize } from "./constants";
+import ModificationShape, {
   AppliedModification,
   applyModificationToUnit,
   costOfAppliedModification,
@@ -151,7 +151,7 @@ class Unit implements UnitShape {
       .reduce((acc, cur) => acc + costOfAppliedModification(this, cur), 0);
   }
 
-  applyModification(modification: Modification): Unit {
+  applyModification(modification: ModificationShape): Unit {
     if (!isModValidForUnit(this, modification)) {
       throw new Error(`Cannot apply modification ${modification.name} to unit`);
     }
@@ -170,6 +170,41 @@ class Unit implements UnitShape {
 
     updatedUnit.modifications.push({ modification, quantity });
     return applyModificationToUnit(updatedUnit, modification);
+  }
+  
+  isOneOfSizes(sizes: VehicleSize[]) {
+    return sizes.includes(this.vehicleClass.size);
+  }
+
+  isFlyer() {
+    return this.special.some((s) => s.includes("Flyer"));
+  }
+
+  isNotFlyer() {
+    return this.special.every((s) => !s.includes("Flyer"));
+  }
+
+  isNotFastMover() {
+    return this.special.every((s) => !s.includes("Fast Mover"));
+  }
+
+  isWalker() {
+    return this.special.some((s) => s.includes("Walker"));
+  }
+
+  isNotWalker() {
+    return this.special.every((s) => !s.includes("Flyer"));
+  }
+
+  hasMount(mount: MountLocation) {
+    return this.mounts.mounts.some((m) => mount === m.type.mountType);
+  }
+
+  hasAtLeastOneOfMounts(mounts: readonly MountLocation[]) {
+    return (
+      mounts.length === 0 ||
+      this.mounts.mounts.some((m) => mounts.includes(m.type.mountType))
+    );
   }
 }
 

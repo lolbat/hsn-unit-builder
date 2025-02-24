@@ -1,4 +1,4 @@
-import Modification from "./modifications";
+import ModificationShape from "./modifications";
 import {
   ModificationType,
   VehicleSize,
@@ -7,7 +7,7 @@ import {
   UpgradeName,
 } from "../constants";
 
-export const EnginePowerReduction: Modification = {
+export const EnginePowerReduction: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.EnginePowerReduction,
   cost: 2,
@@ -24,7 +24,7 @@ export const EnginePowerReduction: Modification = {
   exclusiveModifications: [UpgradeName.EnginePowerIncrease],
 };
 
-export const Flammable: Modification = {
+export const Flammable: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.Flammable,
   cost: 2,
@@ -41,7 +41,7 @@ export const Flammable: Modification = {
   exclusiveModifications: [],
 };
 
-export const GreenCrew: Modification = {
+export const GreenCrew: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.GreenCrew,
   cost: 4,
@@ -58,7 +58,7 @@ export const GreenCrew: Modification = {
   exclusiveModifications: [UpgradeName.VeteranCrew],
 };
 
-export const LightFrontArmour: Modification = {
+export const LightFrontArmour: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.LightFrontArmour,
   cost: 3,
@@ -75,7 +75,7 @@ export const LightFrontArmour: Modification = {
   exclusiveModifications: [UpgradeName.ReinforcedFrontArmour],
 };
 
-export const LightSecondaryArmour: Modification = {
+export const LightSecondaryArmour: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.LightSecondaryArmour,
   cost: 2,
@@ -95,7 +95,7 @@ export const LightSecondaryArmour: Modification = {
   ],
 };
 
-export const LowMorale: Modification = {
+export const LowMorale: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.LowMorale,
   cost: 2,
@@ -112,7 +112,7 @@ export const LowMorale: Modification = {
   exclusiveModifications: [UpgradeName.Resilient],
 };
 
-export const MainGunRetrofit: Modification = {
+export const MainGunRetrofit: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.MainGunRetrofit,
   cost: 1,
@@ -133,7 +133,7 @@ export const MainGunRetrofit: Modification = {
   exclusiveModifications: [],
 };
 
-export const PoorOptics: Modification = {
+export const PoorOptics: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.PoorOptics,
   cost: 1,
@@ -150,7 +150,7 @@ export const PoorOptics: Modification = {
   exclusiveModifications: [UpgradeName.OpticRefinement],
 };
 
-export const WeakHull: Modification = {
+export const WeakHull: ModificationShape = {
   type: ModificationType.Compromise,
   name: CompromiseName.WeakHull,
   cost: 1,
@@ -167,7 +167,7 @@ export const WeakHull: Modification = {
   exclusiveModifications: [UpgradeName.ToughenedHull],
 };
 
-export const Compromises: readonly Modification[] = [
+export const Compromises: readonly ModificationShape[] = [
   EnginePowerReduction,
   Flammable,
   GreenCrew,
@@ -181,7 +181,7 @@ export const Compromises: readonly Modification[] = [
 
 export const CompromisesByName = new Map(Compromises.map((c) => [c.name, c]));
 
-export function getCostForCompromise({ name, cost }: Modification) {
+export function getCostForCompromise({ name, cost }: ModificationShape) {
   switch (name) {
     case CompromiseName.EnginePowerReduction:
     case CompromiseName.Flammable:
