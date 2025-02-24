@@ -1,4 +1,4 @@
-import Armour from "./armour";
+import Armour from "../armour";
 import {
   CompromiseName,
   ModificationName,
@@ -6,8 +6,8 @@ import {
   MountLocation,
   UpgradeName,
   VehicleSize,
-} from "./constants";
-import { EmptyMount } from "./mount";
+} from "../constants";
+import { EmptyMount } from "../mount";
 import {
   BehemothSponsonsMount,
   CoaxialMount,
@@ -23,8 +23,8 @@ import {
   SuperheavyHullMount,
   SuperheavySponsonsMount,
   SuperheavyTurretMount,
-} from "./mount-type";
-import Unit from "./unit";
+} from "../mount-type";
+import Unit from "../unit";
 
 export default interface Modification {
   readonly type: ModificationType;

@@ -4,14 +4,14 @@ import { MountSet } from "../models/mount";
 import { UnitName } from "./UnitName";
 import { useContext, useState } from "react";
 import DispatchContext from "../contexts/dispatch-context";
-import { Upgrades, UpgradesByName } from "../models/upgrades";
+import { Upgrades, UpgradesByName } from "../models/modifications/upgrades";
 import { toModificationName } from "../models/constants";
 import {
   costToApplyModification,
   isModValidForUnit,
   UnimplementedModifications,
-} from "../models/modifications";
-import { Compromises, CompromisesByName } from "../models/compromises";
+} from "../models/modifications/modifications";
+import { Compromises, CompromisesByName } from "../models/modifications/compromises";
 
 interface UnitCardProps {
   unit: Unit;

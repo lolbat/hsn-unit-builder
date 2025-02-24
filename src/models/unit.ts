@@ -5,7 +5,7 @@ import Modification, {
   applyModificationToUnit,
   costOfAppliedModification,
   isModValidForUnit,
-} from "./modifications";
+} from "./modifications/modifications";
 import { EmptyMount, MountSet, MountSetShape } from "./mount";
 import VehicleClass from "./vehicle-class";
 

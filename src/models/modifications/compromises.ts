@@ -5,7 +5,7 @@ import {
   MountLocation,
   CompromiseName,
   UpgradeName,
-} from "./constants";
+} from "../constants";
 
 export const EnginePowerReduction: Modification = {
   type: ModificationType.Compromise,

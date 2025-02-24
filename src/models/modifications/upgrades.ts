@@ -5,7 +5,7 @@ import {
   MountLocation,
   UpgradeName,
   CompromiseName,
-} from "./constants";
+} from "../constants";
 
 export const AAWeaponConfiguration: Modification = {
   type: ModificationType.Upgrade,
