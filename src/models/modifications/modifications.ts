@@ -10,7 +10,7 @@ import {
 import { EmptyMount } from "../mount";
 import {
   BehemothSponsonsMount,
-  CoaxialMount,
+  CoaxialMountType,
   HeavyArmMount,
   HeavyHullMount,
   HeavySponsonsMount,
@@ -166,7 +166,7 @@ export function applyModificationToUnit(
     case UpgradeName.CoaxialMount: {
       const modifiedUnit = Unit.fromUnit(unit);
       modifiedUnit.mounts.addMount(
-        new EmptyMount(CoaxialMount, UpgradeName.CoaxialMount, [], true),
+        new EmptyMount(CoaxialMountType, UpgradeName.CoaxialMount, [], true),
       );
       return modifiedUnit;
     }

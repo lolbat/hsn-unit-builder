@@ -181,7 +181,7 @@ export const BehemothMegaTurretMount: MountType = {
   maximumWeaponWeight: WeaponWeightClass.Superheavy,
 };
 
-export const CoaxialMount: MountType = {
+export const CoaxialMountType: MountType = {
   size: null,
   mountType: MountLocation.Coaxial,
   maximumWeaponWeight: WeaponWeightClass.Light,
