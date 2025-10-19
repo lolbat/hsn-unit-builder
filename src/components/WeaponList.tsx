@@ -38,11 +38,14 @@ export function WeaponList({
 
   return (
     <div className="weapons">
-      <div className="weapon title">Weapons</div>
-      <div className="rating title">Rating</div>
-      <div className="mount title">Mount</div>
-      <div className="special title">Special</div>
-      <ul className="weapons-list">{weaponList}</ul>
+
+      <div className="title">Mount</div>
+      <div className="title">Weapon</div>
+      <div className="title">Rating</div>
+      <div className="title left">Special</div>
+      
+      {weaponList}
+
     </div>
   );
 }

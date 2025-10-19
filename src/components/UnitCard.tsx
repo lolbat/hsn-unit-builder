@@ -127,41 +127,55 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
 
   return (
     <div className="unit-card">
+
       <div className="unit">
+        
         <UnitName
-          name={unit.name}
-          nameIsDefault={unit.name === unit.vehicleClass.name}
-          handleNameChange={handleNameChange}
-        />
-        <div className="cost title">Cost</div>
-        {costElement}
-        <div className="size title">Size</div>
-        <div className="size value">{unit.size}</div>
-        <div className="discipline title">Discipline</div>
-        <div className="discipline value">{unit.discipline}</div>
-        <div className="optics title">Optics</div>
-        <div className="optics value">{unit.optics}</div>
-        <div className="movement title">Movement</div>
-        <div className="movement value">{unit.movement}</div>
-        <div className="morale title">Morale</div>
-        <div className="morale value">{unit.morale}</div>
-        <div className="armour title">Armour</div>
-        <div className="armour value">{unit.armour.toDisplayFormat()}</div>
-        <div className="hullpoints title">Hull Points</div>
-        <div className="hullpoints value">{unit.hullPoints}</div>
-        <div className="special title">Special</div>
-        <div className="special value">{unit.special.join(", ")}</div>
+            name={unit.name}
+            nameIsDefault={unit.name === unit.vehicleClass.name}
+            handleNameChange={handleNameChange}
+          />
+
+        <div className="unitStats">
+
+          <div className="title">Cost</div>
+          <div className="title">Size</div>
+          <div className="title">Discipline</div>
+          <div className="title">Optics</div>
+          <div className="title">Movement</div>
+          
+          {costElement}
+          <div className="value">{unit.size}</div>
+          <div className="value">{unit.discipline}</div>
+          <div className="value">{unit.optics}</div>
+          <div className="value">{unit.movement}</div>
+      
+          <div className="title">Morale</div>
+          <div className="title">Armour</div>
+          <div className="title">Hull Points</div>
+          <div className="title grid-col-span-2 left">Special</div>
+
+          <div className="value">{unit.morale}</div>
+          <div className="value">{unit.armour.toDisplayFormat()}</div>
+          <div className="value">{unit.hullPoints}</div>
+          <div className="value grid-col-span-2 left">{unit.special.join(", ")}</div>
+        
+        </div>
+
         <WeaponList
           mountSet={unit.mounts}
           handleMountSetChange={handleMountsChange}
         />
+
         <div className="modifications">
           <div className="title">Modifications</div>
           <div className="modifications-list">
             <ol>{modificationsElement}</ol>
           </div>
         </div>
+
       </div>
+
       <div className="modifications-selector">
         <select
           name="modifications"
@@ -180,6 +194,7 @@ export default function UnitCard({ unit, handleUnitChange }: UnitCardProps) {
           <i>Modifications in red are not yet implemented</i>
         </div>
       </div>
+
       <div className="button-set">
         <button onClick={handleSave}>Save</button>
         <button onClick={handleLoad}>Load</button>

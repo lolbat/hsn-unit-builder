@@ -2,6 +2,7 @@ import { EmptyMount, Mount } from "../models/mount";
 import { toWeaponName, WeaponName } from "../models/constants";
 import Weapon from "../models/weapon";
 import WeaponTypes from "../models/weapon-types/weapon-types";
+import React from "react";
 
 interface EmptyMountListItemProps {
   mount: EmptyMount;
@@ -41,15 +42,16 @@ export function EmptyMountListItem({
     ));
 
   return (
-    <li className="weapon" key={mount.key}>
-      <div className="weapon-selector">
-        <select name={mount.key} onChange={handleWeaponChange}>
-          <option value="">Choose a weapon...</option>
-          {compatibleWeapons}
-        </select>
-      </div>
-      <div className="mount value">{mount.type.mountType}</div>
-      <div className="special value"> </div>
-    </li>
+      <React.Fragment>
+        <div className="value">{mount.type.mountType}</div>
+        <div className="weapon-selector value">
+          <select name={mount.key} onChange={handleWeaponChange}>
+            <option value="">Choose a weapon...</option>
+            {compatibleWeapons}
+          </select>
+        </div>
+        <div className="value"></div>
+        <div className="value left"></div>
+      </React.Fragment>
   );
 }

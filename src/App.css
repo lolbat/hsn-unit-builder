@@ -14,11 +14,25 @@
   font-weight: bold;
 }
 
-.unit {
-  display: grid;
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+.grid-col-span-2 {
+  grid-column: span 2;
+}
 
+.unit {
+
+  width: 50vw;
+
+  .unitStats {
+    display:grid;
+    grid-column-gap: 0;
+    grid-row-gap: 0;
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .left {
+    text-align: left;
+  }
+  
   .title {
     background-color: #373737;
     border-top-style: solid;
@@ -39,126 +53,37 @@
   }
 
   .name {
-    grid-area: 1 / 1 / 2 / 6;
     font-size: 1.5em;
   }
+
   div {
     padding: 0.5vw;
   }
-  .cost.title {
-    grid-area: 2 / 1 / 3 / 2;
-  }
-  .cost.value {
-    grid-area: 3 / 1 / 4 / 2;
-  }
-  .size.title {
-    grid-area: 2 / 2 / 3 / 3;
-  }
-  .size.value {
-    grid-area: 3 / 2 / 4 / 3;
-  }
-  .discipline.title {
-    grid-area: 2 / 3 / 3 / 4;
-  }
-  .discipline.value {
-    grid-area: 3 / 3 / 4 / 4;
-  }
-  .optics.title {
-    grid-area: 2 / 4 / 3 / 5;
-  }
-  .optics.value {
-    grid-area: 3 / 4 / 4 / 5;
-  }
-  .optics.value::after,
-  .movement.value::after {
-    content: '"';
-  }
-  .movement.title {
-    grid-area: 2 / 5 / 3 / 6;
-  }
-  .movement.value {
-    grid-area: 3 / 5 / 4 / 6;
-  }
-
-  .morale.title {
-    grid-area: 4 / 1 / 5 / 2;
-  }
-  .morale.value {
-    grid-area: 5 / 1 / 6 / 2;
-  }
-  .armour.title {
-    grid-area: 4 / 2 / 5 / 3;
-  }
-  .armour.value {
-    grid-area: 5 / 2 / 6 / 3;
-  }
-  .hullpoints.title {
-    grid-area: 4 / 3 / 5 / 4;
-  }
-  .hullpoints.value {
-    grid-area: 5 / 3 / 6 / 4;
-  }
-  .special.title {
-    grid-area: 4 / 4 / 5 / 6;
-  }
-  .special.value {
-    grid-area: 5 / 4 / 6 / 6;
-  }
-
+ 
   .weapons {
-    grid-row-start: 6;
-    grid-column-start: 1;
-    grid-column-end: 5;
-    display: grid;
+    display:grid;
     grid-column-gap: 0px;
-    grid-row-gap: 0px;
+    grid-row-gap: 0px; 
+    grid-template-columns: repeat(4, 1fr);
     padding: 0;
 
-    .weapon.title {
-      grid-area: 1 / 1 / 1 / 2;
-    }
-    .rating.title {
-      grid-area: 1 / 2 / 1 / 3;
-    }
-    .mount.title {
-      grid-area: 1 / 3 / 1 / 4;
-    }
-    .special.title {
-      grid-area: 1 / 4 / 1 / 5;
-    }
-
     .weapons-list {
-      grid-area: 2 / 1 / 3 / 5;
       list-style-type: none;
       padding: 0;
       .weapon {
-        display: grid;
-        .name {
-          grid-area: 1 / 1 / 2 / 2;
-        }
-        .rating {
-          grid-area: 1 / 2 / 2 / 3;
-        }
-        .mount {
-          grid-area: 1 / 3 / 2 / 4;
-        }
-        .special {
-          grid-area: 1 / 4 / 2 / 5;
-        }
+        padding:0;
       }
     }
   }
 
   .modifications {
-    grid-row-start: 6;
-    grid-column-start: 5;
-    grid-column-end: 6;
     padding: 0;
   }
 
   .error {
     color: crimson;
   }
+
 }
 
 option.error {

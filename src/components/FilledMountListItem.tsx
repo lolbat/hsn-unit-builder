@@ -3,6 +3,7 @@ import { Mount, FilledMount } from "../models/mount";
 import Weapon from "../models/weapon";
 import { toWeaponName, WeaponName } from "../models/constants";
 import WeaponTypes from "../models/weapon-types/weapon-types";
+import React from "react";
 
 interface FilledMountListItemProps {
   mount: FilledMount;
@@ -40,6 +41,7 @@ export function FilledMountListItem({
   }
 
   if (open) {
+
     const compatibleWeapons = (mount as Mount)
       .compatibleWeaponTypes()
       .map((w) => (
@@ -47,7 +49,9 @@ export function FilledMountListItem({
       ));
 
     return (
-      <li className="weapon" key={mount.key} onBlur={() => setOpen(false)}>
+      <React.Fragment>
+        
+        <div className="value" key={mount.key} onBlur={() => setOpen(false)}>{mount.type.mountType}</div>
         <div className="weapon-selector">
           <select
             autoFocus
@@ -64,20 +68,21 @@ export function FilledMountListItem({
             {compatibleWeapons}
           </select>
         </div>
-        <div className="mount value">{mount.type.mountType}</div>
-        <div className="special value"> </div>
-      </li>
+        <div className="value"></div>
+        <div className="value left"></div>
+      
+      </React.Fragment>
     );
   }
 
   return (
-    <li className="weapon">
-      <div className="weapon value" onClick={() => setOpen(true)}>
+    <React.Fragment>
+      <div className="value">{mount.type.mountType}</div>
+      <div className="value" onClick={() => setOpen(true)}>
         {mount.weapon.name}
       </div>
-      <div className="rating value">{mount.weapon.rating}</div>
-      <div className="mount value">{mount.type.mountType}</div>
-      <div className="special value">{mount.weapon.special.join(", ")}</div>
-    </li>
+      <div className="value">{mount.weapon.rating}</div>
+      <div className="value left">{mount.weapon.special.join(", ")}</div>
+    </React.Fragment>
   );
 }
