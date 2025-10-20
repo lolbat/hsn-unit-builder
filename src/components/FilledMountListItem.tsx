@@ -51,8 +51,8 @@ export function FilledMountListItem({
     return (
       <React.Fragment>
         
-        <div className="value" key={mount.key} onBlur={() => setOpen(false)}>{mount.type.mountType}</div>
-        <div className="weapon-selector">
+        <div className="value">{mount.type.mountType}</div>
+        <div className="weapon-selector" key={mount.key} onBlur={() => setOpen(false)}>
           <select
             autoFocus
             name={mount.key}

@@ -69,6 +69,13 @@ export const Changelog: ChangelogEntry[] = [
     description:
       "Added the ability to apply most Modifications. Modifications that have not yet been implemented are shown in red.",
   },
+  {
+    index: 7,
+    date: "2025-10-19",
+    version: new Version(0, 0, 8),
+    description:
+      "Modified the layout and css to not use 'absolute' grid positioning. Simplified the CSS by removing those references and adding a fixed column size. Broke Weapons off to their own grid. ",
+  },
 ];
 
 export const Todos: string[] = [
